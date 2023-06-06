@@ -5,8 +5,8 @@ const Error = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen">
       <img
-        className="w-64 h-64 mb-8"
-        src="/path/to/404-image.png"
+        className="w-auto h-64 mb-8"
+        src="https://wpklik.com/wp-content/uploads/2019/03/A-404-Page-Best-Practices-and-Design-Inspiration.jpg"
         alt="404 Page Not Found"
       />
       <h1 className="text-4xl font-bold mb-4">Oops! Page not found</h1>
