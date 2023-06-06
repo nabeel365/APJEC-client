@@ -80,21 +80,19 @@ const Login = () => {
                     </button>
                 </form>
                 <div className="mt-4 text-center">
-                    <Link to="/registration" className="text-blue-500 hover:underline">Create an account</Link>
+                    <Link to="/register" className="text-blue-500 hover:underline">Create an account</Link>
                 </div>
+
+
                 <div className="mt-4 text-center">
-                <p>Or login with:</p> 
+  <p>Or login with:</p>
+  <button className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
+  <FaGoogle className="text-blue-500 text-lg " />
+
+  </button>
+</div>
 
 
-
-                        <button className="mr-2 btn-circle text-center">
-
-                        <FaGoogle></FaGoogle>
-
-
-
-                        </button>
-                </div>
             </div>
         </div>
     );
