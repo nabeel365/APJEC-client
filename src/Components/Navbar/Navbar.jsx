@@ -1,6 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Navbar = ({ isAuthenticated }) => {
+const Navbar = ({  }) => {
+
+    // isAuthenticated
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const handleMenuToggle = () => {
@@ -20,17 +24,20 @@ const Navbar = ({ isAuthenticated }) => {
               <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
               <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instructors</a>
               <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Classes</a>
-              {isAuthenticated && (
+              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+
+
+              {/* {isAuthenticated && (
                 <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-              )}
+              )} */}
             </div>
           </div>
           <div className="flex items-center">
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
               <img className="h-8 w-8 rounded-full" src="/path/to/profile-pic.png" alt="User Profile" />
             ) : (
-              <a href="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
-            )}
+              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+            )} */}
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -80,17 +87,17 @@ const Navbar = ({ isAuthenticated }) => {
           <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
           <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Instructors</a>
           <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Classes</a>
-          {isAuthenticated && (
+          {/* {isAuthenticated && (
             <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-          )}
+          )} */}
         </div>
         <div className="pt-4 pb-3 border-t border-gray-700">
           <div className="flex items-center px-5">
-            {isAuthenticated ? (
+            {/* {isAuthenticated ? (
               <img className="h-8 w-8 rounded-full" src="/path/to/profile-pic.png" alt="User Profile" />
             ) : (
-              <a href="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
-            )}
+              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+            )} */}
           </div>
         </div>
       </div>
@@ -99,3 +106,4 @@ const Navbar = ({ isAuthenticated }) => {
 };
 
 export default Navbar;
+

@@ -7,6 +7,7 @@ import {
 import './index.css'
 import Home from './Components/Home/Home';
 import Error from './Components/Error/Error';
+import Login from './Components/Login/Login';
 
 
 const router = createBrowserRouter([
@@ -16,10 +17,9 @@ const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
+        path: "login",
+        element: <Login></Login>
 
-      },
-      {
-        
       }
     ]
   },
