@@ -1,26 +1,53 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 
 
 const Register = () => {
 
     // use form 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-console.log(errors);
-    console.log(watch("example"));
+    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+    
+    const {newUser} = useContext(AuthContext);
+
+
+
+    const onSubmitData = data => {
+    // console.log(data);
+
+    newUser( data.email, data.password )
+    .then(result => {
+        const registeredUser = result.user;
+        console.log(registeredUser);
+
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setPhotoURL('');
+        setName('');
+        setCheckbox('');
+
+    })
+
+
+    }
+
+    // console.log(watch("example"));
 
 
 
 
+
+
+    const [checkbox, setCheckbox] = useState('');
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [photoUrl, setPhotoUrl] = useState('');
+    const [photoURL, setPhotoURL] = useState('');
     const [gender, setGender] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const [address, setAddress] = useState('');
@@ -43,8 +70,8 @@ console.log(errors);
         setConfirmPassword(e.target.value);
     };
 
-    const handlePhotoUrlChange = (e) => {
-        setPhotoUrl(e.target.value);
+    const handlePhotoURLChange = (e) => {
+        setPhotoURL(e.target.value);
     };
 
     const handleGenderChange = (e) => {
@@ -76,7 +103,7 @@ console.log(errors);
         <div className="flex flex-col items-center justify-center bg-gradient-to-b from-pink-500 to-purple-500 min-h-screen">
             <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
                 <h2 className="text-2xl font-bold text-center mb-4">Registration</h2>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(onSubmitData)}>
                     <div className="mb-4">
                         <label htmlFor="name" className="block font-medium mb-1">
                             Name
@@ -89,31 +116,31 @@ console.log(errors);
                             value={name}
                             {...register("name", { required: true })}
                             onChange={handleNameChange}
-                            
 
-                            // required
+
+                        // required
                         />
-                            {errors.name && <span className='text-error'>Name is required</span>}
+                        {errors.name && <span className='text-error'>Name is required</span>}
 
 
 
-                    </div> 
+                    </div>
 
                     <div className="mb-4">
                         <label htmlFor="email" className="block font-medium mb-1">
                             Email
                         </label>
                         <input
-                            type="email" 
-                            id="email" 
+                            type="email"
+                            id="email"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={email} 
-                            {...register("email", { required: true })} 
+                            value={email}
+                            {...register("email", { required: true })}
 
-                            onChange={handleEmailChange} 
-                            // required
+                            onChange={handleEmailChange}
+                        // required
                         />
-                            {errors.email && <span className='text-error'>Email is required</span>}
+                        {errors.email && <span className='text-error'>Email is required</span>}
 
                     </div>
 
@@ -130,10 +157,10 @@ console.log(errors);
                                 id="password"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={password}
-                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, pattern: /^(?=.*[A-Z])/ })} 
+                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, pattern: /^(?=.*[A-Z])/ })}
 
                                 onChange={handlePasswordChange}
-                                // required
+                            // required
                             />
                             {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
                             {errors.password?.type === 'minLength' && <span className='text-error'>Password must be atleast 6 characters long.</span>}
@@ -165,10 +192,10 @@ console.log(errors);
                                 id="confirmPassword"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={confirmPassword}
-                                {...register("confirmPassword", { required: true })} 
+                                {...register("confirmPassword", { required: true })}
 
                                 onChange={handleConfirmPasswordChange}
-                                // required
+                            // required
                             />
                             {errors.confirmPassword && <span className='text-error'>You need to confirm your Password</span>}
 
@@ -189,26 +216,26 @@ console.log(errors);
                     </div>
 
                     <div className="mb-4">
-                        <label htmlFor="photoUrl" className="block font-medium mb-1">Photo URL</label>
+                        <label htmlFor="photoURL" className="block font-medium mb-1">Photo URL</label>
                         <input
                             type="text"
-                            id="photoUrl"
+                            id="photoURL"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={photoUrl}
-                            {...register("photoUrl", { required: true })}                             
-                            onChange={handlePhotoUrlChange}
-                            // required
+                            value={photoURL}
+                            {...register("photoURL", { required: true })}
+                            onChange={handlePhotoURLChange}
+                        // required
                         />
-                            {errors.photoUrl && <span className='text-error'>PhotoUrl is required</span>}
-                        
+                        {errors.photoURL && <span className='text-error'>PhotoURL is required</span>}
+
                     </div>
 
                     {/* optional form fields to be added later  */}
 
                     <div className="flex items-center mb-4">
-                        <input type="checkbox" id="terms" className="mr-2"  
-                            {...register("checkbox", { required: true })}                             
-                            />
+                        <input type="checkbox" id="terms" className="mr-2"
+                            {...register("checkbox", { required: true })}
+                        />
 
                         <label htmlFor="terms" className="text-gray-700">
                             I agree to the{' '}
@@ -220,12 +247,14 @@ console.log(errors);
                     </div>
                     {errors.checkbox && <span className='text-error'>You need to accept our Terms and Conditions.</span>}
 
-                    <button
-                        type="submit"
-                        className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                    >
-                        Register
-                    </button>
+
+{/* register */}
+
+
+                      <input  className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                     type="submit" value="Register"/>
+
+
                     <p className="text-gray-600 text-center mt-4">
                         Already have an account?{' '}
                         <Link to="/login" className="text-indigo-500 font-semibold">

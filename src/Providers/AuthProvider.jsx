@@ -1,8 +1,8 @@
 import React, { createContext, useEffect, useState } from 'react';
 
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-import axios from 'axios';
-import app from '../FireBase/firebase.config';
+import app from '../../firebase.config';
+// import axios from 'axios';
 
 export const AuthContext = createContext(null);
 
@@ -20,7 +20,7 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
 
-    const createNewUser = (email, password) =>{
+    const newUser = (email, password) =>{
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
@@ -39,14 +39,14 @@ const AuthProvider = ({ children }) => {
 
             // get and set token....
 
-            if(currentUser){
-            axios.post('http://localhost:1000/jwt', {email: currentUser.email})
-            .then(data => {
-                console.log(data.data.token);
-                localStorage.setItem('access-token', data.data.token)
-            })
+            // if(currentUser){
+            // axios.post('http://localhost:1000/jwt', {email: currentUser.email})
+            // .then(data => {
+            //     console.log(data.data.token);
+            //     localStorage.setItem('access-token', data.data.token)
+            // })
 
-            }
+            // }
 
 
 
@@ -84,7 +84,7 @@ const AuthProvider = ({ children }) => {
     const authenticationData = {
         user,
         loading,
-        createNewUser,
+        newUser,
         userSignIn,
         userLogOut,
         signInWithGoogle,
