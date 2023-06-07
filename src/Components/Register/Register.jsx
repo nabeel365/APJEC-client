@@ -1,8 +1,21 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
+
+
 const Register = () => {
+
+    // use form 
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const onSubmit = data => console.log(data);
+console.log(errors);
+    console.log(watch("example"));
+
+
+
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -54,30 +67,56 @@ const Register = () => {
         setShowConfirmPassword(!showConfirmPassword);
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your registration logic here
-    };
+    // const handleSubmitBtn = (e) => {
+    //     e.preventDefault();
+    //     // Add your registration logic here
+    // };
 
     return (
         <div className="flex flex-col items-center justify-center bg-gradient-to-b from-pink-500 to-purple-500 min-h-screen">
             <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
                 <h2 className="text-2xl font-bold text-center mb-4">Registration</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mb-4">
                         <label htmlFor="name" className="block font-medium mb-1">
                             Name
                         </label>
-                        <input
+                        {/* <input
                             type="text"
                             id="name"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                             value={name}
+                            {...register("customerName", { required: true })}
                             onChange={handleNameChange}
+                            
+                            {errors.customerName && <span>This field is required</span>}
+
+                            // required
+                        /> */}
+
+<input {...register("name", { required: true })} />
+      {/* errors will return when field validation fails  */}
+      {errors.name && <span>This field is required</span>}
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block font-medium mb-1">
+                            Email
+                        </label>
+                        <input
+                            type="email" 
+                            id="email" 
+                            className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
+                            value={email} 
+                            {...register("email")} 
+                            onChange={handleEmailChange} 
                             required
                         />
                     </div>
+
+
                     {/* Rest of the form fields */}
+
                     <div className="mb-4">
                         <label htmlFor="password" className="block font-medium mb-1">
                             Password
@@ -88,6 +127,8 @@ const Register = () => {
                                 id="password"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={password}
+                                {...register("password")} 
+
                                 onChange={handlePasswordChange}
                                 required
                             />
@@ -116,6 +157,8 @@ const Register = () => {
                                 id="confirmPassword"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={confirmPassword}
+                                {...register("confirmPassword")} 
+
                                 onChange={handleConfirmPasswordChange}
                                 required
                             />
@@ -142,6 +185,7 @@ const Register = () => {
                             id="photoUrl"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                             value={photoUrl}
+                            {...register("photoUrl")}                             
                             onChange={handlePhotoUrlChange}
                             required
                         />

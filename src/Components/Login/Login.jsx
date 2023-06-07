@@ -80,17 +80,18 @@ const Login = () => {
                     </button>
                 </form>
                 <div className="mt-4 text-center">
-                    <Link to="/register" className="text-blue-500 hover:underline">Create an account</Link>
+                  New to our Website ?  <Link to="/register" className="text-blue-500 hover:underline">Create an account</Link>
                 </div>
+ 
+ <br />
 
+<div className="flex flex-col items-center">
+          <p className="mb-2">Or login with:</p>
+          <button className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
+            <FaGoogle className="text-blue-500 text-lg" />
+          </button>
+        </div>
 
-                <div className="mt-4 text-center">
-  <p>Or login with:</p>
-  <button className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
-  <FaGoogle className="text-blue-500 text-lg " />
-
-  </button>
-</div>
 
 
             </div>
