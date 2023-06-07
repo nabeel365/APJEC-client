@@ -81,23 +81,23 @@ console.log(errors);
                         <label htmlFor="name" className="block font-medium mb-1">
                             Name
                         </label>
-                        {/* <input
+
+                        <input
                             type="text"
                             id="name"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                             value={name}
-                            {...register("customerName", { required: true })}
+                            {...register("name", { required: true })}
                             onChange={handleNameChange}
                             
-                            {errors.customerName && <span>This field is required</span>}
 
                             // required
-                        /> */}
+                        />
+                            {errors.name && <span className='text-error'>Name is required</span>}
 
-<input {...register("name", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.name && <span>This field is required</span>}
-                    </div>
+
+
+                    </div> 
 
                     <div className="mb-4">
                         <label htmlFor="email" className="block font-medium mb-1">
@@ -108,10 +108,13 @@ console.log(errors);
                             id="email" 
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                             value={email} 
-                            {...register("email")} 
+                            {...register("email", { required: true })} 
+
                             onChange={handleEmailChange} 
-                            required
+                            // required
                         />
+                            {errors.email && <span className='text-error'>Email is required</span>}
+
                     </div>
 
 
@@ -127,11 +130,16 @@ console.log(errors);
                                 id="password"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={password}
-                                {...register("password")} 
+                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, pattern: /^(?=.*[A-Z])/ })} 
 
                                 onChange={handlePasswordChange}
-                                required
+                                // required
                             />
+                            {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
+                            {errors.password?.type === 'minLength' && <span className='text-error'>Password must be atleast 6 characters long.</span>}
+                            {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain any special character.</span>}
+                            {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain a capital letter.</span>}
+
                             <button
                                 type="button"
                                 className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
@@ -157,11 +165,13 @@ console.log(errors);
                                 id="confirmPassword"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={confirmPassword}
-                                {...register("confirmPassword")} 
+                                {...register("confirmPassword", { required: true })} 
 
                                 onChange={handleConfirmPasswordChange}
-                                required
+                                // required
                             />
+                            {errors.confirmPassword && <span className='text-error'>You need to confirm your Password</span>}
+
                             <button
                                 type="button"
                                 className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
@@ -185,23 +195,31 @@ console.log(errors);
                             id="photoUrl"
                             className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                             value={photoUrl}
-                            {...register("photoUrl")}                             
+                            {...register("photoUrl", { required: true })}                             
                             onChange={handlePhotoUrlChange}
-                            required
+                            // required
                         />
+                            {errors.photoUrl && <span className='text-error'>PhotoUrl is required</span>}
+                        
                     </div>
 
                     {/* optional form fields to be added later  */}
 
                     <div className="flex items-center mb-4">
-                        <input type="checkbox" id="terms" className="mr-2" required />
+                        <input type="checkbox" id="terms" className="mr-2"  
+                            {...register("checkbox", { required: true })}                             
+                            />
+
                         <label htmlFor="terms" className="text-gray-700">
                             I agree to the{' '}
                             <Link to="/terms" className="text-indigo-500">
                                 Terms and Conditions
                             </Link>
                         </label>
+
                     </div>
+                    {errors.checkbox && <span className='text-error'>You need to accept our Terms and Conditions.</span>}
+
                     <button
                         type="submit"
                         className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
