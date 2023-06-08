@@ -1,8 +1,9 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 
 
@@ -10,27 +11,50 @@ const Register = () => {
 
     // use form 
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
-    
-    const {newUser} = useContext(AuthContext);
+
+    const { newUser } = useContext(AuthContext);
 
 
+    // navigate 
+    const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const from = location.state?.from?.pathname || '/';
+
+
+   
 
     const onSubmitData = data => {
-    // console.log(data);
+        // console.log(data);
 
-    newUser( data.email, data.password )
-    .then(result => {
-        const registeredUser = result.user;
-        console.log(registeredUser);
+        newUser(data.email, data.password)
+            .then(result => {
+                const registeredUser = result.user;
+                console.log(registeredUser);
 
-        setEmail('');
-        setPassword('');
-        setConfirmPassword('');
-        setPhotoURL('');
-        setName('');
-        setCheckbox('');
+                setEmail('');
+                setPassword('');
+                setConfirmPassword('');
+                setPhotoURL('');
+                setName('');
+                setCheckbox('');
 
-    })
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'SignUp Successful !!!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+
+                navigate(from, { replace: true })
+
+
+                 
+
+
+            })
 
 
     }
@@ -248,11 +272,11 @@ const Register = () => {
                     {errors.checkbox && <span className='text-error'>You need to accept our Terms and Conditions.</span>}
 
 
-{/* register */}
+                    {/* register */}
 
 
-                      <input  className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                     type="submit" value="Register"/>
+                    <input className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="submit" value="Register" />
 
 
                     <p className="text-gray-600 text-center mt-4">

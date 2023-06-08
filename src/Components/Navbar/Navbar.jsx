@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
-const Navbar = ({  }) => {
+const Navbar = ({ }) => {
 
-    // isAuthenticated
+  // 
+
+  const { user, userLogOut } = useContext(AuthContext);
+  console.log(userLogOut);
+
+  const handleLogOut = () => {
+    userLogOut()
+  }
 
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
@@ -24,20 +32,32 @@ const Navbar = ({  }) => {
               <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
               <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instructors</a>
               <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Classes</a>
-              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+
+              {/* <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link> */}
 
 
-              {/* {isAuthenticated && (
+              {user && (
                 <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
-              )} */}
+              )}
             </div>
           </div>
           <div className="flex items-center">
-            {/* {isAuthenticated ? (
-              <img className="h-8 w-8 rounded-full" src="/path/to/profile-pic.png" alt="User Profile" />
+            {user ? (
+
+              <div>
+
+                <Link to="/login">
+                  <button onClick={handleLogOut} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LogOut</button>
+                </Link>
+
+                <img className="h-8 w-8 rounded-full" src={user.photoURL} alt={user.displayName} />
+
+
+              </div>
+
             ) : (
               <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
-            )} */}
+            )}
           </div>
           <div className="-mr-2 flex md:hidden">
             <button
@@ -87,17 +107,23 @@ const Navbar = ({  }) => {
           <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
           <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Instructors</a>
           <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Classes</a>
-          {/* {isAuthenticated && (
+          {user && (
             <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-          )} */}
+          )}
         </div>
         <div className="pt-4 pb-3 border-t border-gray-700">
           <div className="flex items-center px-5">
-            {/* {isAuthenticated ? (
-              <img className="h-8 w-8 rounded-full" src="/path/to/profile-pic.png" alt="User Profile" />
+            {user ? (
+              <div className='flex'>
+                <Link to="/login">
+                  <button onClick={handleLogOut} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LogOut</button>
+                </Link>
+                <img className="h-8 w-8 rounded-full" src={user.photoURL} alt={user.displayName} />
+
+              </div>
             ) : (
               <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
-            )} */}
+            )}
           </div>
         </div>
       </div>
