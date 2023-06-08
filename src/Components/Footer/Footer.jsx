@@ -1,9 +1,11 @@
 import React from 'react';
+import "../Footer/Footer.css"
 
-const Footer = () => {
+const Footer = ({ isDarkMode }) => {
   return (
-    <div>
-      <footer className="footer p-10 bg-purple-400 text-base-content">
+    <div className={isDarkMode ? 'dark' : 'light'}>
+
+      <footer className="footer p-10 bg-purple-400 text-base-content ">
         <div>
           <img width="150" height="150" src="https://cdn.dribbble.com/users/317918/screenshots/3850739/sw-01.jpg" alt="" />
           <p>Craftopia Art School Ltd.<br/>Providing reliable courses since 2020</p>

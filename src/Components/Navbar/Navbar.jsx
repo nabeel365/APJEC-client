@@ -1,13 +1,17 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import "../Navbar/Navbar.css"
+import { FaSun, FaMoon  } from 'react-icons/fa';
 
-const Navbar = ({ }) => {
+
+
+const Navbar = ({ toggleMode, isDarkMode }) => {
 
   // 
 
   const { user, userLogOut } = useContext(AuthContext);
-  console.log(userLogOut);
+  // console.log(userLogOut);
 
   const handleLogOut = () => {
     userLogOut()
@@ -44,7 +48,7 @@ const Navbar = ({ }) => {
           <div className="flex items-center">
             {user ? (
 
-              <div>
+              <div className="flex items-center space-x-4">
 
                 <Link to="/login">
                   <button onClick={handleLogOut} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LogOut</button>
@@ -55,10 +59,20 @@ const Navbar = ({ }) => {
 
               </div>
 
+
+
             ) : (
               <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
             )}
           </div>
+
+          {/* dark and light theme */}
+          
+          <button className='btn btn-xs btn-square' onClick={toggleMode}>
+            {isDarkMode ? <FaMoon></FaMoon> : <FaSun></FaSun>}
+          </button>
+
+
           <div className="-mr-2 flex md:hidden">
             <button
               onClick={handleMenuToggle}
@@ -101,6 +115,7 @@ const Navbar = ({ }) => {
             </button>
           </div>
         </div>
+        
       </div>
       <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

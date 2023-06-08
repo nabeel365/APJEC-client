@@ -5,12 +5,13 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCVjBgGjleDkKnpBA62cZcRi41vZCvOzew",
-  authDomain: "craftopia-art-school.firebaseapp.com",
-  projectId: "craftopia-art-school",
-  storageBucket: "craftopia-art-school.appspot.com",
-  messagingSenderId: "503789249322",
-  appId: "1:503789249322:web:53e15a26ce28895ec2b453"
+apiKey:import.meta.env.VITE_APIKEY,
+authDomain:import.meta.env.VITE_AUTHDOMAIN,
+projectId:import.meta.env.VITE_PROJECTID,
+storageBucket:import.meta.env.VITE_STORAGEBUCKET,
+messagingSenderId:import.meta.env.VITE_MESSAGINGSENDERID,
+appId:import.meta.env.VITE_APPID,
+
 };
 
 // Initialize Firebase

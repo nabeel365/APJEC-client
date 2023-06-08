@@ -10,7 +10,7 @@ const Login = () => {
     // useform 
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
-    const { userLogIn } = useContext(AuthContext);
+    const { userLogIn, googleSignIn } = useContext(AuthContext);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -65,6 +65,17 @@ const Login = () => {
 
 
     };
+
+    const handleGoogleSingIn = () => {
+        googleSignIn()
+        .then(result => {
+            const socialUser = result.user;
+            console.log(socialUser);
+
+            navigate(from, { replace: true })
+
+        })
+    }
 
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-purple-500">
@@ -134,7 +145,7 @@ const Login = () => {
 
                 <div className="flex flex-col items-center">
                     <p className="mb-2">Or login with:</p>
-                    <button className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
+                    <button onClick={handleGoogleSingIn} className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
                         <FaGoogle className="text-blue-500 text-lg" />
                     </button>
                 </div>

@@ -63,7 +63,7 @@ const AuthProvider = ({ children }) => {
 
     }, [])
 
-    const signInWithGoogle = () => {
+    const googleSignIn = () => {
         return signInWithPopup(auth, googleProvider)
 
 
@@ -72,7 +72,7 @@ const AuthProvider = ({ children }) => {
 
 
 
-    const userProfileUpdate = (name, photoURL) => {
+    const profileUpdate = (name, photoURL) => {
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photoURL
@@ -87,8 +87,8 @@ const AuthProvider = ({ children }) => {
         newUser,
         userLogIn,
         userLogOut,
-        signInWithGoogle,
-        userProfileUpdate
+        googleSignIn,
+        profileUpdate
     }
 
     return (

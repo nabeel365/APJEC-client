@@ -12,7 +12,7 @@ const Register = () => {
     // use form 
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
-    const { newUser } = useContext(AuthContext);
+    const { newUser, profileUpdate } = useContext(AuthContext);
 
 
     // navigate 
@@ -28,10 +28,12 @@ const Register = () => {
     const onSubmitData = data => {
         // console.log(data);
 
-        newUser(data.email, data.password)
+        newUser(data.email, data.password, data.name, data.photoURL)
             .then(result => {
                 const registeredUser = result.user;
                 console.log(registeredUser);
+
+                profileUpdate(name, photoURL);
 
                 setEmail('');
                 setPassword('');
@@ -41,7 +43,7 @@ const Register = () => {
                 setCheckbox('');
 
                 Swal.fire({
-                    position: 'top-end',
+                    position: 'top-center',
                     icon: 'success',
                     title: 'SignUp Successful !!!',
                     showConfirmButton: false,
