@@ -53,7 +53,7 @@ const Login = () => {
             })
 
             Swal.fire({
-                position: 'top-end',
+                position: 'top-center',
                 icon: 'success',
                 title: 'Login Successful !!!',
                 showConfirmButton: false,
@@ -71,6 +71,15 @@ const Login = () => {
         .then(result => {
             const socialUser = result.user;
             console.log(socialUser);
+
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Login Successful !!!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+
 
             navigate(from, { replace: true })
 

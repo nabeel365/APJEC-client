@@ -33,15 +33,15 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
               <span className="ml-2 text-white text-lg font-semibold">Craftopia Art School</span>
             </div>
             <div className="hidden md:ml-6 md:flex md:space-x-4">
-              <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-              <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instructors</a>
-              <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Classes</a>
+              <Link to="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+              <Link to="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instructors</Link>
+              <Link to="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Classes</Link>
 
               {/* <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link> */}
 
 
               {user && (
-                <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</a>
+                <Link to="/dashboard/myClasses" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</Link>
               )}
             </div>
           </div>
@@ -69,7 +69,7 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
           {/* dark and light theme */}
           
           <button className='btn btn-xs btn-square' onClick={toggleMode}>
-            {isDarkMode ? <FaMoon></FaMoon> : <FaSun></FaSun>}
+            {isDarkMode ? <FaSun></FaSun> : <FaMoon></FaMoon>}
           </button>
 
 
@@ -123,7 +123,7 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
           <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Instructors</a>
           <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Classes</a>
           {user && (
-            <a href="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+            <Link to="/dashboard/myClasses" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</Link>
           )}
         </div>
         <div className="pt-4 pb-3 border-t border-gray-700">

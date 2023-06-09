@@ -12,7 +12,7 @@ const Register = () => {
     // use form 
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
-    const { newUser, profileUpdate } = useContext(AuthContext);
+    const { newUser, profileUpdate, googleSignIn } = useContext(AuthContext);
 
 
     // navigate 
@@ -60,6 +60,29 @@ const Register = () => {
 
 
     }
+
+
+
+    const handleGoogleSingIn = () => {
+        googleSignIn()
+        .then(result => {
+            const socialUser = result.user;
+            console.log(socialUser);
+
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'SignUp Successful !!!',
+                showConfirmButton: false,
+                timer: 1500
+              })
+
+
+            navigate(from, { replace: true })
+
+        })
+    }
+
 
     // console.log(watch("example"));
 
@@ -289,7 +312,7 @@ const Register = () => {
                     </p>
                 </form>
 
-                <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4 w-full">
+                <button onClick={handleGoogleSingIn} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4 w-full">
                     Sign up with Google
                 </button>
             </div>
