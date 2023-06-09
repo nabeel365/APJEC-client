@@ -23,6 +23,7 @@ import StudentDashBoard from './Components/DashBoards/StudentDashBoard/StudentDa
 import MySelectedClasses from './Components/DashBoards/StudentDashBoard/MySelectedClasses';
 import MyEnrolledClasses from './Components/DashBoards/StudentDashBoard/MyEnrolledClasses';
 import Payment from './Components/DashBoards/StudentDashBoard/Payment/Payment';
+import PrivateRoute from './Routes/PrivateRoute';
 
 
 const queryClient = new QueryClient()
