@@ -19,11 +19,17 @@ import {
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
-import StudentDashBoard from './Components/DashBoards/StudentDashBoard/StudentDashBoard';
 import MySelectedClasses from './Components/DashBoards/StudentDashBoard/MySelectedClasses';
 import MyEnrolledClasses from './Components/DashBoards/StudentDashBoard/MyEnrolledClasses';
 import Payment from './Components/DashBoards/StudentDashBoard/Payment/Payment';
 import PrivateRoute from './Routes/PrivateRoute';
+import DashBoard from './Components/DashBoards/DashBoard';
+import AddAClass from './Components/DashBoards/InstructotDashBoard/AddAClass';
+import MyClasses from './Components/DashBoards/InstructotDashBoard/MyClasses';
+import TotalEnrolledStudents from './Components/DashBoards/InstructotDashBoard/TotalEnrolledStudents';
+import FeedBack from './Components/DashBoards/InstructotDashBoard/FeedBack';
+import ManageClasses from './Components/DashBoards/AdminDashBoard/ManageClasses';
+import ManageUsers from './Components/DashBoards/AdminDashBoard/ManageUsers';
 
 
 const queryClient = new QueryClient()
@@ -62,10 +68,10 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <StudentDashBoard></StudentDashBoard>,
+    element: <DashBoard></DashBoard>,
     children: [
       {
-        path: "myClasses",
+        path: "mySelectedClasses",
         element: <MySelectedClasses></MySelectedClasses>
       },
       {
@@ -75,7 +81,31 @@ const router = createBrowserRouter([
       {
         path: "payment",
         element: <Payment></Payment>
-      }
+      },
+      {
+        path: "addClass",
+        element: <AddAClass></AddAClass>
+      },
+      {
+        path: "myClasses" ,
+        element: <MyClasses></MyClasses>
+      },
+      {
+        path: "totalEnrolledStudents" ,
+        element: <TotalEnrolledStudents></TotalEnrolledStudents>
+      },
+      {
+        path: "feedback",
+        element: <FeedBack></FeedBack>
+      },
+      {
+        path: "manageClasses" ,
+        element: <ManageClasses></ManageClasses>
+      },
+      {
+        path: "manageUsers" ,
+        element: <ManageUsers></ManageUsers>
+      },
     ]
   }
 ]);
