@@ -21,8 +21,7 @@ import {
 } from '@tanstack/react-query'
 import MySelectedClasses from './Components/DashBoards/StudentDashBoard/MySelectedClasses';
 import MyEnrolledClasses from './Components/DashBoards/StudentDashBoard/MyEnrolledClasses';
-import Payment from './Components/DashBoards/StudentDashBoard/Payment/Payment';
-import PrivateRoute from './Routes/PrivateRoute';
+import Payment from './Components/DashBoards/StudentDashBoard/Payment/Payments';
 import DashBoard from './Components/DashBoards/DashBoard';
 import AddAClass from './Components/DashBoards/InstructotDashBoard/AddAClass';
 import MyClasses from './Components/DashBoards/InstructotDashBoard/MyClasses';
@@ -30,6 +29,8 @@ import TotalEnrolledStudents from './Components/DashBoards/InstructotDashBoard/T
 import FeedBack from './Components/DashBoards/InstructotDashBoard/FeedBack';
 import ManageClasses from './Components/DashBoards/AdminDashBoard/ManageClasses';
 import ManageUsers from './Components/DashBoards/AdminDashBoard/ManageUsers';
+import Pay from './Components/DashBoards/StudentDashBoard/Payment/Pay';
+import PrivateRoute from './Routes/PrivateRoute';
 
 
 const queryClient = new QueryClient()
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
       {
         path: "payment",
         element: <Payment></Payment>
+      },
+      {
+        path: "pay",
+        element: <Pay></Pay> ,
       },
       {
         path: "addClass",
