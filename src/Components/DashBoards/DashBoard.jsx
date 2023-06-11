@@ -6,7 +6,7 @@ import Footer from '../Footer/Footer';
 const DashBoard = ({  }) => {
 
 
-  const role = 'instructor'
+  const role = 'admin'
 
   let dashboardLinks;
 
