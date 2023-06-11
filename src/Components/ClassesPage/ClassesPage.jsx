@@ -31,7 +31,8 @@ const ClassesPage = ({ isAdmin }) => {
       name: data.name,
       instructor: data.instructor,
       price: data.price,
-      image: data.image
+      image: data.image,
+      email: user.email
 
 
     }

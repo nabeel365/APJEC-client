@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
 
 const MySelectedClasses = () => {
-    const [selectedClass, refetch] = useSelectedClasses();
+    const [selectedClass, ,refetch] = useSelectedClasses();
     console.log(selectedClass);
 
     //   const [courses, setCourses] = useState([]);

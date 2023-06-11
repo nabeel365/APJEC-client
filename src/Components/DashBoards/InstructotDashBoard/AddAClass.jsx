@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const AddAClass = () => {
   const { user } = useContext(AuthContext);
-  console.log(user.email);
+  // console.log(user.email);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -15,6 +16,8 @@ const AddAClass = () => {
       email: user.email,
       available_seats: parseInt(e.target.elements.available_seats.value),
       price: parseFloat(e.target.elements.price.value),
+      role: "student",
+      status: "pending"
     };
 
     try {
@@ -25,6 +28,14 @@ const AddAClass = () => {
     } catch (error) {
       console.error('Error saving class data:', error);
     }
+
+    Swal.fire({
+      position: 'top-center',
+      icon: 'success',
+      title: 'Your Class has been added Successfully',
+      showConfirmButton: false,
+      timer: 1500
+    })
   };
 
   return (
