@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-const useClasses = () => {
+const useUsers = () => {
     const {data: users = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async() => {
@@ -13,4 +13,4 @@ const useClasses = () => {
 
 };
 
-export default useClasses;
+export default useUsers;

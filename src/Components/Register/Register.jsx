@@ -37,7 +37,7 @@ const Register = () => {
 
                 // 
 
-                    const savedUser = { name: data.name, email: data.email }
+                    const savedUser = { name: data.name, email: data.email, role: "student" }
                     fetch('http://localhost:5000/users', {
                         method: 'POST',
                         headers: {

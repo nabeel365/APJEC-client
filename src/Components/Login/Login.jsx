@@ -52,6 +52,15 @@ const Login = () => {
                 setError(error.message)
             })
 
+            const savedUser = { name: data.name, email: data.email, role: "student" }
+            fetch('http://localhost:5000/users', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(savedUser)
+            })
+
             Swal.fire({
                 position: 'top-center',
                 icon: 'success',
