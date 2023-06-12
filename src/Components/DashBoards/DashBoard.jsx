@@ -125,6 +125,7 @@ const DashBoard = ({ }) => {
   console.log(isInstructor);
   console.log(isAdmin);
 
+
   // const role = "admin"
 
   // let dashboardLinks;
@@ -268,7 +269,7 @@ const DashBoard = ({ }) => {
 {/*  */}
 
 {
-    isAdmin ? (
+    isAdmin.admin ? (
      
 
       <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
@@ -281,7 +282,7 @@ const DashBoard = ({ }) => {
   
       </ul>
   ) : ( 
-    isInstructor ? (
+    isInstructor.instructor ? (
   
   
       <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">

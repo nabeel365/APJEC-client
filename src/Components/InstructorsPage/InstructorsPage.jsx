@@ -8,8 +8,10 @@ const InstructorsPage = () => {
 
   const [instructors, setInstructors] = useState([]);
 
+  console.log(instructors);
+
   useEffect(() => {
-    fetch('http://localhost:5000/instructors')
+    fetch('http://localhost:5000/users/instructor')
       .then(response => response.json())
       .then(data => setInstructors(data))
       .catch(error => console.log(error));
@@ -42,3 +44,5 @@ const InstructorsPage = () => {
 };
 
 export default InstructorsPage;
+
+

@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import FeedBack from './FeedBack';
 
 const MyClasses = () => {
   const [classes, setClasses] = useState([]);
 
+  console.log(classes);
   useEffect(() => {
     fetchClasses();
   }, []);
@@ -51,7 +53,10 @@ const MyClasses = () => {
                   {/* {classItem.enrolledStudents.length} */}
                 </td>
                 <td className="px-4 py-2 border-b">
+                  {/* { classItem.status ? (classItem.status === 'denied' && classItem.status === 'denied') : classItem.feedback } */}
+                  {/* {classItem.feedback} */}
                   {classItem.status === 'denied' ? classItem.feedback : '-'}
+
                 </td>
                 <td className="px-4 py-2 border-b">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

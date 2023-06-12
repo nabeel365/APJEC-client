@@ -6,14 +6,17 @@ import useClasses from '../../../../Hooks/useClasses';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PK);
 
+// console.log(VITE_PK);
+
 const Pay = () => {
 
     const [classes] = useClasses();
 
-    const price = classes.price
+    const price = classes;
+    console.log();
 
     return (
-        <div>
+        <div className='w-full'>
             <Elements stripe={stripePromise}>
             <Checkout 
             price={price}
@@ -21,7 +24,7 @@ const Pay = () => {
 
             </Elements>
 
-            pay 
+            
         </div>
     );
 };

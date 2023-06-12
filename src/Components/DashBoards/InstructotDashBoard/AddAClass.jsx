@@ -12,12 +12,13 @@ const AddAClass = () => {
     const classData = {
       name: e.target.elements.className.value,
       image: e.target.elements.classImage.files[0],
-      instructor: user.displayName,
-      email: user.email,
+      instructor: user?.displayName,
+      email: user?.email,
       available_seats: parseInt(e.target.elements.available_seats.value),
       price: parseFloat(e.target.elements.price.value),
       role: "student",
-      status: "pending"
+      status: "pending",
+      feedback: ' '
     };
 
     try {
@@ -80,7 +81,7 @@ const AddAClass = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="instructor-name"
             type="text"
-            value={user.displayName}
+            defaultValue={user?.displayName}
             readOnly
           />
         </div>
@@ -92,7 +93,7 @@ const AddAClass = () => {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="instructor-email"
             type="email"
-            value={user.email}
+            defaultValue={user?.email}
             readOnly
           />
         </div>
