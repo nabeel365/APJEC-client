@@ -1,4 +1,5 @@
 import React from 'react';
+import { Roll } from 'react-awesome-reveal';
 
 const CustomerReview = () => {
   const reviews = [
@@ -44,8 +45,11 @@ const CustomerReview = () => {
     <div className="bg-gray-100 py-12">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center mb-8">Our Happy Customers</h2>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review) => (
+      <Roll>
+
             <div
               key={review.id}
               className="bg-white rounded-lg p-6 shadow-lg"
@@ -60,8 +64,12 @@ const CustomerReview = () => {
               <h3 className="text-lg font-bold text-center mb-2">{review.name}</h3>
               <p className="text-gray-700 text-center">{review.review}</p>
             </div>
+
+      </Roll>
+
           ))}
         </div>
+
       </div>
     </div>
   );

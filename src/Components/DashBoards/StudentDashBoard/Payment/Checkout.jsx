@@ -178,9 +178,9 @@ const Checkout = ({price}) => {
 
 
   return (
-    <div className='max-w-full'>
+    <div className=''>
 
- <form  onSubmit={handleSubmit} >
+ {/* <form  onSubmit={handleSubmit} >
         <CardElement 
           options={{
             style: {
@@ -207,12 +207,12 @@ const Checkout = ({price}) => {
 
       {transactionId && <p className="text-success">Transaction complete with transactionId: {transactionId}</p>}
    
-
+ */}
 
 {/*  */}
 
 
-{/* <form onSubmit={handleSubmit} className="w-2/3 ">
+ <form onSubmit={handleSubmit} className="w-2/3 ">
   <div className="rounded-lg overflow-hidden shadow-lg p-6 bg-white">
     <div className="mb-4">
       <CardElement
@@ -249,7 +249,7 @@ const Checkout = ({price}) => {
   <p className="text-success">
     Transaction complete with transactionId: {transactionId}
   </p>
-)} */}
+)} 
 
 
 

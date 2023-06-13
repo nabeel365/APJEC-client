@@ -3,10 +3,11 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import useClasses from '../../Hooks/useClasses';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Bounce, Slide } from 'react-awesome-reveal';
 
-const ClassesPage = ({ isAdmin }) => {
+const ClassesPage = ({}) => {
   const { user } = useContext(AuthContext);
-  const [ classes] = useClasses();
+  const [classes] = useClasses();
   console.log(classes);
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,10 +33,8 @@ const ClassesPage = ({ isAdmin }) => {
       instructor: data.instructor,
       price: data.price,
       image: data.image,
-      email: user.email
-
-
-    }
+      email: user.email,
+    };
     console.log(newData);
     try {
       const response = await fetch('http://localhost:5000/selected-classes', {
@@ -43,11 +42,11 @@ const ClassesPage = ({ isAdmin }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(newData), 
+        body: JSON.stringify(newData),
       });
 
       console.log(response);
-  
+
       if (response.ok) {
         Swal.fire({
           icon: 'success',
@@ -69,17 +68,16 @@ const ClassesPage = ({ isAdmin }) => {
         text: 'An error occurred while selecting a class',
       });
     }
-
-
   };
-  
 
   return (
     <div className="class-list grid sm:grid-cols-3 gap-4 border-2">
       {classes.map((classItem) => (
+      <Slide>
+
         <div
           key={classItem._id}
-          className={`bg-white rounded-lg shadow-md p-6 ${
+          className={`bg-red rounded-lg shadow-md p-6 ${
             classItem.available_seats === 0 ? 'bg-red-500' : ''
           }`}
         >
@@ -89,7 +87,7 @@ const ClassesPage = ({ isAdmin }) => {
             <p className="text-gray-600 mb-2">Instructor: {classItem.instructor}</p>
             <p className="text-gray-600 mb-2">Available Seats: {classItem.available_seats}</p>
             <p className="text-gray-600 mb-4">Price: $ {classItem.price}</p>
-            {!user && !isAdmin ? (
+            {!user ? (
               <button
                 disabled={classItem.available_seats === 0}
                 className={`bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded ${
@@ -111,15 +109,16 @@ const ClassesPage = ({ isAdmin }) => {
               </button>
             )}
           </div>
+
         </div>
+      </Slide>
+
       ))}
+
     </div>
   );
 };
 
 export default ClassesPage;
-
-
-
 
 

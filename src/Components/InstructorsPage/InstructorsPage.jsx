@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Zoom } from 'react-awesome-reveal';
 import { Link } from 'react-router-dom';
 // import useInstructors from '../../Hooks/useInstructors';
 
@@ -20,6 +21,8 @@ const InstructorsPage = () => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {instructors.map((instructor) => (
+      <Zoom>
+
         <div key={instructor._id} className="bg-white rounded-lg shadow-lg p-4">
           <img src={instructor.image} alt={instructor.name} className="w-40 h-40 object-cover rounded-md mb-4" />
           <h2 className="text-lg font-semibold">Name: {instructor.name}</h2>
@@ -38,7 +41,10 @@ const InstructorsPage = () => {
             </button>
           </Link>
         </div>
+      </Zoom>
+
       ))}
+
     </div>
   );
 };
