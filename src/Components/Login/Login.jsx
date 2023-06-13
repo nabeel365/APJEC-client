@@ -112,6 +112,8 @@ const Login = () => {
                             onChange={handleEmailChange}
                         // required
                         />
+                        {errors.email && <span className='text-error'>Email is required</span>}
+
                     </div>
                     <div className="mb-4">
                         <label htmlFor="password" className="block font-medium mb-1">Password</label>
@@ -121,11 +123,15 @@ const Login = () => {
                                 id="password"
                                 className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
                                 value={password}
-                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/, pattern: /^(?=.*[A-Z])/ })}
+                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/ })}
 
                                 onChange={handlePasswordChange}
                             // required
                             />
+                            {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
+
+                            {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain any special character and Password must contain a capital letter.</span>}
+
                             <button
                                 type="button"
                                 className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500"

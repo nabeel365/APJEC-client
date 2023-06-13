@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import Checkout from './Checkout';
-import useClasses from '../../../../Hooks/useClasses';
+import { useParams } from 'react-router-dom';
+import useSelectedClasses from '../../../../Hooks/useSelectedClasses';
 
 const stripePromise = loadStripe(import.meta.env.VITE_PK);
 
@@ -10,23 +11,45 @@ const stripePromise = loadStripe(import.meta.env.VITE_PK);
 
 const Pay = () => {
 
-    const [classes] = useClasses();
+    const [selectedClass] = useSelectedClasses()
 
-    const price = classes;
-    console.log();
+    const { id } = useParams();
+    console.log(id);
+
+
+    const payForClass = selectedClass?.find(isClass => isClass._id == id);
+
+    console.log(payForClass);
+
+    const price = payForClass?.price;
+
+
+
+
+    // useEffect(() => {
+    //     fetch(`http://localhost:5000/classes/${id}`)
+    //     .then(res => res.json())
+    //     .then(data => console.log(data) )
+
+
+    // })
+
+    // const price = classes;
+    // console.log(classes[0].price);
 
     return (
         <div className='w-full'>
             <Elements stripe={stripePromise}>
-            <Checkout 
-            price={price}
-            ></Checkout>
+                <Checkout
+                price={price}
+                ></Checkout>
 
             </Elements>
 
-            
+
         </div>
     );
 };
 
 export default Pay;
+

@@ -122,8 +122,8 @@ const DashBoard = ({ }) => {
   const [isAdmin] = useAdmin();
 
   // const isAdmin = true;
-  console.log(isInstructor);
-  console.log(isAdmin);
+  // console.log(isInstructor);
+  // console.log(isAdmin);
 
 
   // const role = "admin"

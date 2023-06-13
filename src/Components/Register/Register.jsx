@@ -226,6 +226,7 @@ const Register = () => {
                             />
                             {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
                             {errors.password?.type === 'minLength' && <span className='text-error'>Password must be atleast 6 characters long.</span>}
+                            
                             {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain any special character and Password must contain a capital letter.</span>}
                             {/* {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain a capital letter.</span>} */}
 

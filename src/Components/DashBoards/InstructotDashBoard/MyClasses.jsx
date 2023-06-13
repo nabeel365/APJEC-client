@@ -54,7 +54,7 @@ const MyClasses = () => {
                 </td>
                 <td className="px-4 py-2 border-b">
                   {/* { classItem.status ? (classItem.status === 'denied' && classItem.status === 'denied') : classItem.feedback } */}
-                  {/* {classItem.feedback} */}
+                  {classItem.feedback}
                   {classItem.status === 'denied' ? classItem.feedback : '-'}
 
                 </td>
