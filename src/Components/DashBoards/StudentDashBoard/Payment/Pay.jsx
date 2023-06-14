@@ -23,6 +23,13 @@ const Pay = () => {
 
     const price = payForClass?.price;
 
+    const name = payForClass?.name;
+
+    const image = payForClass?.image;
+
+
+  
+
 
 
 
@@ -41,7 +48,10 @@ const Pay = () => {
         <div className='w-full'>
             <Elements stripe={stripePromise}>
                 <Checkout
+                id={id}
                 price={price}
+                name= {name}
+                image={image}
                 ></Checkout>
 
             </Elements>

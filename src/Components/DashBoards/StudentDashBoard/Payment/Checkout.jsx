@@ -1,96 +1,356 @@
 
+// import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+// import React, { useContext, useEffect, useState } from 'react';
+// import { AuthContext } from '../../../../Providers/AuthProvider';
+// import Swal from 'sweetalert2';
+// // import './Checkout.css';
+
+// const Checkout = ({ price, name, id }) => {
+
+//   console.log(price);
+//   console.log(id);
+
+
+//   const { user } = useContext(AuthContext)
+
+//   const stripe = useStripe();
+//   const elements = useElements();
+
+//   const [cardError, setCardError] = useState('');
+//   const [clientSecret, setClientSecret] = useState('');
+//   const [processing, setProcessing] = useState(false);
+//   const [transactionId, setTransactionId] = useState('');
+
+
+
+
+//   useEffect(() => {
+
+//     console.log(price);
+//     if (price > 0) {
+//       fetch('http://localhost:5000/create-payment-intent', {
+//         method: 'POST',
+//         headers: {
+
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ price })
+//       })
+//         .then(res => res.json())
+//         .then(data => {
+//           setClientSecret(data.clientSecret)
+//           console.log(data.clientSecret);
+//         })
+//     }
+
+//   }, [price])
+
+//   // console.log(cl);
+
+
+
+
+
+
+//   const handleSubmit = async (event) => {
+//     // Block native form submission.
+//     event.preventDefault();
+
+//     if (!stripe || !elements) {
+//       // Stripe.js has not loaded yet. Make sure to disable
+//       // form submission until Stripe.js has loaded.
+//       return;
+//     }
+
+//     // Get a reference to a mounted CardElement. Elements knows how
+//     // to find your CardElement because there can only ever be one of
+//     // each type of element.
+//     const card = elements.getElement(CardElement);
+
+//     if (card == null) {
+//       return;
+//     }
+
+
+//     // payment method ????    
+
+//     const { error, paymentMethod } = await stripe.createPaymentMethod({
+//       type: 'card',
+//       card
+
+//     })
+
+//     if (error) {
+//       console.log('error', error)
+//       setCardError(error.message);
+//     }
+//     else {
+//       setCardError('');
+//       console.log('payment method', paymentMethod)
+//     }
+//     setProcessing(true)
+
+
+//     // confirm card payment 
+
+//     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
+//       clientSecret,
+//       {
+//         payment_method: {
+//           card: card,
+//           billing_details: {
+//             email: user?.email || 'unknown',
+//             name: user?.displayName || 'anonymous',
+//             // paymentStatus: "paid"
+//           },
+//         },
+//       },
+//     );
+
+//     if (confirmError) {
+//       console.log(confirmError);
+//     }
+
+//     console.log(paymentIntent);
+//     setProcessing(false)
+
+
+//     // payment status
+
+//     if (paymentIntent.status === 'succeeded') {
+//       setTransactionId(paymentIntent.id);
+
+//       const payment = {
+//         email: user?.email,
+//         transactionId: paymentIntent.id,
+//         price,
+//         date: new Date(),
+//         status: "paid",
+//         name: name
+
+
+//       }
+
+//       fetch('http://localhost:5000/payments', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({ payment })
+//       })
+//         .then(response => response.json())
+//         .then(data => {
+//           console.log(data);
+
+//           // result. b4 insertedId 
+
+//           if (data.insertedId) {
+//             // display confirm
+//             console.log('done');
+
+//             // alert('Payment Successful')
+//             Swal.fire({
+//               position: 'center',
+//               icon: 'success',
+//               title: 'Payment Successful',
+//               showConfirmButton: false,
+//               timer: 1500
+//             })
+//           }
+//         })
+//         .catch(error => {
+//           console.error('Error:', error);
+//         });
+
+//       }
+// // 
+
+
+
+
+// // 
+
+    
+
+
+
+
+//   }
+
+
+
+//   return (
+//     <div className=''>
+
+
+//       <form onSubmit={handleSubmit} className="w-2/3 ">
+//         <div className="rounded-lg overflow-hidden shadow-lg p-6 bg-white">
+//           <div className="mb-4">
+//             <CardElement
+//               options={{
+//                 style: {
+//                   base: {
+//                     fontSize: '16px',
+//                     color: '#424770',
+//                     '::placeholder': {
+//                       color: '#aab7c4',
+//                     },
+//                   },
+//                   invalid: {
+//                     color: '#9e2146',
+//                   },
+//                 },
+//               }}
+//               className="p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300"
+//             />
+//           </div>
+//           <button
+//             className="btn btn-primary w-full py-2 px-4 text-white rounded-lg shadow-md disabled:opacity-50"
+//             type="submit"
+//             disabled={!stripe || !clientSecret || processing}
+//           >
+//             Pay
+//           </button>
+//         </div>
+//       </form>
+
+//       {cardError && <p className='text-error'>{cardError}</p>}
+
+//       {transactionId && (
+//         <p className="text-success">
+//           Transaction complete with transactionId: {transactionId}
+//         </p>
+//       )}
+
+
+
+
+
+
+//     </div>
+//   );
+// };
+
+// export default Checkout;
+
+
+
+
+
+
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
-// import './Checkout.css';
+import useClasses from '../../../../Hooks/useClasses';
+import useSelectedClasses from '../../../../Hooks/useSelectedClasses';
 
-const Checkout = ({ price }) => {
-
-  console.log(price);
-
-
-  const { user } = useContext(AuthContext)
-
+const Checkout = ({ price, name , id, image}) => {
+  const { user } = useContext(AuthContext);
   const stripe = useStripe();
   const elements = useElements();
+
+  const [selectedClass] = useSelectedClasses();
+
+
+  console.log(id);
+  // const [classes] = useClasses();
+  // const [selectedClass] = useSelectedClasses();
+
+  // const paidClass = selectedClass?.find(c => c._id == id);
+
+  // console.log(paidClass);
+
+  const [classes, setClasses] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/selected-classes');
+        const data = await response.json();
+        setClasses(data);
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+  console.log(classes);
+
+  // console.log(classes?.[classes.length - 1]);
+
+  const paidClass = selectedClass?.find(c => c._id === id); 
+
+
+
+  console.log(paidClass?.enroled);
+
+  const enrolled = paidClass?.enroled;
+  console.log(enrolled);
+
+  const available_seats = paidClass?.available_seats;
+  console.log(paidClass?.available_seats);
+
+  const delId = paidClass?._id;
+  console.log(delId);
+
+// \
+
+
+
+// \
+  
+
 
   const [cardError, setCardError] = useState('');
   const [clientSecret, setClientSecret] = useState('');
   const [processing, setProcessing] = useState(false);
   const [transactionId, setTransactionId] = useState('');
 
-
-
-
   useEffect(() => {
-
-    console.log(price);
     if (price > 0) {
       fetch('http://localhost:5000/create-payment-intent', {
         method: 'POST',
         headers: {
-
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ price })
       })
-        .then(res => res.json())
-        .then(data => {
-          setClientSecret(data.clientSecret)
-          console.log(data.clientSecret);
-        })
+      .then(res => res.json())
+      .then(data => {
+        setClientSecret(data.clientSecret);
+      });
     }
-
-  }, [price])
-
-// console.log(cl);
-
-
-
-
-
+  }, [price]);
 
   const handleSubmit = async (event) => {
-    // Block native form submission.
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
-    // Get a reference to a mounted CardElement. Elements knows how
-    // to find your CardElement because there can only ever be one of
-    // each type of element.
     const card = elements.getElement(CardElement);
 
     if (card == null) {
       return;
     }
 
-
-    // payment method ????    
-
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: 'card',
       card
-
-    })
+    });
 
     if (error) {
-      console.log('error', error)
       setCardError(error.message);
-    }
-    else {
+    } else {
       setCardError('');
-      console.log('payment method', paymentMethod)
     }
-    setProcessing(true)
 
-
-    // confirm card payment 
+    setProcessing(true);
 
     const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(
       clientSecret,
@@ -99,8 +359,7 @@ const Checkout = ({ price }) => {
           card: card,
           billing_details: {
             email: user?.email || 'unknown',
-            name: user?.displayName || 'anonymous',
-            // paymentStatus: "paid"
+            name: user?.displayName || 'anonymous'
           },
         },
       },
@@ -110,11 +369,7 @@ const Checkout = ({ price }) => {
       console.log(confirmError);
     }
 
-    console.log(paymentIntent);
-    setProcessing(false)
-
-
-    // payment status
+    setProcessing(false);
 
     if (paymentIntent.status === 'succeeded') {
       setTransactionId(paymentIntent.id);
@@ -124,10 +379,10 @@ const Checkout = ({ price }) => {
         transactionId: paymentIntent.id,
         price,
         date: new Date(),
-        status: "paid"
-
-
-      }
+        status: 'paid',
+        name: name,
+        image: image
+      };
 
       fetch('http://localhost:5000/payments', {
         method: 'POST',
@@ -136,77 +391,89 @@ const Checkout = ({ price }) => {
         },
         body: JSON.stringify({ payment })
       })
-        .then(response => response.json())
-        .then(data => {
-          console.log(data);
+      .then(response => response.json())
+      .then(data => {
+        if (data.insertedId) {
 
-          // result. b4 insertedId 
+           // del from selected class 
+          //  handleDeleteClass();
 
-          if (data.insertedId) {
-            // display confirm
-            console.log('done');
+          updateSeatsAndEnroled(); 
 
-            // alert('Payment Successful')
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: 'Payment Successful',
-              showConfirmButton: false,
-              timer: 1500
-            })
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Payment Successful',
+            showConfirmButton: false,
+            timer: 1500
+          });
 
+         
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+    }
+  };
 
+  const updateSeatsAndEnroled = () => {
+    // const courseId = id; 
+    const courseId = paidClass?._id; 
+    const updateSeatsQuery = {
+      // available_seats: available_seats,
+      enroled: enrolled 
 
     }
 
+    // Execute the update query
+    fetch(`http://localhost:5000/classes/${courseId}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(updateSeatsQuery)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Seats and enroled updated successfully');
+    })
+    .catch(error => {
+      console.log('Error updating available seats and enroled:', error);
+    });
+  };
 
 
 
-  }
+
+  // delete my from my selected class 
+
+  const handleDeleteClass = (delId) => {
+    console.log('deleted', delId);
+    fetch(`http://localhost:5000/selected-classes/${delId}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.deletedCount > 0) {
+          // refetch();
+          // Swal.fire({
+          //   position: 'top-center',
+          //   icon: 'success',
+          //   title: 'Deleted',
+          //   showConfirmButton: false,
+          //   timer: 1500,
+          // });
+        }
+      });
+  };
+
 
 
 
   return (
     <div className=''>
-
-      {/* <form  onSubmit={handleSubmit} >
-        <CardElement 
-          options={{
-            style: {
-              base: {
-                fontSize: '16px',
-                color: '#424770',
-                '::placeholder': {
-                  color: '#aab7c4',
-                },
-              },
-              invalid: {
-                color: '#9e2146',
-              },
-            },
-          }}
-        />
-        <button className='btn btn-primary' type="submit" disabled={!stripe || !clientSecret || processing}>
-          Pay
-        </button>
-      </form>
-
-
-      {cardError && <p className='text-error'>{cardError}</p>}
-
-      {transactionId && <p className="text-success">Transaction complete with transactionId: {transactionId}</p>}
-   
- */}
-
-      {/*  */}
-
-
-      <form onSubmit={handleSubmit} className="w-2/3 ">
+      <form onSubmit={handleSubmit} className="w-2/3">
         <div className="rounded-lg overflow-hidden shadow-lg p-6 bg-white">
           <div className="mb-4">
             <CardElement
@@ -244,17 +511,8 @@ const Checkout = ({ price }) => {
           Transaction complete with transactionId: {transactionId}
         </p>
       )}
-
-
-
-      {/*  */}
-
-
-
     </div>
   );
 };
 
 export default Checkout;
-
-

@@ -75,7 +75,7 @@ const ManageUsers = () => {
                     user.role === 'instructor' ? 'disabled' : ''
                   }`}
                   onClick={() => handleRoleChange(user._id, 'instructor')}
-                  disabled={user.role === 'instructor'}
+                  disabled={user.role === 'instructor' }
                 >
                   Make Instructor
                 </button>

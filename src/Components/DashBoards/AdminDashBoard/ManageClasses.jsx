@@ -1,13 +1,12 @@
-
-
-
-
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const ManageClasses = () => {
   const [classes, setClasses] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedClassId, setSelectedClassId] = useState(null);
+  const [feedback, setFeedback] = useState('');
 
   useEffect(() => {
     fetchClasses();
@@ -53,8 +52,31 @@ const ManageClasses = () => {
   };
 
   const handleSendFeedback = (classId) => {
-    // Logic to open modal or navigate to a separate route for sending feedback
-    console.log('Send feedback for class:', classId);
+    setSelectedClassId(classId);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmitFeedback = async () => {
+    try {
+      await axios.patch(`http://localhost:5000/classes/${selectedClassId}`, { feedback , status: "denied"});
+      console.log('Feedback submitted:', feedback);
+
+      Swal.fire({
+        position: 'top-center',
+        icon: 'success',
+        title: 'Feedback Sent',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+      setShowModal(false);
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+    }
   };
 
   return (
@@ -111,6 +133,8 @@ const ManageClasses = () => {
                   <button
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded focus:outline-none focus:shadow-outline"
                     onClick={() => handleSendFeedback(classItem._id)}
+                    disabled={classItem.status === 'approved'}
+
                   >
                     Send Feedback
                   </button>
@@ -120,13 +144,36 @@ const ManageClasses = () => {
           </tbody>
         </table>
       </div>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+          <div className=" rounded-lg p-6 max-w-md  bg-purple-400">
+            <h2 className="text-lg font-bold mb-4">Send Feedback</h2>
+            <input
+              type="text"
+              className="w-full h-40 resize-none border rounded-lg p-2 mb-4"
+              placeholder="Enter your feedback here..."
+              value={feedback}
+              onChange={(e) => setFeedback(e.target.value)}
+            />
+            <div className="flex justify-end">
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                onClick={handleSubmitFeedback}
+              >
+                Submit Feedback
+              </button>
+              <button
+                className="bg-red-500 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                onClick={handleCloseModal}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default ManageClasses;
-
-
-
-
-

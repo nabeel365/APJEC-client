@@ -313,7 +313,7 @@ const DashBoard = ({ }) => {
           <Link to="/dashBoard/enrolled">My Enrolled Classes</Link>
         </li>
         <li>
-          <Link to="/dashBoard/payment">Payment</Link>
+          <Link to="/dashBoard/payment">Payment History</Link>
         </li>
       </ul>
     )

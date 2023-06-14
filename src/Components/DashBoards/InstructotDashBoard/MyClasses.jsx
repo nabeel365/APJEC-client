@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 import FeedBack from './FeedBack';
+import { AuthContext } from '../../../Providers/AuthProvider';
 
 const MyClasses = () => {
   const [classes, setClasses] = useState([]);
 
+  const {user} = useContext(AuthContext);
+
   console.log(classes);
   useEffect(() => {
     fetchClasses();
-  }, []);
+  }, [user?.email]);
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/classes');
+      const response = await axios.get(`http://localhost:5000/instructorclasses?email=${user?.email}`);
       setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -50,12 +53,12 @@ const MyClasses = () => {
                 </td>
                 <td className="px-4 py-2 border-b">{classItem.status}</td>
                 <td className="px-4 py-2 border-b">
-                  {/* {classItem.enrolledStudents.length} */}
+                  {classItem.enroled}
                 </td>
                 <td className="px-4 py-2 border-b">
                   {/* { classItem.status ? (classItem.status === 'denied' && classItem.status === 'denied') : classItem.feedback } */}
-                  {classItem.feedback}
-                  {classItem.status === 'denied' ? classItem.feedback : '-'}
+                  {/* {classItem.feedback} */}
+                  {classItem.status === 'denied' ? classItem.feedback : 'No FeedBack'}
 
                 </td>
                 <td className="px-4 py-2 border-b">

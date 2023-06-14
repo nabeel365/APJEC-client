@@ -18,20 +18,25 @@ const AddAClass = () => {
       price: parseFloat(e.target.elements.price.value),
       role: "student",
       status: "pending",
-      feedback: ' '
+      feedback: 'none ',
+      enroled: 0
     };
 
     try {
       await axios.post('http://localhost:5000/classes', classData);
 
+      await axios.post('http://localhost:5000/selected-classes', classData);
+
+
+
       e.target.reset();
-      
+
     } catch (error) {
       console.error('Error saving class data:', error);
     }
 
     Swal.fire({
-      position: 'top-center',
+      position: 'center',
       icon: 'success',
       title: 'Your Class has been added Successfully',
       showConfirmButton: false,
@@ -128,7 +133,7 @@ const AddAClass = () => {
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Add
+            Add Class
           </button>
         </div>
       </form>
@@ -137,3 +142,7 @@ const AddAClass = () => {
 };
 
 export default AddAClass;
+
+
+
+
