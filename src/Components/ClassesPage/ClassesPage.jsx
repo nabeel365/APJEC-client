@@ -59,7 +59,7 @@ const ClassesPage = ({}) => {
     console.log(newData, "59");
     
     try {
-      const response = await fetch('http://localhost:5000/selected-classes', {
+      const response = await fetch('https://art-server-two.vercel.app/selected-classes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -4,18 +4,19 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const useAdmin = () => {
     const {user } = useContext(AuthContext)
-    const {data: isAdmin = [] } = useQuery({
+    const {data: isAdmin = [], isLoading } = useQuery({
+
         queryKey: ['admins', user?.email],
+        enabled: !! user?.email,
+
         queryFn: async() => {
-        if(user?.email ){
-            const res = await fetch(`http://localhost:5000/users/admin/${user.email}`);
+            const res = await fetch(`https://art-server-two.vercel.app/users/admin/${user.email}`);
             const data = res.json();
             return data;
         }
-        }
     })
 
-    return [isAdmin]
+    return [isAdmin, isLoading]
 };
 
 export default useAdmin;

@@ -38,7 +38,7 @@ const Register = () => {
                 // 
 
                     const savedUser = { name: data.name, email: data.email, role: "student"}
-                    fetch('http://localhost:5000/users', {
+                    fetch('https://art-server-two.vercel.app/users', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'

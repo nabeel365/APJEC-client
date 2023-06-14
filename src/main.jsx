@@ -31,6 +31,8 @@ import ManageClasses from './Components/DashBoards/AdminDashBoard/ManageClasses'
 import ManageUsers from './Components/DashBoards/AdminDashBoard/ManageUsers';
 import Pay from './Components/DashBoards/StudentDashBoard/Payment/Pay';
 import PrivateRoute from './Routes/PrivateRoute';
+import AdminRoute from './Routes/AdminRoute';
+import InstructorRoute from './Routes/InstructorRoute';
 
 
 const queryClient = new QueryClient()
@@ -73,15 +75,15 @@ const router = createBrowserRouter([
     children: [
       {
         path: "mySelectedClasses",
-        element: <MySelectedClasses></MySelectedClasses>
+        element: <PrivateRoute><MySelectedClasses></MySelectedClasses></PrivateRoute>
       },
       {
         path: "enrolled",
-        element: <MyEnrolledClasses></MyEnrolledClasses>
+        element: <PrivateRoute><MyEnrolledClasses></MyEnrolledClasses></PrivateRoute>
       },
       {
         path: "payment",
-        element: <Payment></Payment>
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>
       },
       {
         path: "pay/:id",
@@ -89,11 +91,11 @@ const router = createBrowserRouter([
       },
       {
         path: "addClass",
-        element: <AddAClass></AddAClass>
+        element: <InstructorRoute><AddAClass></AddAClass></InstructorRoute>
       },
       {
         path: "myClasses" ,
-        element: <MyClasses></MyClasses>
+        element: <InstructorRoute><MyClasses></MyClasses></InstructorRoute>
       },
       {
         path: "totalEnrolledStudents" ,
@@ -105,16 +107,15 @@ const router = createBrowserRouter([
       },
       {
         path: "manageClasses" ,
-        element: <ManageClasses></ManageClasses>
+        element: <AdminRoute><ManageClasses></ManageClasses></AdminRoute>
       },
       {
         path: "manageUsers" ,
-        element: <ManageUsers></ManageUsers>
+        element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
     ]
   }
 ]);
-
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(

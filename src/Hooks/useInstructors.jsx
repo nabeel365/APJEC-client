@@ -4,18 +4,19 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const useInstructors = () => {
     const {user } = useContext(AuthContext)
-    const {data: isInstructor = [] } = useQuery({
+    console.log(user);
+    const {data: isInstructor = [], isLoading } = useQuery({
         queryKey: ['instructors', user?.email],
+        enabled: !! user?.email,
         queryFn: async() => {
-        if(user?.email ){
-            const res = await fetch(`http://localhost:5000/users/instructor/${user.email}`);
-            const data = res.json();
+
+            const res = await fetch(`https://art-server-two.vercel.app/users/instructor/${user.email}`);
+            const data = await res.json();
             return data;
-        }
         }
     })
 
-    return [isInstructor]
+    return [isInstructor, isLoading]
 };
 
 export default useInstructors;

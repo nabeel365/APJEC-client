@@ -12,7 +12,7 @@ const InstructorsPage = () => {
   console.log(instructors);
 
   useEffect(() => {
-    fetch('http://localhost:5000/users/instructor')
+    fetch('https://art-server-two.vercel.app/users/instructor')
       .then(response => response.json())
       .then(data => setInstructors(data))
       .catch(error => console.log(error));

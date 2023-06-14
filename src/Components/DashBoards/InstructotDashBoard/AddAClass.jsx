@@ -23,9 +23,9 @@ const AddAClass = () => {
     };
 
     try {
-      await axios.post('http://localhost:5000/classes', classData);
+      await axios.post('https://art-server-two.vercel.app/classes', classData);
 
-      await axios.post('http://localhost:5000/selected-classes', classData);
+      await axios.post('https://art-server-two.vercel.app/selected-classes', classData);
 
 
 

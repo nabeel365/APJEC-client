@@ -28,13 +28,13 @@ const Pay = () => {
     const image = payForClass?.image;
 
 
-  
+
 
 
 
 
     // useEffect(() => {
-    //     fetch(`http://localhost:5000/classes/${id}`)
+    //     fetch(`https://art-server-two.vercel.app/classes/${id}`)
     //     .then(res => res.json())
     //     .then(data => console.log(data) )
 
@@ -46,12 +46,18 @@ const Pay = () => {
 
     return (
         <div className='w-full'>
+            <h1 className="text-3xl font-bold">
+                Paying
+                <span className="text-green-500"> $ {price} </span>
+                for class
+                <span className="text-blue-500"> {name} </span>
+            </h1>
             <Elements stripe={stripePromise}>
                 <Checkout
-                id={id}
-                price={price}
-                name= {name}
-                image={image}
+                    id={id}
+                    price={price}
+                    name={name}
+                    image={image}
                 ></Checkout>
 
             </Elements>

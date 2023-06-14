@@ -11,7 +11,7 @@
 
 //     const handleDelete = (_id) => {
 //         console.log('deleted', _id);
-//         fetch(`http://localhost:5000/selected-classes/${_id}`, {
+//         fetch(`https://art-server-two.vercel.app/selected-classes/${_id}`, {
 //             method: 'DELETE',
 //         })
 //             .then((res) => res.json())
@@ -87,10 +87,10 @@ import { Link } from 'react-router-dom';
 const MySelectedClasses = () => {
   const [selectedClass, , refetch] = useSelectedClasses();
   console.log(selectedClass);
-
+  
   const handleDelete = (_id) => {
     console.log('deleted', _id);
-    fetch(`http://localhost:5000/selected-classes/${_id}`, {
+    fetch(`https://art-server-two.vercel.app/selected-classes/${_id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -107,6 +107,10 @@ const MySelectedClasses = () => {
         }
       });
   };
+
+
+
+ 
 
   return (
     <div>
@@ -131,8 +135,9 @@ const MySelectedClasses = () => {
               <td className="border-b border-gray-300 px-4 py-2">{classItem.instructor}</td>
               <td className="border-b border-gray-300 px-4 py-2">${classItem.price}</td>
               <td className="border-b border-gray-300 px-4 py-2">
-                <Link to={`/dashboard/pay/${classItem._id}`}>
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mr-2 rounded">Pay</button>
+                <Link  to={`/dashboard/pay/${classItem._id}`}>
+
+                  <button  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mr-2 rounded">Pay</button>
                 </Link>
                 <button onClick={() => handleDelete(classItem._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
                   Delete

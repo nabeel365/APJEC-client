@@ -28,7 +28,7 @@
 
 //     console.log(price);
 //     if (price > 0) {
-//       fetch('http://localhost:5000/create-payment-intent', {
+//       fetch('https://art-server-two.vercel.app/create-payment-intent', {
 //         method: 'POST',
 //         headers: {
 
@@ -131,7 +131,7 @@
 
 //       }
 
-//       fetch('http://localhost:5000/payments', {
+//       fetch('https://art-server-two.vercel.app/payments', {
 //         method: 'POST',
 //         headers: {
 //           'Content-Type': 'application/json'
@@ -266,7 +266,7 @@ const Checkout = ({ price, name , id, image}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/selected-classes');
+        const response = await fetch('https://art-server-two.vercel.app/selected-classes');
         const data = await response.json();
         setClasses(data);
       } catch (error) {
@@ -312,7 +312,7 @@ const Checkout = ({ price, name , id, image}) => {
 
   useEffect(() => {
     if (price > 0) {
-      fetch('http://localhost:5000/create-payment-intent', {
+      fetch('https://art-server-two.vercel.app/create-payment-intent', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -384,7 +384,7 @@ const Checkout = ({ price, name , id, image}) => {
         image: image
       };
 
-      fetch('http://localhost:5000/payments', {
+      fetch('https://art-server-two.vercel.app/payments', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -427,7 +427,7 @@ const Checkout = ({ price, name , id, image}) => {
     }
 
     // Execute the update query
-    fetch(`http://localhost:5000/classes/${courseId}`, {
+    fetch(`https://art-server-two.vercel.app/classes/${courseId}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
@@ -450,7 +450,7 @@ const Checkout = ({ price, name , id, image}) => {
 
   const handleDeleteClass = (delId) => {
     console.log('deleted', delId);
-    fetch(`http://localhost:5000/selected-classes/${delId}`, {
+    fetch(`https://art-server-two.vercel.app/selected-classes/${delId}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -473,6 +473,7 @@ const Checkout = ({ price, name , id, image}) => {
 
   return (
     <div className=''>
+      
       <form onSubmit={handleSubmit} className="w-2/3">
         <div className="rounded-lg overflow-hidden shadow-lg p-6 bg-white">
           <div className="mb-4">

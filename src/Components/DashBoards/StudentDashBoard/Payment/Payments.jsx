@@ -8,7 +8,7 @@
 //     const [paymentHistory, setPaymentHistory] = useState();
     
 //   useEffect(() => {
-//     fetch(`http://localhost:5000/payments?email=${user?.email}`)
+//     fetch(`https://art-server-two.vercel.app/payments?email=${user?.email}`)
 //       .then(response => response.json())
 //       .then(data => {
 //         console.log(data);
@@ -41,7 +41,7 @@ const Payments = () => {
   const [paymentHistory, setPaymentHistory] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/payments?email=${user?.email}`)
+    fetch(`https://art-server-two.vercel.app/payments?email=${user?.email}`)
       .then(response => response.json())
       .then(data => {
         console.log(data);
