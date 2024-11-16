@@ -1,54 +1,77 @@
 import React, { useEffect, useState } from 'react';
 import { Zoom } from 'react-awesome-reveal';
 import { Link } from 'react-router-dom';
-// import useInstructors from '../../Hooks/useInstructors';
 
 const InstructorsPage = () => {
-  // const [isInstructor] = useInstructors();
-  // console.log(isInstructor);
-
   const [instructors, setInstructors] = useState([]);
 
-  console.log(instructors);
-
   useEffect(() => {
-    fetch('https://art-server-two.vercel.app/users/instructor')
-      .then(response => response.json())
-      .then(data => setInstructors(data))
-      .catch(error => console.log(error));
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/users/instructor`)
+      .then((response) => response.json())
+      .then((data) => setInstructors(data))
+      .catch((error) => console.log(error));
   }, []);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {instructors.map((instructor) => (
-      <Zoom>
+    <div className="bg-[#F6F6F2] py-10 px-5 md:px-20">
+      {/* Header Section */}
+      <div className="text-center mb-10">
+        <h1 className="text-3xl md:text-4xl font-bold text-[#2b6777]">Meet Our Instructors</h1>
+        <p className="text-[#388087] mt-2 text-lg">
+          Our highly qualified and experienced instructors are dedicated to providing the best learning experience.
+        </p>
+      </div>
 
-        <div key={instructor._id} className="bg-white rounded-lg shadow-lg p-4">
-          <img src={instructor.image} alt={instructor.name} className="w-40 h-40 object-cover rounded-md mb-4" />
-          <h2 className="text-lg font-semibold">Name: {instructor.name}</h2>
-          <p className="text-gray-600 mb-2">Email: <span className="text-blue-500">{instructor.email}</span></p>
-          {instructor.num_classes_taken && (
-            <p className="text-gray-600 mb-2">Number of Classes taken: <strong>{instructor.num_classes_taken}</strong> </p>
-          )}
-          {instructor.classes_taken && (
-            <p className="text-gray-600 mb-2">
-              Classes taken: <span className="text-green-500">{instructor.classes_taken.join(', ')}</span>
-            </p>
-          )}
-          <Link to={`classes/${instructor._id}`} className="text-blue-500 hover:underline">
-            <button className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
-              See Classes
-            </button>
-          </Link>
-        </div>
-      </Zoom>
+      {/* Instructors Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {instructors.map((instructor) => (
+          <Zoom key={instructor._id}>
+            <div className="bg-[#BADFE7] rounded-lg shadow-lg overflow-hidden hover:shadow-xl transform transition-all duration-300 hover:scale-105">
+              <div className="p-6">
+                {/* Instructor Image */}
+                <img
+                  src={instructor.image}
+                  alt={instructor.name}
+                  className="w-32 h-32 object-cover rounded-full mx-auto mb-4 border-4 border-[#C2EDCE]"
+                />
 
-      ))}
+                {/* Instructor Details */}
+                <h2 className="text-lg font-semibold text-[#2b6777] text-center">
+                  {instructor.name}
+                </h2>
+                <p className="text-sm text-[#388087] text-center mb-4">
+                  <span className="font-medium">Email:</span> <span className="text-blue-600">{instructor.email}</span>
+                </p>
 
+                {/* Additional Details */}
+                <div className="text-sm text-[#2b6777]">
+                  {instructor.num_classes_taken && (
+                    <p>
+                      <strong>Classes Taken:</strong> {instructor.num_classes_taken}
+                    </p>
+                  )}
+                  {instructor.classes_taken && (
+                    <p>
+                      <strong>Subjects:</strong> {instructor.classes_taken.join(', ')}
+                    </p>
+                  )}
+                </div>
+
+                {/* CTA Button */}
+                <div className="text-center mt-4">
+                  <Link to={`classes/${instructor._id}`}>
+                    <button className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-6 rounded">
+                      View Classes
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Zoom>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default InstructorsPage;
-
-

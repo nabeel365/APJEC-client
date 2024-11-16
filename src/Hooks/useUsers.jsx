@@ -4,7 +4,7 @@ const useUsers = () => {
     const {data: users = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['users'],
         queryFn: async() => {
-            const res = await fetch('https://art-server-two.vercel.app/users');
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users`);
             return res.json();
         }
     })

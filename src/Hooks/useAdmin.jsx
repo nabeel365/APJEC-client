@@ -10,7 +10,7 @@ const useAdmin = () => {
         enabled: !! user?.email,
 
         queryFn: async() => {
-            const res = await fetch(`https://art-server-two.vercel.app/users/admin/${user.email}`);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/admin/${user.email}`);
             const data = res.json();
             return data;
         }

@@ -10,7 +10,7 @@ const ManageUsers = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://art-server-two.vercel.app/users');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/users`);
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -19,7 +19,7 @@ const ManageUsers = () => {
 
   const updateUserRole = async (userId, role) => {
     try {
-      await axios.patch(`https://art-server-two.vercel.app/users/${userId}`, {
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/users/${userId}`, {
         role: role,
       });
       const updatedUsers = users.map((user) => {

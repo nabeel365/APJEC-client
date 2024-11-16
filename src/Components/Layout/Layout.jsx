@@ -5,37 +5,43 @@ import CustomerReview from '../HomePage/CustomerReview';
 import PopularClasses from '../HomePage/PopularClasses';
 import PopularInstructors from '../HomePage/PopularInstructors';
 import { Fade, Reveal, Roll, Slide, Zoom } from 'react-awesome-reveal';
+import NoticeSection from '../Notice/NoticeSection';
+import TeamPage from '../Team/TeamPage';
+import Testimonials from '../Testimonials/Testimonials';
 
 const Layout = () => {
     return (
         <div>
+            <br />
             <Slide direction="left">
             <TopSlider></TopSlider> 
 
             </Slide>
 
+<br />
+            
+            
+            <NoticeSection></NoticeSection>
 
-            <Roll>
-            <PopularClasses></PopularClasses> 
-
-            </Roll>
+            
 
 
 
 
             <Fade duration={2000} >
-            <PopularInstructors></PopularInstructors>
+            {/* <PopularInstructors></PopularInstructors> */}
 
             </Fade>
 
 
+<br></br>
 
 
+           <TeamPage></TeamPage>
 
-            <Zoom>
-            <CustomerReview></CustomerReview>
+           <br></br>
 
-            </Zoom>
+           <Testimonials></Testimonials>
 
 
         </div>

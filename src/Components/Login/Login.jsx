@@ -6,180 +6,136 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Login = () => {
-
-    // useform 
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
-
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const { userLogIn, googleSignIn } = useContext(AuthContext);
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-
     const [error, setError] = useState('');
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-
-    // navigate 
-    const navigate = useNavigate();
-
-    const location = useLocation();
-
-    const from = location.state?.from?.pathname || '/';
-
-
-
     const handleSubmitData = (data) => {
-
         userLogIn(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser);
+            .then((result) => {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate(from, { replace: true });
             })
-            .catch(error => {
-                console.log(error)
-                setError(error.message)
-            })
-
-            // const savedUser = { name: data.name, email: data.email, role: "student" }
-            // fetch('https://art-server-two.vercel.app/users', {
-            //     method: 'POST',
-            //     headers: {
-            //         'content-type': 'application/json'
-            //     },
-            //     body: JSON.stringify(savedUser)
-            // })
-
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Login Successful !!!',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-        navigate(from, { replace: true })
-
-
-
+            .catch((error) => {
+                setError(error.message);
+            });
     };
 
-    const handleGoogleSingIn = () => {
+    const handleGoogleSignIn = () => {
         googleSignIn()
-        .then(result => {
-            const socialUser = result.user;
-            console.log(socialUser);
-
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'Login Successful !!!',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-
-            navigate(from, { replace: true })
-
-        })
-    }
+            .then((result) => {
+                Swal.fire({
+                    position: 'top-center',
+                    icon: 'success',
+                    title: 'Login Successful!',
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                navigate(from, { replace: true });
+            });
+    };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-blue-500 to-purple-500">
-            <div className="bg-white p-8 rounded shadow-md w-96">
-                <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-[#BADFE7] to-[#C2EDCE]">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+                <h2 className="text-2xl font-bold text-center mb-6 text-[#2b6777]">APJEC</h2>
+                <p className="text-sm text-center text-gray-500 mb-8">
+                    Log in to access your personalized dashboard and course materials.
+                </p>
+
                 <form onSubmit={handleSubmit(handleSubmitData)}>
+                    {/* Email Field */}
                     <div className="mb-4">
-                        <label htmlFor="email" className="block font-medium mb-1">Email</label>
+                        <label htmlFor="email" className="block font-medium text-gray-700">Email</label>
                         <input
                             type="email"
                             id="email"
-                            className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={email}
+                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#388087] focus:outline-none"
                             {...register("email", { required: true })}
-
-                            onChange={handleEmailChange}
-                        // required
                         />
-                        {errors.email && <span className='text-error'>Email is required</span>}
-
+                        {errors.email && <span className="text-red-500 text-sm">Email is required</span>}
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block font-medium mb-1">Password</label>
-                        <div className="relative">
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                id="password"
-                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                                value={password}
-                                {...register("password", { required: true, minLength: 6, maxLength: 12, pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/ })}
 
-                                onChange={handlePasswordChange}
-                            // required
-                            />
-                            {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
-
-                            {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain any special character and Password must contain a capital letter.</span>}
-
-                            <button
-                                type="button"
-                                className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-500"
-                                onClick={handleTogglePasswordVisibility}
-                            >
-                                {showPassword ? (
-
-
-                                    <FaEyeSlash></FaEyeSlash>
-
-                                ) :
-
-                                    <FaEye></FaEye>
-
-
-                                }
-
-
-                            </button>
-                        </div>
+                    {/* Password Field */}
+                    <div className="mb-4 relative">
+                        <label htmlFor="password" className="block font-medium text-gray-700">Password</label>
+                        <input
+                            type={showPassword ? 'text' : 'password'}
+                            id="password"
+                            className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-[#388087] focus:outline-none"
+                            {...register("password", {
+                                required: true,
+                                minLength: 6,
+                                pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/,
+                            })}
+                        />
+                        <button
+                            type="button"
+                            className="absolute top-2 right-3 text-gray-500"
+                            onClick={handleTogglePasswordVisibility}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
+                        {errors.password && (
+                            <span className="text-red-500 text-sm">
+                                Password must be 6+ characters, include a capital letter and a special character.
+                            </span>
+                        )}
                     </div>
+
+                    {/* Login Button */}
                     <button
                         type="submit"
-                        className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-4 py-2 rounded focus:outline-none"
+                        className="w-full bg-[#2b6777] text-white font-semibold py-2 rounded-lg hover:bg-[#388087] transition"
                     >
-                        Login
+                        Log In
                     </button>
-                    <p className='text-error'> {error} </p>
                 </form>
-                <div className="mt-4 text-center">
-                    New to our Website ?  <Link to="/register" className="text-blue-500 hover:underline">Create an account</Link>
+
+                {/* Error Message */}
+                {error && <p className="text-red-500 text-center mt-2">{error}</p>}
+
+                {/* Register Redirect */}
+                <p className="text-center text-sm text-gray-600 mt-4">
+                    New here?{" "}
+                    <Link to="/register" className="text-[#388087] hover:underline">
+                        Create an account
+                    </Link>
+                </p>
+
+                {/* Divider */}
+                <div className="flex items-center my-6">
+                    <div className="flex-grow border-t border-gray-300"></div>
+                    <span className="px-4 text-gray-500 text-sm">OR</span>
+                    <div className="flex-grow border-t border-gray-300"></div>
                 </div>
 
-                <br />
-
-                <div className="flex flex-col items-center">
-                    <p className="mb-2">Or login with:</p>
-                    <button onClick={handleGoogleSingIn} className="flex items-center justify-center w-10 h-10 bg-white rounded-full shadow-md mt-2">
-                        <FaGoogle className="text-blue-500 text-lg" />
-                    </button>
-                </div>
-
-{error.message}
-
+                {/* Google Sign-In */}
+                <button
+                    onClick={handleGoogleSignIn}
+                    className="w-full flex items-center justify-center bg-[#BADFE7] text-[#2b6777] font-semibold py-2 rounded-lg hover:bg-[#C2EDCE] transition"
+                >
+                    <FaGoogle className="mr-2" /> Sign in with Google
+                </button>
             </div>
         </div>
     );
-
 };
 
 export default Login;

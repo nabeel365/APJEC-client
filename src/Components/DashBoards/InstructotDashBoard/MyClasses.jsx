@@ -15,7 +15,7 @@ const MyClasses = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get(`https://art-server-two.vercel.app/instructorclasses?email=${user?.email}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/instructorclasses?email=${user?.email}`);
       setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);

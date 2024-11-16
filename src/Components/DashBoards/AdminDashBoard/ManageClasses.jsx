@@ -14,7 +14,7 @@ const ManageClasses = () => {
 
   const fetchClasses = async () => {
     try {
-      const response = await axios.get('https://art-server-two.vercel.app/classes');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/classes`);
       setClasses(response.data);
     } catch (error) {
       console.error('Error fetching classes:', error);
@@ -23,7 +23,7 @@ const ManageClasses = () => {
 
   const handleApprove = async (classId) => {
     try {
-      await axios.patch(`https://art-server-two.vercel.app/classes/${classId}`, { status: 'approved' });
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, { status: 'approved' });
       const updatedClasses = classes.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, status: 'approved' };
@@ -38,7 +38,7 @@ const ManageClasses = () => {
 
   const handleDeny = async (classId) => {
     try {
-      await axios.patch(`https://art-server-two.vercel.app/classes/${classId}`, { status: 'denied' });
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, { status: 'denied' });
       const updatedClasses = classes.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, status: 'denied' };
@@ -62,7 +62,7 @@ const ManageClasses = () => {
 
   const handleSubmitFeedback = async () => {
     try {
-      await axios.patch(`https://art-server-two.vercel.app/classes/${selectedClassId}`, { feedback , status: "denied"});
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${selectedClassId}`, { feedback , status: "denied"});
       console.log('Feedback submitted:', feedback);
 
       Swal.fire({

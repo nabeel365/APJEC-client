@@ -1,84 +1,3 @@
-// import React, { useState } from 'react';
-// import useSelectedClasses from '../../../Hooks/useSelectedClasses';
-// import Swal from 'sweetalert2';
-// import { Link } from 'react-router-dom';
-
-// const MySelectedClasses = () => {
-//     const [selectedClass, ,refetch] = useSelectedClasses();
-//     console.log(selectedClass);
-
-//     //   const [courses, setCourses] = useState([]);
-
-//     const handleDelete = (_id) => {
-//         console.log('deleted', _id);
-//         fetch(`https://art-server-two.vercel.app/selected-classes/${_id}`, {
-//             method: 'DELETE',
-//         })
-//             .then((res) => res.json())
-//             .then((data) => {
-//                 if (data.deletedCount > 0) {
-//                     refetch();
-//                     Swal.fire({
-//                         position: 'top-center',
-//                         icon: 'success',
-//                         title: 'Deleted',
-//                         showConfirmButton: false,
-//                         timer: 1500
-//                     })
-//                     //   const remaining = courses.filter((course) => course._id !== _id);
-//                     //   setCourses(remaining);
-//                 }
-
-//             });
-//     };
-
-//     return (
-//         <div>
-
-//             <h1 className="text-2xl font-bold mb-4">My Selected Classes</h1>
-//             <table className="w-full border-collapse">
-//                 <thead>
-//                     <tr>
-//                         <th className="border-b-2 border-gray-300 px-4 py-2">Image</th>
-//                         <th className="border-b-2 border-gray-300 px-4 py-2">Name</th>
-//                         <th className="border-b-2 border-gray-300 px-4 py-2">Instructor</th>
-//                         <th className="border-b-2 border-gray-300 px-4 py-2">Price</th>
-//                         <th className="border-b-2 border-gray-300 px-4 py-2">Actions</th>
-//                     </tr>
-//                 </thead>
-//                 <tbody>
-//                     {selectedClass.map((classItem) => (
-//                         <tr key={classItem._id}>
-//                             <td className="border-b border-gray-300 px-4 py-2">
-//                                 <img src={classItem.image} alt={classItem.name} className="w-16 h-16" />
-//                             </td>
-//                             <td className="border-b border-gray-300 px-4 py-2">{classItem.name}</td>
-//                             <td className="border-b border-gray-300 px-4 py-2">{classItem.instructor}</td>
-//                             <td className="border-b border-gray-300 px-4 py-2">${classItem.price}</td>
-//                             <td className="border-b border-gray-300 px-4 py-2">
-//                                 <Link to={`/dashboard/pay${_id}`}>
-//                                 <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mr-2 rounded">Pay</button>
-
-//                                 </Link>
-//                                 <button onClick={() => handleDelete(classItem._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">Delete</button>
-//                             </td>
-//                         </tr>
-//                     ))}
-//                 </tbody>
-//             </table>
-//         </div>
-//     );
-// };
-
-// export default MySelectedClasses;
-
-
-
-
-
-
-
-
 import React, { useState } from 'react';
 import useSelectedClasses from '../../../Hooks/useSelectedClasses';
 import Swal from 'sweetalert2';
@@ -86,11 +5,9 @@ import { Link } from 'react-router-dom';
 
 const MySelectedClasses = () => {
   const [selectedClass, , refetch] = useSelectedClasses();
-  console.log(selectedClass);
-  
+
   const handleDelete = (_id) => {
-    console.log('deleted', _id);
-    fetch(`https://art-server-two.vercel.app/selected-classes/${_id}`, {
+    fetch(`${import.meta.env.VITE_BACKEND_URL}/selected-classes/${_id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
@@ -100,7 +17,7 @@ const MySelectedClasses = () => {
           Swal.fire({
             position: 'top-center',
             icon: 'success',
-            title: 'Deleted',
+            title: 'Class removed successfully!',
             showConfirmButton: false,
             timer: 1500,
           });
@@ -108,45 +25,74 @@ const MySelectedClasses = () => {
       });
   };
 
-
-
- 
-
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">My Selected Classes</h1>
-      <table className="w-full border-collapse">
-        <thead>
-          <tr>
-            <th className="border-b-2 border-gray-300 px-4 py-2">Image</th>
-            <th className="border-b-2 border-gray-300 px-4 py-2">Name</th>
-            <th className="border-b-2 border-gray-300 px-4 py-2">Instructor</th>
-            <th className="border-b-2 border-gray-300 px-4 py-2">Price</th>
-            <th className="border-b-2 border-gray-300 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedClass.map((classItem) => (
-            <tr key={classItem._id}>
-              <td className="border-b border-gray-300 px-4 py-2">
-                <img src={classItem.image} alt={classItem.name} className="w-16 h-16" />
-              </td>
-              <td className="border-b border-gray-300 px-4 py-2">{classItem.name}</td>
-              <td className="border-b border-gray-300 px-4 py-2">{classItem.instructor}</td>
-              <td className="border-b border-gray-300 px-4 py-2">${classItem.price}</td>
-              <td className="border-b border-gray-300 px-4 py-2">
-                <Link  to={`/dashboard/pay/${classItem._id}`}>
+    <div className="bg-[#F6F6F2] min-h-screen py-10 px-5 md:px-20">
+      {/* Header */}
+      <div className="text-center mb-10">
+        <h1 className="text-3xl font-bold text-[#2b6777]">My Selected Classes</h1>
+        <p className="text-[#388087] mt-2 text-lg">
+          Manage your selected classes and proceed to payment.
+        </p>
+      </div>
 
-                  <button  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 mr-2 rounded">Pay</button>
-                </Link>
-                <button onClick={() => handleDelete(classItem._id)} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded">
-                  Delete
-                </button>
-              </td>
+      {/* Table Section */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse bg-white shadow-md rounded-lg overflow-hidden">
+          <thead>
+            <tr className="bg-[#2b6777] text-white text-left">
+              <th className="px-6 py-3">Image</th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Instructor</th>
+              <th className="px-6 py-3">Price</th>
+              <th className="px-6 py-3">Actions</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {selectedClass.map((classItem, index) => (
+              <tr
+                key={classItem._id}
+                className={`${index % 2 === 0 ? 'bg-[#BADFE7]' : 'bg-[#C2EDCE]'}`}
+              >
+                <td className="px-6 py-4">
+                  <img
+                    src={classItem.image}
+                    alt={classItem.name}
+                    className="w-16 h-16 rounded-md border-2 border-[#388087]"
+                  />
+                </td>
+                <td className="px-6 py-4 font-semibold text-[#2b6777]">{classItem.name}</td>
+                <td className="px-6 py-4 text-[#388087]">{classItem.instructor}</td>
+                <td className="px-6 py-4 text-[#2b6777] font-bold">₹{classItem.price}</td>
+                <td className="px-6 py-4 flex gap-2">
+                  <Link to={`/dashboard/pay/${classItem._id}`}>
+                    <button className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-4 rounded shadow-md">
+                      Pay
+                    </button>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(classItem._id)}
+                    className="bg-[#E63946] hover:bg-[#D62839] text-white font-bold py-2 px-4 rounded shadow-md"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      {/* No Classes Message */}
+      {selectedClass.length === 0 && (
+        <div className="text-center mt-10">
+          <p className="text-xl text-[#388087]">You have not selected any classes yet.</p>
+          <Link to="/classes">
+            <button className="mt-4 bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-6 rounded shadow-md">
+              Browse Classes
+            </button>
+          </Link>
+        </div>
+      )}
     </div>
   );
 };

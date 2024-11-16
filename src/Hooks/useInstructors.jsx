@@ -10,7 +10,7 @@ const useInstructors = () => {
         enabled: !! user?.email,
         queryFn: async() => {
 
-            const res = await fetch(`https://art-server-two.vercel.app/users/instructor/${user.email}`);
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/instructor/${user.email}`);
             const data = await res.json();
             return data;
         }

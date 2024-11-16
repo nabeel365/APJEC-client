@@ -4,7 +4,7 @@ const useClasses = () => {
     const {data: classes = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['classes'],
         queryFn: async() => {
-            const res = await fetch('https://art-server-two.vercel.app/classes');
+            const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/classes`);
             return res.json();
         }
     })

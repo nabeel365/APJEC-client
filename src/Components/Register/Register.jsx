@@ -5,342 +5,189 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
 
-
-
 const Register = () => {
-
-    // use form 
-    const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
-
-    const { newUser, profileUpdate, googleSignIn } = useContext(AuthContext);
-
-
-    // navigate 
-    const navigate = useNavigate();
-
-    const location = useLocation();
-
-    const from = location.state?.from?.pathname || '/';
-
-
-   
-
-    const onSubmitData = data => {
-        // console.log(data);
-
-        newUser(data.email, data.password, data.name, data.photoURL)
-            .then(result => {
-                const registeredUser = result.user;
-                console.log(registeredUser);
-
-                profileUpdate(name, photoURL);
-
-                // 
-
-                    const savedUser = { name: data.name, email: data.email, role: "student"}
-                    fetch('https://art-server-two.vercel.app/users', {
-                        method: 'POST',
-                        headers: {
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify(savedUser)
-                    })
-
-
-                // 
-
-                setEmail('');
-                setPassword('');
-                setConfirmPassword('');
-                setPhotoURL('');
-                setName('');
-                setCheckbox('');
-
-                Swal.fire({
-                    position: 'top-center',
-                    icon: 'success',
-                    title: 'SignUp Successful !!!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-
-                navigate(from, { replace: true })
-
-
-                 
-
-
-            })
-
-
-    }
-
-
-
-    const handleGoogleSingIn = () => {
-        googleSignIn()
-        .then(result => {
-            const socialUser = result.user;
-            console.log(socialUser);
-
-            Swal.fire({
-                position: 'top-center',
-                icon: 'success',
-                title: 'SignUp Successful !!!',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-
-            navigate(from, { replace: true })
-
-        })
-    }
-
-
-    // console.log(watch("example"));
-
-
-
-
-
-
-    const [checkbox, setCheckbox] = useState('');
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [photoURL, setPhotoURL] = useState('');
-    const [gender, setGender] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [address, setAddress] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-    const handleNameChange = (e) => {
-        setName(e.target.value);
-    };
-
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleConfirmPasswordChange = (e) => {
-        setConfirmPassword(e.target.value);
-    };
-
-    const handlePhotoURLChange = (e) => {
-        setPhotoURL(e.target.value);
-    };
-
-    const handleGenderChange = (e) => {
-        setGender(e.target.value);
-    };
-
-    const handlePhoneNumberChange = (e) => {
-        setPhoneNumber(e.target.value);
-    };
-
-    const handleAddressChange = (e) => {
-        setAddress(e.target.value);
-    };
-
-    const handleShowPassword = () => {
-        setShowPassword(!showPassword);
-    };
-
-    const handleShowConfirmPassword = () => {
-        setShowConfirmPassword(!showConfirmPassword);
-    };
-
-    // const handleSubmitBtn = (e) => {
-    //     e.preventDefault();
-    //     // Add your registration logic here
-    // };
-
-    return (
-        <div className="flex flex-col items-center justify-center bg-gradient-to-b from-pink-500 to-purple-500 min-h-screen">
-            <div className="bg-white p-8 rounded shadow-md w-full sm:w-96">
-                <h2 className="text-2xl font-bold text-center mb-4">Registration</h2>
-                <form onSubmit={handleSubmit(onSubmitData)}>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block font-medium mb-1">
-                            Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="name"
-                            className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={name}
-                            {...register("name", { required: true })}
-                            onChange={handleNameChange}
-
-
-                        // required
-                        />
-                        {errors.name && <span className='text-error'>Name is required</span>}
-
-
-
-                    </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block font-medium mb-1">
-                            Email
-                        </label>
-                        <input
-                            type="email"
-                            id="email"
-                            className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={email}
-                            {...register("email", { required: true })}
-
-                            onChange={handleEmailChange}
-                        // required
-                        />
-                        {errors.email && <span className='text-error'>Email is required</span>}
-
-                    </div>
-
-
-
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block font-medium mb-1">
-                            Password
-                        </label>
-                        <div className="relative">
-                            <input
-                                type={showPassword ? 'text' : 'password'}
-                                id="password"
-                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                                value={password}
-                                {...register("password", { required: true, minLength: 6, maxLength: 12,  pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/, })}
-
-                                onChange={handlePasswordChange}
-                            // required
-                            />
-                            {errors.password?.type === 'required' && <span className='text-error'>Password is required</span>}
-                            {errors.password?.type === 'minLength' && <span className='text-error'>Password must be atleast 6 characters long.</span>}
-                            
-                            {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain any special character and Password must contain a capital letter.</span>}
-                            {/* {errors.password?.type === 'pattern' && <span className='text-error'>Password must contain a capital letter.</span>} */}
-
-                            <button
-                                type="button"
-                                className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
-                                onClick={handleShowPassword}
-                            >
-                                {showPassword ? (
-
-                                    <FaEyeSlash></FaEyeSlash>
-                                ) : (
-
-                                    <FaEye></FaEye>
-                                )}
-                            </button>
-                        </div>
-                    </div>
-                    <div className="mb-4">
-                        <label htmlFor="confirmPassword" className="block font-medium mb-1">
-                            Confirm Password
-                        </label>
-                        <div className="relative">
-                            <input
-                                type={showConfirmPassword ? 'text' : 'password'}
-                                id="confirmPassword"
-                                className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                                value={confirmPassword}
-                                {...register("confirmPassword", { required: true })}
-
-                                onChange={handleConfirmPasswordChange}
-                            // required
-                            />
-                            {errors.confirmPassword && <span className='text-error'>You need to confirm your Password</span>}
-
-                            <button
-                                type="button"
-                                className="absolute top-1/2 right-2 transform -translate-y-1/2 text-gray-500 focus:outline-none"
-                                onClick={handleShowConfirmPassword}
-                            >
-                                {showConfirmPassword ? (
-                                    <FaEyeSlash></FaEyeSlash>
-
-                                ) : (
-                                    <FaEye></FaEye>
-
-                                )}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="mb-4">
-                        <label htmlFor="photoURL" className="block font-medium mb-1">Photo URL</label>
-                        <input
-                            type="text"
-                            id="photoURL"
-                            className="w-full px-3 py-2 rounded border border-gray-300 focus:outline-none focus:border-indigo-500"
-                            value={photoURL}
-                            {...register("photoURL", { required: true })}
-                            onChange={handlePhotoURLChange}
-                        // required
-                        />
-                        {errors.photoURL && <span className='text-error'>PhotoURL is required</span>}
-
-                    </div>
-
-                    {/* optional form fields to be added later  */}
-
-                    <div className="flex items-center mb-4">
-                        <input type="checkbox" id="terms" className="mr-2"
-                            {...register("checkbox", { required: true })}
-                        />
-
-                        <label htmlFor="terms" className="text-gray-700">
-                            I agree to the{' '}
-                            <Link to="/terms" className="text-indigo-500">
-                                Terms and Conditions
-                            </Link>
-                        </label>
-
-                    </div>
-                    {errors.checkbox && <span className='text-error'>You need to accept our Terms and Conditions.</span>}
-
-
-                    {/* register */}
-
-
-                    <input className="bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="submit" value="Register" />
-
-
-                    <p className="text-gray-600 text-center mt-4">
-                        Already have an account?{' '}
-                        <Link to="/login" className="text-indigo-500 font-semibold">
-                            Login
-                        </Link>
-                    </p>
-                </form>
-
-                <button onClick={handleGoogleSingIn} className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded mt-4 w-full">
-                    Sign up with Google
-                </button>
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { newUser, profileUpdate, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/';
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleShowPassword = () => setShowPassword(!showPassword);
+  const handleShowConfirmPassword = () => setShowConfirmPassword(!showConfirmPassword);
+
+  const onSubmitData = (data) => {
+    newUser(data.email, data.password)
+      .then(() => {
+        profileUpdate(data.name, data.photoURL);
+        Swal.fire({
+          position: 'top-center',
+          icon: 'success',
+          title: 'Registration Successful!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+        });
+      });
+  };
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#BADFE7]">
+      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-8">
+        <h2 className="text-center text-2xl font-semibold text-[#2b6777] mb-6">Register to APJEC</h2>
+        <form onSubmit={handleSubmit(onSubmitData)} className="space-y-4">
+          {/* Name */}
+          <div>
+            <label className="block text-sm font-medium text-[#388087]" htmlFor="name">
+              Name
+            </label>
+            <input
+              type="text"
+              id="name"
+              {...register('name', { required: 'Name is required' })}
+              className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+              placeholder="Enter your full name"
+            />
+            {errors.name && <span className="text-red-500 text-sm">{errors.name.message}</span>}
+          </div>
+
+          {/* Email */}
+          <div>
+            <label className="block text-sm font-medium text-[#388087]" htmlFor="email">
+              Email
+            </label>
+            <input
+              type="email"
+              id="email"
+              {...register('email', { required: 'Email is required' })}
+              className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+              placeholder="Enter your email"
+            />
+            {errors.email && <span className="text-red-500 text-sm">{errors.email.message}</span>}
+          </div>
+
+          {/* Password */}
+          <div>
+            <label className="block text-sm font-medium text-[#388087]" htmlFor="password">
+              Password
+            </label>
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: { value: 6, message: 'Password must be at least 6 characters' },
+                })}
+                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+                placeholder="Enter your password"
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-3 text-gray-500"
+                onClick={handleShowPassword}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
             </div>
+            {errors.password && <span className="text-red-500 text-sm">{errors.password.message}</span>}
+          </div>
+
+          {/* Confirm Password */}
+          <div>
+            <label className="block text-sm font-medium text-[#388087]" htmlFor="confirmPassword">
+              Confirm Password
+            </label>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? 'text' : 'password'}
+                id="confirmPassword"
+                {...register('confirmPassword', {
+                  required: 'Please confirm your password',
+                })}
+                className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+                placeholder="Confirm your password"
+              />
+              <button
+                type="button"
+                className="absolute right-3 top-3 text-gray-500"
+                onClick={handleShowConfirmPassword}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
+            {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
+          </div>
+
+          {/* Photo URL */}
+          <div>
+            <label className="block text-sm font-medium text-[#388087]" htmlFor="photoURL">
+              Photo URL
+            </label>
+            <input
+              type="text"
+              id="photoURL"
+              {...register('photoURL', { required: 'Photo URL is required' })}
+              className="w-full px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+              placeholder="Enter photo URL"
+            />
+            {errors.photoURL && <span className="text-red-500 text-sm">{errors.photoURL.message}</span>}
+          </div>
+
+          {/* Terms */}
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              id="terms"
+              {...register('terms', { required: 'You must accept the terms' })}
+              className="h-4 w-4 text-[#388087] border-gray-300 rounded"
+            />
+            <label htmlFor="terms" className="text-sm text-gray-700">
+              I agree to the{' '}
+              <Link to="/terms" className="text-[#2b6777] underline">
+                Terms and Conditions
+              </Link>
+            </label>
+          </div>
+          {errors.terms && <span className="text-red-500 text-sm">{errors.terms.message}</span>}
+
+          {/* Submit Button */}
+          <button
+            type="submit"
+            className="w-full bg-[#388087] text-white py-2 px-4 rounded hover:bg-[#2b6777] transition duration-200"
+          >
+            Register
+          </button>
+        </form>
+
+        <div className="mt-4 text-center">
+          <button
+            onClick={googleSignIn}
+            className="w-full bg-[#C2EDCE] text-[#2b6777] py-2 px-4 rounded flex items-center justify-center space-x-2 hover:bg-[#BADFE7] transition duration-200"
+          >
+            <FaGoogle />
+            <span>Register with Google</span>
+          </button>
         </div>
-    );
+
+        <p className="mt-6 text-center text-sm text-gray-600">
+          Already have an account?{' '}
+          <Link to="/login" className="text-[#2b6777] font-semibold underline">
+            Login here
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default Register;
-
-
-
-
-
-
-
-
-

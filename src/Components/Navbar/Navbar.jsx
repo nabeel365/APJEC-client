@@ -1,87 +1,141 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
-import "../Navbar/Navbar.css"
-import { FaSun, FaMoon  } from 'react-icons/fa';
-
-
+import { FaSun, FaMoon, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 
 const Navbar = ({ toggleMode, isDarkMode }) => {
-
-  // 
-
   const { user, userLogOut } = useContext(AuthContext);
-  // console.log(userLogOut);
 
   const handleLogOut = () => {
-    userLogOut()
-  }
+    userLogOut();
+  };
 
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="bg-purple-600 shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex">
-            <div className="flex-shrink-0 flex items-center">
-              <img className="h-8 w-8" src="https://cdn.dribbble.com/users/317918/screenshots/3850739/sw-01.jpg" alt="Website Logo" />
-              <span className="ml-2 text-white text-lg font-semibold">Craftopia Art School</span>
-            </div>
-            <div className="hidden md:ml-6 md:flex md:space-x-4">
-              <Link to="/" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</Link>
-              <Link to="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Instructors</Link>
-              <Link to="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Classes</Link>
-
-              {/* <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link> */}
-
-
-              {user && (
-                <Link to="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Dashboard</Link>
-              )}
-            </div>
-          </div>
+    <nav className="bg-[#2b6777] shadow-lg">
+      {/* Main Navbar Container */}
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo and Title */}
           <div className="flex items-center">
-            {user ? (
+            <img
+              className="h-10 w-10 rounded-full"
+              src="/src/images/apjec-logo.png"
+              alt="APJEC Logo"
+            />
+            <span className="ml-2 text-[#F6F6F2] text-lg font-semibold">
+              Abul Pakir Jainulabdeen Educational Institution
+            </span>
+          </div>
 
-              <div className="flex items-center space-x-4">
-
-                <Link to="/login">
-                  <button onClick={handleLogOut} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LogOut</button>
-                </Link>
-
-                <img className="h-8 w-8 rounded-full" src={user.photoURL} alt={user.displayName} />
-
-
-              </div>
-
-
-
-            ) : (
-              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
+          {/* Links Section (Hidden on Mobile) */}
+          <div className="hidden md:flex space-x-6">
+            <Link
+              to="/"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+            >
+              Home
+            </Link>
+            <Link
+              to="/instructors"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+            >
+              Instructors
+            </Link>
+            <Link
+              to="/classes"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+            >
+              Classes
+            </Link>
+            {user && (
+              <Link
+                to="/dashboard"
+                className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+              >
+                Dashboard
+              </Link>
             )}
           </div>
 
-          {/* dark and light theme */}
-          
-          <button className='btn btn-xs btn-square' onClick={toggleMode}>
-            {isDarkMode ? <FaSun></FaSun> : <FaMoon></FaMoon>}
-          </button>
+          {/* Right Section: Search, Theme, Social Media, and User */}
+          <div className="flex items-center space-x-4">
+            {/* Search Bar */}
+            <div className="hidden md:block">
+              <input
+                type="text"
+                placeholder="Search..."
+                className="px-3 py-2 rounded-md text-sm bg-[#388087] text-white placeholder-[#C2EDCE]"
+              />
+            </div>
 
+            {/* Social Media Icons */}
+            <div className="hidden md:flex space-x-3 text-[#BADFE7]">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#C2EDCE]"
+              >
+                <FaFacebook size={20} />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#C2EDCE]"
+              >
+                <FaTwitter size={20} />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#C2EDCE]"
+              >
+                <FaInstagram size={20} />
+              </a>
+            </div>
 
-          <div className="-mr-2 flex md:hidden">
+            {/* Login/Logout and User */}
+            {user ? (
+              <div className="flex items-center space-x-4">
+                <button
+                  onClick={handleLogOut}
+                  className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+                >
+                  LogOut
+                </button>
+                <img
+                  className="h-8 w-8 rounded-full"
+                  src={user.photoURL}
+                  alt={user.displayName}
+                />
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+              >
+                Login
+              </Link>
+            )}
+
+            {/* Dark/Light Mode Toggle */}
+            <button onClick={toggleMode} className="text-[#BADFE7] hover:text-[#C2EDCE]">
+              {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+            </button>
+
+            {/* Hamburger Menu for Mobile */}
             <button
               onClick={handleMenuToggle}
-              type="button"
-              className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-              aria-controls="mobile-menu"
-              aria-expanded="false"
+              className="md:hidden text-[#BADFE7] hover:text-[#C2EDCE]"
             >
-              <span className="sr-only">Open main menu</span>
               <svg
                 className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
                 xmlns="http://www.w3.org/2000/svg"
@@ -115,31 +169,31 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
             </button>
           </div>
         </div>
-        
       </div>
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`} id="mobile-menu">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <a href="/" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-          <a href="/instructors" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Instructors</a>
-          <a href="/classes" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Classes</a>
-          {user && (
-            <Link to="/dashboard" className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Dashboard</Link>
-          )}
-        </div>
-        <div className="pt-4 pb-3 border-t border-gray-700">
-          <div className="flex items-center px-5">
-            {user ? (
-              <div className='flex'>
-                <Link to="/login">
-                  <button onClick={handleLogOut} className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">LogOut</button>
-                </Link>
-                <img className="h-8 w-8 rounded-full" src={user.photoURL} alt={user.displayName} />
 
-              </div>
-            ) : (
-              <Link to="/login" className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</Link>
-            )}
-          </div>
+      {/* Mobile Menu */}
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+        <div className="px-4 py-3 space-y-2 bg-[#388087] text-white">
+          <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium">
+            Home
+          </Link>
+          <Link
+            to="/instructors"
+            className="block px-3 py-2 rounded-md text-base font-medium"
+          >
+            Instructors
+          </Link>
+          <Link to="/classes" className="block px-3 py-2 rounded-md text-base font-medium">
+            Classes
+          </Link>
+          {user && (
+            <Link
+              to="/dashboard"
+              className="block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
       </div>
     </nav>
@@ -147,6 +201,3 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
 };
 
 export default Navbar;
-
-
-

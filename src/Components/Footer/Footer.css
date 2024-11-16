@@ -1,10 +1,40 @@
-.dark {
-    background-color: #1f1f1f;
-    color: #ffffff;
-  }
-  
-  .light {
-    background-color: #ffffff;
-    color: #000000;
-  }
-  
+/* Footer custom styles */
+.footer {
+  @apply bg-[#2b6777] text-white py-8 px-4 md:px-10 lg:px-20; /* Main background and padding */
+}
+
+.footer-title {
+  @apply text-lg font-semibold text-[#BADFE7]; /* Section title styling */
+}
+
+.footer a {
+  @apply text-[#F6F6F2] hover:text-[#C2EDCE] transition duration-200; /* Link hover effect */
+}
+
+.footer ul {
+  @apply space-y-2; /* Spacing between links */
+}
+
+.footer p {
+  @apply text-sm leading-relaxed text-[#C2EDCE]; /* Text styling for descriptions */
+}
+
+.footer img {
+  @apply rounded-full shadow-lg; /* Rounded logo with shadow */
+}
+
+.footer .social-icons a {
+  @apply inline-block p-2 bg-[#388087] rounded-full hover:bg-[#BADFE7] transition duration-200; /* Social icon styling */
+}
+
+.footer .social-icons a svg {
+  @apply text-white hover:text-[#2b6777]; /* Social icon color transition */
+}
+
+.footer .address p {
+  @apply text-center md:text-left; /* Address styling for responsiveness */
+}
+
+.footer .bottom-info {
+  @apply mt-12 text-center text-sm text-[#C2EDCE] space-y-2; /* Bottom footer styling */
+}
