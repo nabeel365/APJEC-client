@@ -23,13 +23,12 @@ const ManageClasses = () => {
 
   const handleApprove = async (classId) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, { status: 'approved' });
-      const updatedClasses = classes.map((classItem) => {
-        if (classItem._id === classId) {
-          return { ...classItem, status: 'approved' };
-        }
-        return classItem;
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, {
+        status: 'approved',
       });
+      const updatedClasses = classes.map((classItem) =>
+        classItem._id === classId ? { ...classItem, status: 'approved' } : classItem
+      );
       setClasses(updatedClasses);
     } catch (error) {
       console.error('Error updating class:', error);
@@ -38,13 +37,12 @@ const ManageClasses = () => {
 
   const handleDeny = async (classId) => {
     try {
-      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, { status: 'denied' });
-      const updatedClasses = classes.map((classItem) => {
-        if (classItem._id === classId) {
-          return { ...classItem, status: 'denied' };
-        }
-        return classItem;
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${classId}`, {
+        status: 'denied',
       });
+      const updatedClasses = classes.map((classItem) =>
+        classItem._id === classId ? { ...classItem, status: 'denied' } : classItem
+      );
       setClasses(updatedClasses);
     } catch (error) {
       console.error('Error updating class:', error);
@@ -62,17 +60,17 @@ const ManageClasses = () => {
 
   const handleSubmitFeedback = async () => {
     try {
-      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${selectedClassId}`, { feedback , status: "denied"});
-      console.log('Feedback submitted:', feedback);
-
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/classes/${selectedClassId}`, {
+        feedback,
+        status: 'denied',
+      });
       Swal.fire({
         position: 'top-center',
         icon: 'success',
         title: 'Feedback Sent',
         showConfirmButton: false,
-        timer: 1500
-      })
-
+        timer: 1500,
+      });
       setShowModal(false);
     } catch (error) {
       console.error('Error submitting feedback:', error);
@@ -80,63 +78,76 @@ const ManageClasses = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Manage Classes</h1>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
+    <div className="min-h-screen bg-[#F6F6F2] py-8 px-4 lg:px-16">
+      <h1 className="text-3xl font-bold text-[#2b6777] mb-8 text-center">
+        Manage Classes
+      </h1>
+      <div className="overflow-x-auto rounded-lg shadow-lg">
+        <table className="min-w-full bg-white">
+          <thead className="bg-[#388087] text-white">
             <tr>
-              <th className="px-4 py-2 border-b">Class Image</th>
-              <th className="px-4 py-2 border-b">Class Name</th>
-              <th className="px-4 py-2 border-b">Instructor Name</th>
-              <th className="px-4 py-2 border-b">Instructor Email</th>
-              <th className="px-4 py-2 border-b">Available Seats</th>
-              <th className="px-4 py-2 border-b">Price</th>
-              <th className="px-4 py-2 border-b">Status</th>
-              <th className="px-4 py-2 border-b">Actions</th>
+              <th className="px-6 py-4 text-left">Class Image</th>
+              <th className="px-6 py-4 text-left">Class Name</th>
+              <th className="px-6 py-4 text-left">Instructor Name</th>
+              <th className="px-6 py-4 text-left">Instructor Email</th>
+              <th className="px-6 py-4 text-left">Available Seats</th>
+              <th className="px-6 py-4 text-left">Price</th>
+              <th className="px-6 py-4 text-left">Status</th>
+              <th className="px-6 py-4 text-left">Actions</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="divide-y divide-gray-200">
             {classes.map((classItem) => (
               <tr key={classItem._id}>
-                <td className="px-4 py-2 border-b">
+                <td className="px-6 py-4">
                   <img
                     src={classItem.image}
-                    alt="Class Image"
-                    className="w-8 h-8 object-cover rounded-full"
+                    alt="Class"
+                    className="w-12 h-12 object-cover rounded-md shadow"
                   />
                 </td>
-                <td className="px-4 py-2 border-b">{classItem.name}</td>
-                <td className="px-4 py-2 border-b">{classItem.instructor}</td>
-                <td className="px-4 py-2 border-b">{classItem.email}</td>
-                <td className="px-4 py-2 border-b">{classItem.available_seats}</td>
-                <td className="px-4 py-2 border-b">
-                  <strong>$</strong>
-                  {classItem.price}
+                <td className="px-6 py-4 text-[#2b6777] font-semibold">
+                  {classItem.name}
                 </td>
-                <td className="px-4 py-2 border-b">{classItem.status}</td>
-                <td className="px-4 py-2 border-b">
+                <td className="px-6 py-4">{classItem.instructor}</td>
+                <td className="px-6 py-4">{classItem.email}</td>
+                <td className="px-6 py-4">{classItem.available_seats}</td>
+                <td className="px-6 py-4">
+                  <span className="font-bold text-[#388087]">${classItem.price}</span>
+                </td>
+                <td className="px-6 py-4">
+                  <span
+                    className={`py-1 px-3 rounded-full text-white text-sm ${
+                      classItem.status === 'approved'
+                        ? 'bg-green-500'
+                        : classItem.status === 'denied'
+                        ? 'bg-red-500'
+                        : 'bg-yellow-500'
+                    }`}
+                  >
+                    {classItem.status}
+                  </span>
+                </td>
+                <td className="px-6 py-4 flex items-center gap-2">
                   <button
-                    className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 mr-2 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-[#2b6777] hover:bg-[#388087] text-white py-2 px-4 rounded-lg transition"
                     onClick={() => handleApprove(classItem._id)}
-                    disabled={classItem.status === 'denied'}
+                    disabled={classItem.status === 'approved'}
                   >
                     Approve
                   </button>
                   <button
-                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mr-2 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-[#C2EDCE] hover:bg-[#BADFE7] text-black py-2 px-4 rounded-lg transition"
                     onClick={() => handleDeny(classItem._id)}
-                    disabled={classItem.status === 'approved'}
+                    disabled={classItem.status === 'denied'}
                   >
                     Deny
                   </button>
                   <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-2 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-[#BADFE7] hover:bg-[#388087] text-white py-2 px-4 rounded-lg transition"
                     onClick={() => handleSendFeedback(classItem._id)}
-                    disabled={classItem.status === 'approved'}
-
                   >
-                    Send Feedback
+                    Feedback
                   </button>
                 </td>
               </tr>
@@ -144,26 +155,26 @@ const ManageClasses = () => {
           </tbody>
         </table>
       </div>
+
       {showModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className=" rounded-lg p-6 max-w-md  bg-purple-400">
-            <h2 className="text-lg font-bold mb-4">Send Feedback</h2>
-            <input
-              type="text"
-              className="w-full h-40 resize-none border rounded-lg p-2 mb-4"
-              placeholder="Enter your feedback here..."
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 max-w-md">
+            <h2 className="text-xl font-bold mb-4 text-[#2b6777]">Send Feedback</h2>
+            <textarea
+              className="w-full h-32 border rounded-lg p-3 text-gray-700"
+              placeholder="Enter your feedback..."
               value={feedback}
               onChange={(e) => setFeedback(e.target.value)}
-            />
-            <div className="flex justify-end">
+            ></textarea>
+            <div className="mt-4 flex justify-end gap-2">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
+                className="bg-[#2b6777] hover:bg-[#388087] text-white py-2 px-4 rounded-lg transition"
                 onClick={handleSubmitFeedback}
               >
-                Submit Feedback
+                Submit
               </button>
               <button
-                className="bg-red-500 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-gray-300 hover:bg-gray-400 text-black py-2 px-4 rounded-lg transition"
                 onClick={handleCloseModal}
               >
                 Cancel

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const AddAClass = () => {
   const { user } = useContext(AuthContext);
-  // console.log(user.email);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [charCount, setCharCount] = useState(0);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,124 +18,183 @@ const AddAClass = () => {
       email: user?.email,
       available_seats: parseInt(e.target.elements.available_seats.value),
       price: parseFloat(e.target.elements.price.value),
-      role: "student",
-      status: "pending",
-      feedback: 'none ',
-      enroled: 0
+      role: 'student',
+      status: 'pending',
+      feedback: 'none',
+      enroled: 0,
     };
 
     try {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/classes`, classData);
-
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/selected-classes`, classData);
-
-
-
       e.target.reset();
+      setImagePreview(null);
+      setCharCount(0);
 
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your Class has been added successfully!',
+        showConfirmButton: false,
+        timer: 1500,
+      });
     } catch (error) {
       console.error('Error saving class data:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong while adding the class!',
+      });
     }
-
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Your Class has been added Successfully',
-      showConfirmButton: false,
-      timer: 1500
-    })
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => setImagePreview(reader.result);
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCharCount = (e) => setCharCount(e.target.value.length);
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Add a Class</h1>
+    <div className="container mx-auto p-6 bg-[#BADFE7] rounded-lg shadow-lg">
+      <h1 className="text-3xl font-bold text-center text-[#2b6777] mb-6">
+        Add a Course
+      </h1>
       <form
-        className="w-full max-w-md bg-white rounded-lg shadow-md px-8 pt-6 pb-8 mb-4"
+        className="w-full max-w-lg mx-auto bg-white rounded-lg p-8 shadow-md"
         onSubmit={handleSubmit}
       >
-        {/* Form fields */}
+        {/* Class Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="class-name">
-            Class Name
+          <label
+            htmlFor="class-name"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
+            Course Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="class-name"
             type="text"
+            name="className"
+            maxLength="50"
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
             placeholder="Enter class name"
-            name='className'
             required
+            onChange={handleCharCount}
           />
+          <small className="text-gray-500">
+            {charCount}/50 characters used
+          </small>
         </div>
+
+        {/* Class Image */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="class-image">
-            Class Image
+          <label
+            htmlFor="class-image"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
+            Course Image
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="class-image"
             type="file"
+            name="classImage"
             accept="image/*"
-            name='classImage'
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+            onChange={handleImageChange}
             required
           />
+          {imagePreview && (
+            <div className="mt-4">
+              <img
+                src={imagePreview}
+                alt="Preview"
+                className="w-32 h-32 object-cover rounded-lg border-2 border-[#2b6777]"
+              />
+            </div>
+          )}
         </div>
+
+        {/* Instructor Name */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="instructor-name">
+          <label
+            htmlFor="instructor-name"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
             Instructor Name
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="instructor-name"
             type="text"
-            defaultValue={user?.displayName}
+            value={user?.displayName || ''}
             readOnly
+            className="w-full border border-gray-300 bg-gray-100 rounded-lg p-2 focus:outline-none"
           />
         </div>
+
+        {/* Instructor Email */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="instructor-email">
+          <label
+            htmlFor="instructor-email"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
             Instructor Email
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="instructor-email"
             type="email"
-            defaultValue={user?.email}
+            value={user?.email || ''}
             readOnly
+            className="w-full border border-gray-300 bg-gray-100 rounded-lg p-2 focus:outline-none"
           />
         </div>
+
+        {/* Available Seats */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="available-seats">
+          <label
+            htmlFor="available-seats"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
             Available Seats
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="available-seats"
             type="number"
+            name="available_seats"
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
             placeholder="Enter available seats"
-            name='available_seats'
             required
           />
         </div>
+
+        {/* Price */}
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="price">
+          <label
+            htmlFor="price"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
             Price
           </label>
           <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="price"
             type="number"
+            name="price"
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
             placeholder="Enter price"
-            name='price'
             required
           />
         </div>
-        <div className="flex items-center justify-center">
+
+        {/* Submit Button */}
+        <div className="text-center">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
+            className="bg-[#2b6777] hover:bg-[#388087] text-white font-semibold py-2 px-6 rounded-lg focus:outline-none focus:ring-4 focus:ring-[#C2EDCE]"
           >
-            Add Class
+            Add Course
           </button>
         </div>
       </form>
@@ -142,7 +203,3 @@ const AddAClass = () => {
 };
 
 export default AddAClass;
-
-
-
-

@@ -128,8 +128,8 @@ const Register = () => {
             {errors.confirmPassword && <span className="text-red-500 text-sm">{errors.confirmPassword.message}</span>}
           </div>
 
-          {/* Photo URL */}
-          <div>
+          {/* Photo URL  ----    removed */}
+          {/* <div>
             <label className="block text-sm font-medium text-[#388087]" htmlFor="photoURL">
               Photo URL
             </label>
@@ -141,7 +141,7 @@ const Register = () => {
               placeholder="Enter photo URL"
             />
             {errors.photoURL && <span className="text-red-500 text-sm">{errors.photoURL.message}</span>}
-          </div>
+          </div> */}
 
           {/* Terms */}
           <div className="flex items-center space-x-2">

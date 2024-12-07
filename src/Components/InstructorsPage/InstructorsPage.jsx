@@ -10,6 +10,8 @@ const InstructorsPage = () => {
       .then((response) => response.json())
       .then((data) => setInstructors(data))
       .catch((error) => console.log(error));
+      // console.log(response);
+
   }, []);
 
   return (
@@ -60,9 +62,9 @@ const InstructorsPage = () => {
                 {/* CTA Button */}
                 <div className="text-center mt-4">
                   <Link to={`classes/${instructor._id}`}>
-                    <button className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-6 rounded">
+                    {/* <button className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-6 rounded">
                       View Classes
-                    </button>
+                    </button> */}
                   </Link>
                 </div>
               </div>

@@ -34,50 +34,52 @@ const Payments = () => {
 
       {/* Payment History Table */}
       <div className="overflow-x-auto max-w-full mb-8">
-        <table className="table-auto w-full border-collapse">
-          <thead className="bg-[#388087] text-white">
-            <tr>
-              <th className="px-6 py-3 text-left">Class Image</th>
-              <th className="px-6 py-3 text-left">Paid for Class</th>
-              <th className="px-6 py-3 text-left">Payment ID</th>
-              <th className="px-6 py-3 text-left">Date</th>
-              <th className="px-6 py-3 text-left">Payment Status</th>
-              <th className="px-6 py-3 text-left">Amount Paid</th>
-              <th className="px-6 py-3 text-left">Transaction ID</th>
-              <th className="px-6 py-3 text-left">Mode of Payment</th> {/* New Column */}
-              <th className="px-6 py-3 text-left">Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            {paymentHistory.map((payment) => (
-              <tr key={payment._id} className="hover:bg-[#BADFE7] transition-all duration-300">
-                <td className="border-b px-6 py-4 text-center">
-                  <img src={payment.image} alt={payment.name} className="w-16 h-16 object-cover rounded-lg" />
-                </td>
-                <td className="border-b px-6 py-4">{payment.name}</td>
-                <td className="border-b px-6 py-4">{payment._id}</td>
-                <td className="border-b px-6 py-4">{new Date(payment.date).toLocaleDateString()}</td>
-                <td className="border-b px-6 py-4">
-                  <span className={`inline-flex items-center gap-2 ${payment.status === 'paid' ? 'text-green-500' : 'text-red-500'}`}>
-                    {payment.status === 'paid' ? <FaCheckCircle /> : <FaTimesCircle />}
-                    {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
-                  </span>
-                </td>
-                <td className="border-b px-6 py-4">₹ {payment.price}</td>
-                <td className="border-b px-6 py-4">{payment.transactionId}</td>
-                <td className="border-b px-6 py-4">{payment.modeOfPayment || 'Not specified'}</td> {/* Display Mode of Payment */}
-                <td className="border-b px-6 py-4">
-                  <button
-                    className="bg-[#388087] text-white py-1 px-4 rounded-full hover:bg-[#2b6777] transition duration-300"
-                    onClick={() => setSelectedPayment(payment)} // Show details on click
-                  >
-                    View Details
-                  </button>
-                </td>
+        <div className="max-h-[500px] overflow-y-auto"> {/* Add max height and enable vertical scroll */}
+          <table className="table-auto w-full border-collapse">
+            <thead className="bg-[#388087] text-white">
+              <tr>
+                <th className="px-6 py-3 text-left">Class Image</th>
+                <th className="px-6 py-3 text-left">Paid for Class</th>
+                <th className="px-6 py-3 text-left">Payment ID</th>
+                <th className="px-6 py-3 text-left">Date</th>
+                <th className="px-6 py-3 text-left">Payment Status</th>
+                <th className="px-6 py-3 text-left">Amount Paid</th>
+                <th className="px-6 py-3 text-left">Transaction ID</th>
+                <th className="px-6 py-3 text-left">Mode of Payment</th> {/* New Column */}
+                <th className="px-6 py-3 text-left">Details</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {paymentHistory.map((payment) => (
+                <tr key={payment._id} className="hover:bg-[#BADFE7] transition-all duration-300">
+                  <td className="border-b px-6 py-4 text-center">
+                    <img src={payment.image} alt={payment.name} className="w-16 h-16 object-cover rounded-lg" />
+                  </td>
+                  <td className="border-b px-6 py-4">{payment.name}</td>
+                  <td className="border-b px-6 py-4">{payment._id}</td>
+                  <td className="border-b px-6 py-4">{new Date(payment.date).toLocaleDateString()}</td>
+                  <td className="border-b px-6 py-4">
+                    <span className={`inline-flex items-center gap-2 ${payment.status === 'paid' ? 'text-green-500' : 'text-red-500'}`}>
+                      {payment.status === 'paid' ? <FaCheckCircle /> : <FaTimesCircle />}
+                      {payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}
+                    </span>
+                  </td>
+                  <td className="border-b px-6 py-4">₹ {payment.price}</td>
+                  <td className="border-b px-6 py-4">{payment.transactionId}</td>
+                  <td className="border-b px-6 py-4">{payment.modeOfPayment || 'Not specified'}</td> {/* Display Mode of Payment */}
+                  <td className="border-b px-6 py-4">
+                    <button
+                      className="bg-[#388087] text-white py-1 px-4 rounded-full hover:bg-[#2b6777] transition duration-300"
+                      onClick={() => setSelectedPayment(payment)} // Show details on click
+                    >
+                      View Details
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       {/* Modal for Payment Details */}

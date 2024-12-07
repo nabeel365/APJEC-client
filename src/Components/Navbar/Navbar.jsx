@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { FaSun, FaMoon, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = ({ toggleMode, isDarkMode }) => {
   const { user, userLogOut } = useContext(AuthContext);
@@ -19,61 +20,70 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
   return (
     <nav className="bg-[#2b6777] shadow-lg">
       {/* Main Navbar Container */}
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo and Title */}
-          <div className="flex items-center">
+          <div className="flex items-center space-x-4">
             <img
-              className="h-10 w-10 rounded-full"
+              className="h-12 w-12 rounded-full"
               src="/src/images/apjec-logo.png"
               alt="APJEC Logo"
             />
-            <span className="ml-2 text-[#F6F6F2] text-lg font-semibold">
-              Abul Pakir Jainulabdeen Educational Institution
+            <span className="text-[#F6F6F2] text-xl font-semibold">
+              APJ Abdul Kalam Educational Center
             </span>
           </div>
 
-          {/* Links Section (Hidden on Mobile) */}
-          <div className="hidden md:flex space-x-6">
+          {/* Links Section */}
+          <div className="hidden md:flex space-x-8">
             <Link
               to="/"
-              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
             >
               Home
             </Link>
             <Link
+              to="/aboutUs"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
+            >
+              About Us
+            </Link>
+            <Link
+              to="/current"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
+            >
+              Current Affairs
+            </Link>
+            <Link
               to="/instructors"
-              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
             >
               Instructors
             </Link>
             <Link
               to="/classes"
-              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
             >
-              Classes
+              Courses
             </Link>
             {user && (
               <Link
                 to="/dashboard"
-                className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-sm font-medium"
+                className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
               >
                 Dashboard
               </Link>
             )}
+            <Link
+              to="/help"
+              className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
+            >
+              Help
+            </Link>
           </div>
 
-          {/* Right Section: Search, Theme, Social Media, and User */}
+          {/* Right Section */}
           <div className="flex items-center space-x-4">
-            {/* Search Bar */}
-            <div className="hidden md:block">
-              <input
-                type="text"
-                placeholder="Search..."
-                className="px-3 py-2 rounded-md text-sm bg-[#388087] text-white placeholder-[#C2EDCE]"
-              />
-            </div>
-
             {/* Social Media Icons */}
             <div className="hidden md:flex space-x-3 text-[#BADFE7]">
               <a
@@ -102,7 +112,15 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
               </a>
             </div>
 
-            {/* Login/Logout and User */}
+            {/* Dark/Light Mode Toggle */}
+            {/* <button
+              onClick={toggleMode}
+              className="text-[#BADFE7] hover:text-[#C2EDCE]"
+            >
+              {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+            </button> */}
+
+            {/* Login/Logout */}
             {user ? (
               <div className="flex items-center space-x-4">
                 <button
@@ -112,7 +130,7 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
                   LogOut
                 </button>
                 <img
-                  className="h-8 w-8 rounded-full"
+                  className="h-10 w-10 rounded-full border-2 border-[#BADFE7]"
                   src={user.photoURL}
                   alt={user.displayName}
                 />
@@ -126,46 +144,16 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
               </Link>
             )}
 
-            {/* Dark/Light Mode Toggle */}
-            <button onClick={toggleMode} className="text-[#BADFE7] hover:text-[#C2EDCE]">
-              {isDarkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
-            </button>
-
-            {/* Hamburger Menu for Mobile */}
+            {/* Hamburger Menu */}
             <button
               onClick={handleMenuToggle}
               className="md:hidden text-[#BADFE7] hover:text-[#C2EDCE]"
             >
-              <svg
-                className={`${isMenuOpen ? 'hidden' : 'block'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              <svg
-                className={`${isMenuOpen ? 'block' : 'hidden'} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
+              {isMenuOpen ? (
+                <GiHamburgerMenu size={24} />
+              ) : (
+                <GiHamburgerMenu size={24} />
+              )}
             </button>
           </div>
         </div>
@@ -173,27 +161,36 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
 
       {/* Mobile Menu */}
       <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
-        <div className="px-4 py-3 space-y-2 bg-[#388087] text-white">
-          <Link to="/" className="block px-3 py-2 rounded-md text-base font-medium">
+        <div className="px-4 py-4 bg-[#388087] text-[#F6F6F2]">
+          <Link to="/" className="block px-3 py-2 text-base font-medium">
             Home
+          </Link>
+          <Link to="/aboutUs" className="block px-3 py-2 text-base font-medium">
+            About Us
+          </Link>
+          <Link to="/current" className="block px-3 py-2 text-base font-medium">
+            Current Affairs
           </Link>
           <Link
             to="/instructors"
-            className="block px-3 py-2 rounded-md text-base font-medium"
+            className="block px-3 py-2 text-base font-medium"
           >
             Instructors
           </Link>
-          <Link to="/classes" className="block px-3 py-2 rounded-md text-base font-medium">
-            Classes
+          <Link to="/classes" className="block px-3 py-2 text-base font-medium">
+            Courses
           </Link>
           {user && (
             <Link
               to="/dashboard"
-              className="block px-3 py-2 rounded-md text-base font-medium"
+              className="block px-3 py-2 text-base font-medium"
             >
               Dashboard
             </Link>
           )}
+          <Link to="/help" className="block px-3 py-2 text-base font-medium">
+            Help
+          </Link>
         </div>
       </div>
     </nav>

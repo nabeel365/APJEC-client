@@ -8,15 +8,28 @@ import { Fade, Reveal, Roll, Slide, Zoom } from 'react-awesome-reveal';
 import NoticeSection from '../Notice/NoticeSection';
 import TeamPage from '../Team/TeamPage';
 import Testimonials from '../Testimonials/Testimonials';
+import CurrentAffairsList from '../CurrentAffairs/CurrentAffairsList';
+import FAQ from '../FAQ/FAQ';
+import NoticeModal from '../Notice/NoticeModal';
+import ThreeCards from '../HomePage/ThreeCards';
 
 const Layout = () => {
     return (
         <div>
             <br />
+
             <Slide direction="left">
-            <TopSlider></TopSlider> 
+
+
+
+            <TopSlider>
+                
+                </TopSlider> 
 
             </Slide>
+
+            <NoticeModal></NoticeModal> 
+
 
 <br />
             
@@ -33,8 +46,11 @@ const Layout = () => {
 
             </Fade>
 
+<br />
+            {/* <CurrentAffairsList></CurrentAffairsList> */}
 
-<br></br>
+<ThreeCards></ThreeCards>
+
 
 
            <TeamPage></TeamPage>
@@ -43,6 +59,7 @@ const Layout = () => {
 
            <Testimonials></Testimonials>
 
+<FAQ></FAQ>
 
         </div>
     );

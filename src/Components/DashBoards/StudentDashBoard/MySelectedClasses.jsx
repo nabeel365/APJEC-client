@@ -6,6 +6,9 @@ import { Link } from 'react-router-dom';
 const MySelectedClasses = () => {
   const [selectedClass, , refetch] = useSelectedClasses();
 
+  // console.log(selectedClass);
+  
+
   const handleDelete = (_id) => {
     fetch(`${import.meta.env.VITE_BACKEND_URL}/selected-classes/${_id}`, {
       method: 'DELETE',

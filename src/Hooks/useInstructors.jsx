@@ -4,7 +4,6 @@ import { AuthContext } from '../Providers/AuthProvider';
 
 const useInstructors = () => {
     const {user } = useContext(AuthContext)
-    console.log(user);
     const {data: isInstructor = [], isLoading } = useQuery({
         queryKey: ['instructors', user?.email],
         enabled: !! user?.email,

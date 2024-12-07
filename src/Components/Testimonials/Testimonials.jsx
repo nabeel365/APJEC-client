@@ -60,7 +60,7 @@ const Testimonials = () => {
                     Join APJEC and take the first step toward achieving your career aspirations.
                 </p>
                 <button className="mt-5 bg-[#2b6777] hover:bg-[#BADFE7] hover:text-[#2b6777] text-white px-6 py-3 rounded-md font-semibold transition duration-300">
-                    Enroll Now
+                   <a href="/classes">Enroll Now</a> 
                 </button>
             </div>
         </div>

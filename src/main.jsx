@@ -33,6 +33,24 @@ import Pay from './Components/DashBoards/StudentDashBoard/Payment/Pay';
 import PrivateRoute from './Routes/PrivateRoute';
 import AdminRoute from './Routes/AdminRoute';
 import InstructorRoute from './Routes/InstructorRoute';
+import ManageCurrentAffairs from './Components/DashBoards/AdminDashBoard/ManageCurrentAffairs';
+import UploadNotes from './Components/DashBoards/InstructotDashBoard/UploadNotes';
+import ViewNotes from './Components/DashBoards/ViewNotes';
+import CurrentAffairsList from './Components/CurrentAffairs/CurrentAffairsList';
+import AdminNoticeManagement from './Components/DashBoards/AdminDashBoard/AdminNoticeManagement';
+import StudentNoticePage from './Components/DashBoards/StudentDashBoard/StudentNoticePage';
+import AskDoubts from './Components/DashBoards/StudentDashBoard/AskDoubts';
+import AnswerDoubts from './Components/DashBoards/InstructotDashBoard/AnswerDoubts';
+import AdminApplicationsPage from './Components/DashBoards/AdminDashBoard/AdminApplicationsPage';
+import HelpSection from './Components/DashBoards/StudentDashBoard/HelpSection';
+import AnswerSection from './Components/DashBoards/AdminDashBoard/AnswerSection';
+import InstructorAssignmentPage from './Components/DashBoards/InstructotDashBoard/InstructorAssignmentPage';
+import StudentAssignmentPage from './Components/DashBoards/StudentDashBoard/StudentAssignmentPage';
+import NoticeSection from './Components/Notice/NoticeSection';
+import AboutUs from './Components/HomePage/AboutUs';
+import Career from './Components/Team/Career';
+import Admissions from './Components/HomePage/Admissions';
+import TermsAndConditions from './Components/Home/TermsAndConditions';
 
 
 const queryClient = new QueryClient()
@@ -41,7 +59,9 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Home></Home> ,
+
     errorElement: <Error></Error>,
+    
     children: [
       {
         path: "/",
@@ -63,15 +83,46 @@ const router = createBrowserRouter([
         path: "classes",
         element: <ClassesPage></ClassesPage>
       },
-      // {
-      //   path: "dashboard",
-      //   element: <StudentDashBoard></StudentDashBoard>
-      // }
+      {
+        path: "current",
+        element: <CurrentAffairsList></CurrentAffairsList>
+      },
+      {
+        path: "help",
+        element: <HelpSection></HelpSection>
+      },
+      {
+        path: "viewNotices",
+        element: <NoticeSection></NoticeSection>
+      },
+      {
+        path: "aboutUs",
+        element: <AboutUs></AboutUs>
+      },
+      {
+        path: "career",
+        element: <Career></Career>
+      },
+      {
+        path: "admissions",
+        element: <Admissions></Admissions>
+      },
+      {
+        path: "/terms",
+        element: <TermsAndConditions></TermsAndConditions>
+      }
     ]
   },
   {
     path: "dashboard",
     element: <DashBoard></DashBoard>,
+    loader: async ()=>{
+      const email = localStorage.getItem("email");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users/admin/${email}`);
+      const data = await res.json();
+      return data.admin;
+    }, 
+    
     children: [
       {
         path: "mySelectedClasses",
@@ -113,6 +164,52 @@ const router = createBrowserRouter([
         path: "manageUsers" ,
         element: <AdminRoute><ManageUsers></ManageUsers></AdminRoute>
       },
+      {
+        path: "currentAffairs",
+        element: <ManageCurrentAffairs></ManageCurrentAffairs>
+      },
+      {
+        path: "applications",
+        element: <AdminApplicationsPage></AdminApplicationsPage>
+      },
+      {
+        path: "manageNotice",
+        element: <AdminNoticeManagement></AdminNoticeManagement>
+      },
+      {
+        path: "notes",
+        element: <UploadNotes></UploadNotes>
+      },
+      {
+        path: "viewNotes",
+        element: <ViewNotes></ViewNotes>
+      },
+      {
+        path: "viewNotices",
+        element: <StudentNoticePage></StudentNoticePage>
+      },
+      {
+        path: "doubts",
+        element: <AskDoubts></AskDoubts>
+      },
+      {
+        path: "answerDoubts",
+        element: <AnswerDoubts></AnswerDoubts>
+      },
+      {
+        path: "answer",
+        element: <AnswerSection></AnswerSection>
+      },
+      {
+        path: "assignments",
+        element : <InstructorAssignmentPage></InstructorAssignmentPage>
+      },
+      {
+        path: "submitAssignments",
+        element: <StudentAssignmentPage></StudentAssignmentPage>
+
+      }
+      
     ]
   }
 ]);

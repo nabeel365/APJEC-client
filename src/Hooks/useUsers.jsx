@@ -3,9 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 const useUsers = () => {
     const {data: users = [], isLoading: loading, refetch} = useQuery({
         queryKey: ['users'],
-        queryFn: async() => {
+        queryFn: async () => {
             const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users`);
-            return res.json();
+            return await res.json();
         }
     })
 

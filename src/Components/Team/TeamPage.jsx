@@ -68,7 +68,7 @@ const TeamPage = () => {
                         We are always looking for passionate individuals to contribute to our vision.
                     </p>
                     <a
-                        href="#"
+                        href="career"
                         className="mt-4 inline-block bg-[#2b6777] text-white hover:bg-[#388087] py-3 px-6 rounded-lg"
                     >
                         View Career Opportunities
