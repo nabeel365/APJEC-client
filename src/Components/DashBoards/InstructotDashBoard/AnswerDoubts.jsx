@@ -7,7 +7,7 @@ const AnswerDoubts = () => {
 
   const fetchDoubts = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/doubts');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/doubts`);
       setDoubts(response.data);
     } catch (error) {
       console.error('Error fetching doubts:', error);
@@ -20,7 +20,7 @@ const AnswerDoubts = () => {
 
   const handleSubmitResponse = async (id) => {
     try {
-      await axios.patch(`http://localhost:5000/doubts/${id}`, {
+      await axios.patch(`${import.meta.env.VITE_BACKEND_URL}/doubts/${id}`, {
         answer: responses[id],
       });
       fetchDoubts();

@@ -9,7 +9,7 @@ const NoticeModal = () => {
 
   const fetchLatestNotice = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/notices/latest');    
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notices/latest`);    
       setLatestNotice(response.data);
     } catch (error) {
       console.error('Error fetching latest notice:', error);

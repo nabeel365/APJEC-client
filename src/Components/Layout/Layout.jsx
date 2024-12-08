@@ -51,7 +51,9 @@ const Layout = () => {
 
 <ThreeCards></ThreeCards>
 
+<br />
 
+{/* <div style="height: 2px; background-color: #2b6777; margin: 10px 0;"></div> */}
 
            <TeamPage></TeamPage>
 

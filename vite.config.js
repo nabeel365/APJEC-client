@@ -15,12 +15,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/uploads": {
-        target: "http://localhost:5000",
+        target: "https://apjec-server-appi.vercel.app",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/uploads/, "/uploads"),
       },
       "/current-affairs": {
-        target: "http://localhost:5000",
+        target: "https://apjec-server-appi.vercel.app",
         changeOrigin: true,
       },
     },

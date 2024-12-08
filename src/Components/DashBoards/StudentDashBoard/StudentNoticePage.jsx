@@ -6,7 +6,7 @@ const StudentNoticePage = () => {
 
   const fetchNotices = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/notices');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notices`);
       setNotices(response.data);
     } catch (error) {
       console.error('Error fetching notices:', error);

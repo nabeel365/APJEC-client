@@ -8,7 +8,7 @@ const AdminNoticeManagement = () => {
 
   const fetchNotices = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/notices');
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/notices`);
       setNotices(response.data);
     } catch (error) {
       console.error('Error fetching notices:', error);
@@ -22,7 +22,7 @@ const AdminNoticeManagement = () => {
   const handleAddNotice = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5000/notices/add', form);
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/notices/add`, form);
       fetchNotices();
       setForm({ title: '', description: '', date: '' });
     } catch (error) {
@@ -33,7 +33,7 @@ const AdminNoticeManagement = () => {
   const handleUpdateNotice = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5000/notices/update/${editingNotice._id}`, form);
+      await axios.put(`${import.meta.env.VITE_BACKEND_URL}/notices/update/${editingNotice._id}`, form);
       fetchNotices();
       setEditingNotice(null);
       setForm({ title: '', description: '', date: '' });
@@ -44,7 +44,7 @@ const AdminNoticeManagement = () => {
 
   const handleDeleteNotice = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/notices/delete/${id}`);
+      await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/notices/delete/${id}`);
       fetchNotices();
     } catch (error) {
       console.error('Error deleting notice:', error);
