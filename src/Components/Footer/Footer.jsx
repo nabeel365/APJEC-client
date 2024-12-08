@@ -19,7 +19,7 @@ const Footer = ({ isDarkMode }) => {
               className="mx-auto md:mx-0"
               width="100"
               height="100"
-              src="/src/images/apjec-logo.png"
+              src="/public/images/apjec-logo.png"
               alt="APJEC Logo"
             />
             <h2 className="text-lg font-bold text-center md:text-left">
