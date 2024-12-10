@@ -7,10 +7,12 @@ import Swal from 'sweetalert2';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const { userLogIn, googleSignIn } = useContext(AuthContext);
+    const { userLogIn, googleSignIn, resetPassword } = useContext(AuthContext);
 
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [emailForReset, setEmailForReset] = useState('');
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,7 +24,7 @@ const Login = () => {
 
     const handleSubmitData = (data) => {
         userLogIn(data.email, data.password)
-            .then((result) => {
+            .then(() => {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
@@ -37,17 +39,34 @@ const Login = () => {
             });
     };
 
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then((result) => {
+    const handlePasswordReset = () => {
+        if (!emailForReset) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Please enter your email to reset your password!',
+            });
+            return;
+        }
+
+        resetPassword(emailForReset)
+            .then(() => {
                 Swal.fire({
                     position: 'top-center',
                     icon: 'success',
-                    title: 'Login Successful!',
-                    showConfirmButton: false,
-                    timer: 1500,
+                    title: 'Password reset email sent!',
+                    text: 'Check your inbox for further instructions.',
+                    showConfirmButton: true,
                 });
-                navigate(from, { replace: true });
+                setIsModalOpen(false);
+                setEmailForReset('');
+            })
+            .catch((error) => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.message,
+                });
             });
     };
 
@@ -82,7 +101,7 @@ const Login = () => {
                             {...register("password", {
                                 required: true,
                                 minLength: 6,
-                                pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/,
+                                pattern: /^(?=.*[A-Z])(?=.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?])/, // At least one uppercase and special character
                             })}
                         />
                         <button
@@ -111,6 +130,16 @@ const Login = () => {
                 {/* Error Message */}
                 {error && <p className="text-red-500 text-center mt-2">{error}</p>}
 
+                {/* Forgot Password Link */}
+                <p className="text-right text-sm text-gray-600 mt-4">
+                    <button
+                        className="text-[#388087] hover:underline focus:outline-none"
+                        onClick={() => setIsModalOpen(true)}
+                    >
+                        Forgot password?
+                    </button>
+                </p>
+
                 {/* Register Redirect */}
                 <p className="text-center text-sm text-gray-600 mt-4">
                     New here?{" "}
@@ -128,12 +157,42 @@ const Login = () => {
 
                 {/* Google Sign-In */}
                 <button
-                    onClick={handleGoogleSignIn}
+                    onClick={googleSignIn}
                     className="w-full flex items-center justify-center bg-[#BADFE7] text-[#2b6777] font-semibold py-2 rounded-lg hover:bg-[#C2EDCE] transition"
                 >
                     <FaGoogle className="mr-2" /> Sign in with Google
                 </button>
             </div>
+
+            {/* Modal */}
+            {isModalOpen && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+                    <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm">
+                        <h3 className="text-lg font-bold text-center mb-4">Reset Password</h3>
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="w-full px-4 py-2 border rounded-lg mb-4 focus:ring-2 focus:ring-[#388087] focus:outline-none"
+                            value={emailForReset}
+                            onChange={(e) => setEmailForReset(e.target.value)}
+                        />
+                        <div className="flex justify-between">
+                            <button
+                                onClick={handlePasswordReset}
+                                className="bg-[#2b6777] text-white font-semibold py-2 px-4 rounded-lg hover:bg-[#388087] transition"
+                            >
+                                Send
+                            </button>
+                            <button
+                                onClick={() => setIsModalOpen(false)}
+                                className="bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg hover:bg-gray-400 transition"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

@@ -26,7 +26,7 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
           <div className="flex items-center space-x-4">
             <img
               className="h-12 w-12 rounded-full"
-              src="/public/images/apjec-logo.png"
+              src="/images/apjec-logo.png"
               alt="APJEC Logo"
             />
             <span className="text-[#F6F6F2] text-xl font-semibold">

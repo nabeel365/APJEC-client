@@ -1,145 +1,10 @@
-// import React, { createContext, useEffect, useState } from 'react';
-
-// import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
-// import app from '../../firebase.config';
-// // import axios from 'axios';
-
-// export const AuthContext = createContext(null);
-
-// const auth = getAuth(app)
-
-// const googleProvider = new GoogleAuthProvider()
-
-// const AuthProvider = ({ children }) => {
-
-
-    
-    
-//     const [user, setUser] = useState(null);
-    
-//     const [loading, setLoading] = useState(true);
-
-
-//     const newUser = async(email, password) =>{
-//         try {
-//         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            
-//         const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
-//             method:'POST', 
-//             headers:{
-//                 'Content-Type': 'application/json'
-//             },
-//             body:JSON.stringify({email})
-//         })
-// console.log(response);
-// return userCredential;
-//         } catch (error) {
-//             console.log(error);
-            
-//         }
-//     }
-
-//     const userLogIn = (email, password) => {
-//         return signInWithEmailAndPassword(auth, email, password);
-//     }
-
-
-//     const userLogOut = () =>{
-//         return signOut(auth);
-//     }
-
-//     useEffect( () =>{
-//         const unsubscribe = onAuthStateChanged(auth, currentUser => {
-//             setUser(currentUser);
-
-//             // get and set token....
-
-//             // if(currentUser){
-//             // axios.post('${import.meta.env.VITE_BACKEND_URL}/jwt', {email: currentUser.email})
-//             // .then(data => {
-//             //     console.log(data.data.token);
-//             //     localStorage.setItem('access-token', data.data.token)
-//             // })
-
-//             // }
-
-
-
-
-
-
-
-//             setLoading(false);
-//         });
-
-//         return () =>{
-//            return unsubscribe();
-//         }
-
-//     }, [])
-
-//     const googleSignIn = async() => {
-
-//         try {            
-//             const userCredential = await signInWithPopup(auth, googleProvider);
-                
-//             const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/users`, {
-//                 method:'POST', 
-//                 headers:{
-//                     'Content-Type': 'application/json'
-//                 },
-//                 body:JSON.stringify({email:userCredential.user.email})
-//             })
-//             localStorage.setItem("email", userCredential.user.email);
-//             return userCredential;
-//             } catch (error) {
-//                 console.log(error);
-                
-//             }
-
-
-//     }
-
-
-
-
-//     const profileUpdate = (name, photoURL) => {
-//         return updateProfile(auth.currentUser, {
-//             displayName: name,
-//             photoURL: photoURL
-
-//         })
-
-//     }
-
-//     const authenticationData = {
-//         user,
-//         loading,
-//         newUser,
-//         userLogIn,
-//         userLogOut,
-//         googleSignIn,
-//         profileUpdate
-//     }
-
-//     return (
-//         <div>
-//             <AuthContext.Provider value={authenticationData}>
-//                 {children}
-//             </AuthContext.Provider>
-//         </div>
-//     );
-// };
-
-// export default AuthProvider;
-
-
 import React, { createContext, useEffect, useState } from "react";
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -240,6 +105,17 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  // Reset Password
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+      console.log("Password reset email sent.");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
+      throw error;
+    }
+  };
+
   // Automatically log in the user from localStorage
   useEffect(() => {
     const savedEmail = localStorage.getItem("email");
@@ -268,6 +144,7 @@ const AuthProvider = ({ children }) => {
     userLogOut,
     googleSignIn,
     profileUpdate,
+    resetPassword, // Expose resetPassword
   };
 
   return (

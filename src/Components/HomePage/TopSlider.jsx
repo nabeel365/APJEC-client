@@ -7,7 +7,7 @@ const TopSlider = () => {
             <div className="carousel w-full max-h-[600px] relative">
                 {/* Slide 1 */}
                 <div id="slide1" className="carousel-item relative w-full">
-                    <img src="/public/images/apjec1.jpg" alt="Education" className="w-full h-full object-cover" />
+                    <img src="/images/apjec1.jpg" alt="Education" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#2b6777] via-transparent to-transparent"></div>
                     <div className="absolute bottom-10 left-10 text-white space-y-4">
                         <h1 className="text-3xl md:text-5xl font-bold">Welcome to APJEC</h1>
@@ -24,7 +24,7 @@ const TopSlider = () => {
 
                 {/* Slide 2 */}
                 <div id="slide2" className="carousel-item relative w-full">
-                    <img src="/public/images/apjec2.jpg" alt="Law College" className="w-full h-full object-cover" />
+                    <img src="/images/apjec2.jpg" alt="Law College" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#388087] via-transparent to-transparent"></div>
                     <div className="absolute bottom-10 left-10 text-white space-y-4">
                         <h1 className="text-3xl md:text-5xl font-bold">Join Our Legal Training Programs</h1>
@@ -41,7 +41,7 @@ const TopSlider = () => {
 
                 {/* Slide 3 */}
                 <div id="slide3" className="carousel-item relative w-full">
-                    <img src="/public/images/apjec3.jpg" alt="Classroom" className="w-full h-full object-cover" />
+                    <img src="/images/apjec3.jpg" alt="Classroom" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#BADFE7] via-transparent to-transparent"></div>
                     <div className="absolute bottom-10 left-10 text-[#2b6777] space-y-4">
                         <h1 className="text-3xl md:text-5xl font-bold">Interactive Sessions & Workshops</h1>
@@ -60,7 +60,7 @@ const TopSlider = () => {
                 {/* Slide 4*/}               
 
                 <div id="slide3" className="carousel-item relative w-full">
-                    <img src="/public/images/apjec4.jpg" alt="Classroom" className="w-full h-full object-cover" />
+                    <img src="/images/apjec4.jpg" alt="Classroom" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#BADFE7] via-transparent to-transparent"></div>
                     <div className="absolute bottom-10 left-10 text-[#2b6777] space-y-4">
                         <h1 className="text-3xl md:text-5xl font-bold">Interactive Sessions & Workshops</h1>
@@ -77,7 +77,7 @@ const TopSlider = () => {
 
                 {/* Slide 5*/}
                 <div id="slide4" className="carousel-item relative w-full">
-                    <img src="/public/images/apjec5.jpg" alt="Success" className="w-full h-full object-cover" />
+                    <img src="/images/apjec5.jpg" alt="Success" className="w-full h-full object-cover" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#F6F6F2] via-transparent to-transparent"></div>
                     <div className="absolute bottom-10 left-10 text-[#388087] space-y-4">
                         <h1 className="text-3xl md:text-5xl font-bold">Shape Your Future at APJEC</h1>
