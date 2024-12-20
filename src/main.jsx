@@ -51,6 +51,8 @@ import AboutUs from './Components/HomePage/AboutUs';
 import Career from './Components/Team/Career';
 import Admissions from './Components/HomePage/Admissions';
 import TermsAndConditions from './Components/Home/TermsAndConditions';
+import UploadPYQ from './Components/DashBoards/InstructotDashBoard/UploadPYQ';
+import ViewPYQs from './Components/DashBoards/StudentDashBoard/ViewPYQs';
 
 
 const queryClient = new QueryClient()
@@ -142,7 +144,7 @@ const router = createBrowserRouter([
       },
       {
         path: "addClass",
-        element: <InstructorRoute><AddAClass></AddAClass></InstructorRoute>
+        element: <AdminRoute><AddAClass></AddAClass></AdminRoute>
       },
       {
         path: "myClasses" ,
@@ -174,7 +176,7 @@ const router = createBrowserRouter([
       },
       {
         path: "manageNotice",
-        element: <AdminNoticeManagement></AdminNoticeManagement>
+        element: <AdminRoute> <AdminNoticeManagement></AdminNoticeManagement> </AdminRoute>
       },
       {
         path: "notes",
@@ -208,7 +210,17 @@ const router = createBrowserRouter([
         path: "submitAssignments",
         element: <StudentAssignmentPage></StudentAssignmentPage>
 
+      },
+      {
+        path: "pyqs",
+        element: <UploadPYQ></UploadPYQ>
+
+      },
+      {
+        path: "viewPYQs",
+        element: <ViewPYQs></ViewPYQs>
       }
+      
       
     ]
   }

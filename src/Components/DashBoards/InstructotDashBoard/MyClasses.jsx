@@ -34,7 +34,7 @@ const MyClasses = () => {
   });
 
   return (
-    <div className="container mx-auto p-6 bg-[#F6F6F2] rounded-lg shadow-lg">
+    <div className="container w-screen mx-auto p-6 bg-[#F6F6F2] rounded-lg shadow-lg">
       <h1 className="text-3xl font-bold text-center text-[#2b6777] mb-6">
         My Classes
       </h1>

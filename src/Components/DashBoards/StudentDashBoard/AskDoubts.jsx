@@ -48,51 +48,65 @@ const AskDoubts = () => {
   );
 
   return (
-    <div className="p-6 bg-[#F6F6F2] min-h-screen">
-      <h2 className="text-2xl font-bold text-[#2b6777] mb-4">Ask Your Doubts</h2>
-      <form onSubmit={handleSubmit} className="mb-6">
-        <textarea
-          value={doubt}
-          onChange={(e) => setDoubt(e.target.value)}
-          className="w-full p-3 border-2 border-[#BADFE7] rounded-md"
-          placeholder="Type your doubt here..."
-          required
-        />
-        <button
-          type="submit"
-          className="mt-3 bg-[#2b6777] text-white px-6 py-2 rounded-md hover:bg-[#388087] transition-colors"
-        >
-          Submit Doubt
-        </button>
-      </form>
-      <div className="mb-6">
-        <input
-          type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full p-3 border-2 border-[#BADFE7] rounded-md"
-          placeholder="Search your question..."
-        />
-      </div>
-      <div>
-        <h3 className="text-xl font-semibold text-[#2b6777] mb-3">Asked Doubts</h3>
-        <ul className="bg-[#C2EDCE] p-4 rounded-md shadow-md">
-          {filteredDoubts.length > 0 ? (
-            filteredDoubts.map((d, idx) => (
-              <li
-                key={idx}
-                className="mb-2 p-4 bg-white border border-[#BADFE7] rounded-md hover:shadow-md transition-shadow"
-              >
-                <p className="font-medium text-[#2b6777]">{d.question}</p>
-                <p className="text-sm text-gray-600 mt-1">
-                  <strong>Answer:</strong> {d.answer || 'Not answered yet'}
+    <div className="bg-[#F6F6F2] w-screen min-h-screen p-4 md:p-6 lg:p-8">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2b6777] mb-6 text-center">
+          Ask Your Doubts - APJEC
+        </h1>
+
+        <form onSubmit={handleSubmit} className="mb-8">
+          <textarea
+            value={doubt}
+            onChange={(e) => setDoubt(e.target.value)}
+            className="w-full p-4 border-2 border-[#BADFE7] rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#2b6777] shadow-md text-sm md:text-base"
+            placeholder="Type your doubt here..."
+            required
+            rows="4"
+          />
+          <button
+            type="submit"
+            className="mt-4 w-full bg-[#2b6777] text-white px-6 py-3 rounded-lg hover:bg-[#388087] transition-colors shadow-lg text-sm md:text-base"
+          >
+            Submit Doubt
+          </button>
+        </form>
+
+        <div className="mb-8">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full p-3 border-2 border-[#BADFE7] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2b6777] shadow-md text-sm md:text-base"
+            placeholder="Search your question..."
+          />
+        </div>
+
+        <div>
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#2b6777] mb-4">
+            Asked Doubts
+          </h2>
+          <div className="overflow-y-auto max-h-[60vh] bg-[#C2EDCE] p-4 md:p-6 rounded-lg shadow-lg">
+            <ul>
+              {filteredDoubts.length > 0 ? (
+                filteredDoubts.map((d, idx) => (
+                  <li
+                    key={idx}
+                    className="mb-4 p-4 bg-white border border-[#BADFE7] rounded-lg hover:shadow-xl transition-shadow text-sm md:text-base"
+                  >
+                    <p className="font-medium text-[#2b6777] text-lg">{d.question}</p>
+                    <p className="text-sm text-gray-600 mt-3">
+                      <strong>Answer:</strong> {d.answer || 'Not answered yet'}
+                    </p>
+                  </li>
+                ))
+              ) : (
+                <p className="text-center text-[#388087] font-medium">
+                  No doubts found for "{search}".
                 </p>
-              </li>
-            ))
-          ) : (
-            <p className="text-center text-[#388087]">No doubts found for "{search}".</p>
-          )}
-        </ul>
+              )}
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

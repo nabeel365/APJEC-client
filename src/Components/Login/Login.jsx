@@ -16,7 +16,7 @@ const Login = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || 'dashboard';
 
     const handleTogglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -33,6 +33,7 @@ const Login = () => {
                     timer: 1500,
                 });
                 navigate(from, { replace: true });
+                // navigate("dashbaord");
             })
             .catch((error) => {
                 setError(error.message);

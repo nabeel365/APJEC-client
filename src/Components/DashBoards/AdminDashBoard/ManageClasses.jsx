@@ -78,7 +78,7 @@ const ManageClasses = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F6F6F2] py-8 px-4 lg:px-16">
+    <div className="min-h-screen w-screen bg-[#F6F6F2] py-8 px-4 lg:px-16">
       <h1 className="text-3xl font-bold text-[#2b6777] mb-8 text-center">
         Manage Classes
       </h1>

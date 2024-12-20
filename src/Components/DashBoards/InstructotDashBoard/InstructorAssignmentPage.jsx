@@ -79,7 +79,7 @@ const InstructorAssignmentPage = () => {
   };
 
   return (
-    <div style={{ padding: "20px", backgroundColor: "#F6F6F2" }}>
+    <div className="w-screen" style={{ padding: "20px", backgroundColor: "#F6F6F2" }}>
       <h2 style={{ color: "#2b6777" }}>Instructor Assignment Page</h2>
       <form onSubmit={handleAssignmentUpload}>
         <div style={{ marginBottom: "15px" }}>

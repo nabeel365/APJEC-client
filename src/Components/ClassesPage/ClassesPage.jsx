@@ -16,6 +16,8 @@ const ClassesPage = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/login';
     const [selectedClass, setSelectedClass] = useState(null); // For modal handling
+    const [courseDetails, setCourseDetails] = useState(null);
+
     const [formData, setFormData] = useState({
         name: '',
         fatherName: '',
@@ -91,6 +93,15 @@ const ClassesPage = () => {
     };
 
     return (
+
+
+
+
+
+
+
+
+
         <div className="bg-[#F6F6F2] py-10 px-5 md:px-20">
             {/* Page Header */}
             <div className="text-center mb-10">
@@ -105,9 +116,8 @@ const ClassesPage = () => {
                 {classes.map((classItem) => (
                     <Slide key={classItem._id}>
                         <div
-                            className={`rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 ${
-                                classItem.available_seats === 0 ? 'opacity-50 bg-gray-200' : 'bg-[#BADFE7]'
-                            }`}
+                            className={`rounded-lg shadow-md overflow-hidden transform transition-all duration-300 hover:scale-105 ${classItem.available_seats === 0 ? 'opacity-50 bg-gray-200' : 'bg-[#BADFE7]'
+                                }`}
                         >
                             <img
                                 src={classItem.image}
@@ -118,15 +128,19 @@ const ClassesPage = () => {
                                 <h3 className="text-lg font-semibold text-[#2b6777] mb-2">
                                     {classItem.name}
                                 </h3>
-                                <p className="text-[#388087] mb-2">
+                                {/* <p className="text-[#388087] mb-2">
                                     <strong>Instructor:</strong> {classItem.instructor}
-                                </p>
+                                </p> */}
                                 <p className="text-[#2b6777] mb-2">
                                     <strong>Available Seats:</strong> {classItem.available_seats}
                                 </p>
                                 <p className="text-[#388087] mb-4">
                                     <strong>Price:</strong> ₹ {classItem.price}
                                 </p>
+
+                                {/* <div className='row-span-2'>
+                                <div >
+
                                 {!user ? (
                                     <button
                                         disabled={classItem.available_seats === 0}
@@ -148,11 +162,86 @@ const ClassesPage = () => {
                                         Select Course
                                     </button>
                                 )}
+
+
+</div>
+
+<div>
+                                <button
+                                    className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-4 rounded mt-2"
+                                    onClick={() => setCourseDetails(classItem.description)}
+                                >
+                                    View Details
+                                </button>
+
+                                </div>
+
+                                </div> */}
+
+                                <div className="flex">
+                                    <div className="mr-8">
+                                        {!user ? (
+                                            <button
+                                                disabled={classItem.available_seats === 0}
+                                                className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-4 rounded"
+                                                onClick={handleSelect}
+                                            >
+                                                Login to Select
+                                            </button>
+                                        ) : (
+                                            <button
+                                                disabled={
+                                                    classItem.available_seats === 0 ||
+                                                    isAdmin.admin ||
+                                                    isInstructor.instructor
+                                                }
+                                                className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-4 rounded"
+                                                onClick={() => setSelectedClass(classItem._id)}
+                                            >
+                                                Select Course
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div>
+                                        <button
+                                            className="bg-[#2b6777] hover:bg-[#388087] text-white font-bold py-2 px-4 rounded"
+                                            onClick={() => setCourseDetails(classItem.description)}
+                                        >
+                                            View Details
+                                        </button>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </Slide>
                 ))}
             </div>
+
+
+
+            {courseDetails && (
+                <div className="fixed inset-0 bg-gray-800 bg-opacity-75 flex justify-center items-center z-50">
+                    <div className="bg-white rounded-lg shadow-lg p-6 w-11/12 md:w-3/5 lg:w-2/5 max-h-[90vh] overflow-y-auto">
+                        <h2 className="text-2xl font-bold text-[#2b6777] mb-4 text-center">Course Details</h2>
+                        <p className="text-[#388087]">{courseDetails}</p>
+                        <div className="mt-6 flex justify-end">
+                            <button
+                                type="button"
+                                className="bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600"
+                                onClick={() => setCourseDetails(null)}
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+
+
 
             {/* Modal */}
             {selectedClass && (
@@ -166,7 +255,7 @@ const ClassesPage = () => {
                         </h2>
                         <div className="space-y-4">
                             {[
-                                { label: "Full Name", name: "name" },
+                                { label: "Full Name ", name: "name" },
                                 { label: "Father's Name", name: "fatherName" },
                                 { label: "Email", name: "email" },
                                 { label: "Phone Number", name: "phone" },

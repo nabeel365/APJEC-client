@@ -68,7 +68,7 @@ const UploadNotes = () => {
   };
 
   return (
-    <div className="bg-[#F6F6F2] min-h-screen p-6">
+    <div className="bg-[#F6F6F2] min-h-screen w-screen p-6">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-2xl font-bold text-[#2b6777] mb-6">Upload Notes</h1>
         <form onSubmit={handleUpload} className="space-y-4">

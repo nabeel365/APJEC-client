@@ -40,7 +40,7 @@ const CurrentAffairsList = () => {
 
   return (
     <div className="bg-[#F6F6F2] min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-[#2b6777] mb-6">Manage Current Affairs</h1>
+      <h1 className="text-3xl font-bold text-[#2b6777] mb-6"> Current Affairs</h1>
 
       {/* Search and Filter Section */}
       <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -53,6 +53,7 @@ const CurrentAffairsList = () => {
         />
         <input
           type="date"
+          placeholder="Search by date..."
           className="border px-4 py-2 rounded"
           value={filterDate}
           onChange={(e) => setFilterDate(e.target.value)}

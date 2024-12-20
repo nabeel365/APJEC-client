@@ -17,8 +17,6 @@ const AnswerSection = () => {
   const fetchQuestions = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/questions`);
-      console.log(response);
-      
       const data = response.data || [];
       setQuestions(data);
       setFilteredQuestions(data);
@@ -83,39 +81,23 @@ const AnswerSection = () => {
   }, [emailFilter, statusFilter, search, questions]);
 
   return (
-    <div style={{ padding: "20px", fontFamily: "Arial, sans-serif", backgroundColor: "#F6F6F2" }}>
+    <div
+      className="answer-section w-screen"
+      style={{ padding: "20px", fontFamily: "Arial, sans-serif", backgroundColor: "#F6F6F2" }}
+    >
       <h2 style={{ color: "#2b6777", textAlign: "center" }}>Answer Questions - APJEC</h2>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "20px",
-          backgroundColor: "#C2EDCE",
-          padding: "10px",
-          borderRadius: "10px",
-        }}
-      >
+      <div className="filters" style={{ display: "flex", flexWrap: "wrap", gap: "10px", marginBottom: "20px" }}>
         <input
           type="text"
           placeholder="Filter by email..."
           value={emailFilter}
           onChange={(e) => setEmailFilter(e.target.value)}
-          style={{
-            padding: "10px",
-            border: "1px solid #388087",
-            borderRadius: "5px",
-            width: "30%",
-          }}
+          style={{ padding: "10px", border: "1px solid #388087", borderRadius: "5px", flex: "1 1 200px" }}
         />
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          style={{
-            padding: "10px",
-            border: "1px solid #388087",
-            borderRadius: "5px",
-            width: "30%",
-          }}
+          style={{ padding: "10px", border: "1px solid #388087", borderRadius: "5px", flex: "1 1 200px" }}
         >
           <option value="all">All Questions</option>
           <option value="answered">Answered</option>
@@ -126,12 +108,7 @@ const AnswerSection = () => {
           placeholder="Search questions..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          style={{
-            padding: "10px",
-            border: "1px solid #388087",
-            borderRadius: "5px",
-            width: "30%",
-          }}
+          style={{ padding: "10px", border: "1px solid #388087", borderRadius: "5px", flex: "1 1 200px" }}
         />
         <button
           onClick={resetFilters}
@@ -142,7 +119,7 @@ const AnswerSection = () => {
             border: "none",
             borderRadius: "5px",
             cursor: "pointer",
-            marginLeft: "10px",
+            flex: "1 1 200px",
           }}
         >
           Clear Filters
@@ -152,6 +129,7 @@ const AnswerSection = () => {
         filteredQuestions.map((q) => (
           <div
             key={q._id}
+            className="question"
             style={{
               backgroundColor: "#BADFE7",
               padding: "20px",

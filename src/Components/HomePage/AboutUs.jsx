@@ -4,14 +4,9 @@ const AboutUs = () => {
   return (
     <div className="bg-[#F6F6F2] min-h-screen">
       <header className="bg-[#2b6777] text-white py-10">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl font-bold">About APJEC</h1>
-          <p className="text-lg mt-4"><strong>Empowering Minds, Shaping Futures</strong></p>
-          <p className="text-lg mt-4">The APJ Abdul Kalam Education Center was established on October 15, 2022, the anniversary of APJ Abdul Kalam's birth, by the Universal Human Foundation. Our organization aims to provide deserving Bengali students with affordable and top-notch education, empowering them with the resources they need to excel in university entrance exams.
+      <h1 className="text-3xl font-bold text-[#f7f9fa] text-center mb-6">About Us</h1>
 
-Contact us: BioMechaSoft@gmail.com</p>
 
-        </div>
       </header>
 
       <main className="container mx-auto px-4 py-10">
@@ -21,28 +16,39 @@ Contact us: BioMechaSoft@gmail.com</p>
           <div className="grid md:grid-cols-2 gap-8">
 
 
-            
-            <div className="bg-[#BADFE7] p-6 rounded-lg shadow-lg">
+
+          <div className="bg-[#BADFE7] p-6 rounded-lg shadow-lg">
+
+            <h3 className="text-xl font-semibold text-[#2b6777] mb-4">About APJEC</h3>
+              <p className="text-[#388087]"><strong>Empowering Minds, Shaping Futures</strong></p>
+              <p className="text-[#388087]">The APJ Abdul Kalam Education Center was established on October 15, 2022, the anniversary of APJ Abdul Kalam's birth, by the Universal Human Foundation. Our organization aims to provide deserving Bengali students with affordable and top-notch education, empowering them with the resources they need to excel in university entrance exams.
+
+                Contact us: BioMechaSoft@gmail.com</p>
+
+            </div>
+
+
+            <div className=" bg-[#C2EDCE] p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-semibold text-[#2b6777] mb-4">Our Mission</h3>
               <p className="text-[#388087]">
-              At our core, we're driven by a mission to bridge educational disparities. Inspired by the visionary words of Dr. APJ Abdul Kalam, we strive to empower disadvantaged students across West Bengal and India to excel in university entrance exams.
+                At our core, we're driven by a mission to bridge educational disparities. Inspired by the visionary words of Dr. APJ Abdul Kalam, we strive to empower disadvantaged students across West Bengal and India to excel in university entrance exams.
 
-Join us in our commitment to democratize education and unlock the potential of every student. </p>
+                Join us in our commitment to democratize education and unlock the potential of every student. </p>
             </div>
-            
-            {/* <div className="bg-[#C2EDCE] p-6 rounded-lg shadow-lg">
+
+            <div className=" bg-[#C2EDCE] p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-semibold text-[#2b6777] mb-4">Our Vision</h3>
               <p className="text-[#388087]">
                 We envision becoming a leader in educational excellence, shaping future generations through innovative learning and inclusive opportunities.
               </p>
-            </div> */}
+            </div>
 
-<div className="bg-[#C2EDCE] p-6 rounded-lg shadow-lg">
+            <div className="bg-[#BADFE7] p-6 rounded-lg shadow-lg">
               <h3 className="text-xl font-semibold text-[#2b6777] mb-4">Course Offers</h3>
               <p className="text-[#388087]">
-              The coaching sessions are a component of this institution's mission to give deserving and diligent students from underprivileged backgrounds the chance to pursue careers at prestigious universities in various fields.  </p>
+                The coaching sessions are a component of this institution's mission to give deserving and diligent students from underprivileged backgrounds the chance to pursue careers at prestigious universities in various fields.  </p>
             </div>
-            
+
           </div>
         </section>
 

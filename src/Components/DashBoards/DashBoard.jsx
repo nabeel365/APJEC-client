@@ -6,272 +6,106 @@ import useUsers from '../../Hooks/useUsers';
 import useInstructors from '../../Hooks/useInstructors';
 import useAdmin from '../../Hooks/useAdmin';
 
-
-const DashBoard = ({ }) => {
-
-
+const DashBoard = () => {
   const [users] = useUsers();
-
   const [isInstructor] = useInstructors();
-
   const [isAdmin] = useAdmin();
 
-  
-
   return (
-    <div>
-      <Navbar></Navbar>
+    <div className="bg-[#F6F6F2] min-h-screen flex flex-col">
+      {/* Navbar */}
+      <Navbar />
 
-      {/*  */}
-
-{
-  
-}
-
-      {/*  */}
-
-      <div className="drawer lg:drawer-open">
+      <div className="drawer lg:drawer-open flex-2">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-        <div className="drawer-content flex flex-col items-center justify-center">
-          <label
-            htmlFor="my-drawer-2"
-            className="btn btn-primary drawer-button lg:hidden bg-[#2b6777] text-white hover:bg-[#388087]"
-          >
-            Open Dashboard Menu
-          </label>
-          {/* Page content here */}
-          <Outlet></Outlet>
+
+        {/* Main Content Area */}
+        <div className="drawer-content flex flex-col">
+          {/* Dashboard Cards */}
+          <div className="p-4 grid grid-cols-3 gap-4  ">
+            {isAdmin && (
+              <>
+                <DashboardCard link="/dashBoard/addClass" title="Add a Course" icon="📚" />
+                <DashboardCard link="/dashBoard/manageClasses" title="Manage Classes" icon="🛠" />
+                <DashboardCard link="/dashBoard/manageUsers" title="Manage Users" icon="👥" />
+                <DashboardCard link="/dashBoard/currentAffairs" title="Manage Current Affairs" icon="📰" />
+                <DashboardCard link="/dashBoard/manageNotice" title="Manage Notices" icon="📢" />
+                <DashboardCard link="/dashBoard/applications" title="Registered Students" icon="✅" />
+                <DashboardCard link="/dashBoard/answer" title="Answer Questions" icon="💬" />
+              </>
+            )}
+
+            {isInstructor.instructor && (
+              <>
+                <DashboardCard link="/dashBoard/myClasses" title="My Classes" icon="📘" />
+                <DashboardCard link="/dashBoard/totalEnrolledStudents" title="Total Enrolled Students" icon="🎓" />
+                <DashboardCard link="/dashBoard/feedback" title="Feedback" icon="📝" />
+                <DashboardCard link="/dashBoard/notes" title="Upload Notes" icon="📤" />
+                <DashboardCard link="/dashBoard/answerDoubts" title="Answer Doubts" icon="❓" />
+                <DashboardCard link="/dashBoard/assignments" title="Upload Assignments" icon="📂" />
+                <DashboardCard link="/dashBoard/pyqs" title="Upload PYQs" icon="📜" />
+
+
+              </>
+            )}
+
+            {!isAdmin && !isInstructor.instructor && (
+              <>
+                <DashboardCard link="/dashBoard/mySelectedClasses" title="My Selected Courses" icon="📋" />
+                <DashboardCard link="/dashBoard/enrolled" title="My Enrolled Courses" icon="🎟" />
+                <DashboardCard link="/dashBoard/payment" title="Payment History" icon="💳" />
+                <DashboardCard link="/dashBoard/viewNotes" title="Notes" icon="📄" />
+                <DashboardCard link="/dashBoard/viewNotices" title="View Notices" icon="📃" />
+                <DashboardCard link="/dashBoard/doubts" title="Ask Doubts" icon="🤔" />
+                <DashboardCard link="/dashBoard/viewPYQs" title="PYQs" icon="🤔" />
+                <DashboardCard link="/dashBoard/submitAssignments" title="Your Assignments" icon="📥" />
+                <DashboardCard
+                  link="https://apjec.onlinetestpanel.com/#login"
+                  title="Mock Test Login"
+                  icon="🖥"
+                  external
+                />
+              </>
+            )}
+          </div>
+
+          {/* Outlet Section */}
+          <div className="flex-grow-3 mt-4">
+            <Outlet />
+          </div>
         </div>
+
+        {/* Drawer Side */}
         <div className="drawer-side">
-          <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-
-          {/* {dashboardLinks} */}
-
-{/*  */}
-
-{
-    isAdmin ? (
-      <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-        <li>
-          <Link to="/dashBoard/manageClasses">Manage Classes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/manageUsers">Manage Users</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/currentAffairs"> Manage Current Affairs</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/manageNotice"> Manage Notices</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/applications"> View Registered Students</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/answer">Answer Questions</Link>
-        </li>
-  
-      </ul>
-  ) : ( 
-    isInstructor.instructor ? (
-  
-  
-      <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-        <li>
-          <Link to="/dashBoard/addClass">Add a Course</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/myClasses">My Classes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/totalEnrolledStudents">Total Enrolled Students</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/feedback">FeedBack</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/notes">Upload Notes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/answerDoubts">Answer Doubts</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/assignments">Upload Assigments</Link>
-        </li>
-      </ul>
-    
-    ) :  (
-  
-  
-  
-  
-      <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
-        <li>
-          <Link to="/dashBoard/mySelectedClasses">My Selected Classes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/enrolled">My Enrolled Classes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/payment">Payment History</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/viewNotes">Notes</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/viewNotices">View All Notices</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/doubts">Ask Your Doubts</Link>
-        </li>
-        <li>
-          <Link to="/dashBoard/submitAssignments">Your Assignments</Link>
-        </li>
-      </ul>
-    )
-  )
-}
-
-{/*  */}
-
-
-
-
+          <label htmlFor="my-drawer-1" className=""></label>
         </div>
       </div>
-      <Footer></Footer>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 };
 
+const DashboardCard = ({ link, title, icon, external }) => (
+  <div className="bg-[#BADFE7] hover:bg-[#C2EDCE] transition-all duration-300 w-20 sm:w-24 md:w-28 lg:w-32 xl:w-36 h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36 p-2 md:p-4 rounded-lg shadow-lg flex flex-col items-center justify-center text-center">
+    {external ? (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block text-xs sm:text-sm md:text-base font-semibold text-[#2b6777]"
+      >
+        <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-1 md:mb-2">{icon}</span>
+        {title}
+      </a>
+    ) : (
+      <Link to={link} className="block text-xs sm:text-sm md:text-base font-semibold text-[#2b6777]">
+        <span className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mb-1 md:mb-2">{icon}</span>
+        {title}
+      </Link>
+    )}
+  </div>
+);
+
 export default DashBoard;
-
-
-
-// import React from 'react';
-// import { Link, Outlet } from 'react-router-dom';
-// import Navbar from '../Navbar/Navbar';
-// import Footer from '../Footer/Footer';
-// import useUsers from '../../Hooks/useUsers';
-// import useInstructors from '../../Hooks/useInstructors';
-// import useAdmin from '../../Hooks/useAdmin';
-
-// const DashBoard = () => {
-//   const [users] = useUsers();
-//   const [isInstructor] = useInstructors();
-//   const [isAdmin] = useAdmin();
-
-//   return (
-//     <div>
-//       <Navbar />
-
-//       <div className="drawer lg:drawer-open">
-//         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-//         <div className="drawer-content flex flex-col items-center justify-center">
-//           <label
-//             htmlFor="my-drawer-2"
-//             className="btn btn-primary drawer-button lg:hidden bg-[#388087] text-white hover:bg-[#2b6777]"
-//           >
-//             Open Dashboard Menu
-//           </label>
-//           <Outlet />
-//         </div>
-//         <div className="drawer-side">
-//           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-//           <ul className="menu p-4 w-80 h-full bg-[#F6F6F2] text-base-content">
-//             {/* Admin Tabs */}
-//             {isAdmin && (
-//               <>
-//                 <li className="text-[#388087] font-bold">Admin Controls</li>
-//                 <li>
-//                   <Link to="/dashBoard/manageClasses">Manage Classes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/manageUsers">Manage Users</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/currentAffairs">Manage Current Affairs</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/manageNotice">Manage Notices</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/applications">View Registered Students</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/answer">Answer Questions</Link>
-//                 </li>
-//               </>
-//             )}
-
-//             {/* Instructor Tabs */}
-//             {isInstructor && (
-//               <>
-//                 <li className="text-[#388087] font-bold">Instructor Tools</li>
-//                 <li>
-//                   <Link to="/dashBoard/addClass">Add a Course</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/myClasses">My Classes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/totalEnrolledStudents">Total Enrolled Students</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/feedback">Feedback</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/notes">Upload Notes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/answerDoubts">Answer Doubts</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/assignments">Upload Assignments</Link>
-//                 </li>
-//               </>
-//             )}
-
-//             {/* Student Tabs */}
-//             {!isAdmin && !isInstructor && (
-//               <>
-//                 <li className="text-[#388087] font-bold">Student Dashboard</li>
-//                 <li>
-//                   <Link to="/dashBoard/mySelectedClasses">My Selected Classes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/enrolled">My Enrolled Classes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/payment">Payment History</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/viewNotes">Notes</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/viewNotices">View All Notices</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/doubts">Ask Your Doubts</Link>
-//                 </li>
-//                 <li>
-//                   <Link to="/dashBoard/submitAssignments">Your Assignments</Link>
-//                 </li>
-//               </>
-//             )}
-
-//             {/* Common Logout Button */}
-//             <li className="mt-6">
-//               {/* <button className="btn w-full bg-[#2b6777] text-white hover:bg-[#388087]">
-//                 Logout
-//               </button> */}
-//             </li>
-//           </ul>
-//         </div>
-//       </div>
-//       <Footer />
-//     </div>
-//   );
-// };
-
-// export default DashBoard;

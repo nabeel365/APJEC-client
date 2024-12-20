@@ -26,6 +26,7 @@ const StudentNoticePage = () => {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '20px',
+        // position: 'relative'
       }}
     >
       <h1

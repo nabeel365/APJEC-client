@@ -41,7 +41,7 @@ const AdminApplicationsPage = () => {
     };
 
     return (
-        <div className="container mx-auto p-4 bg-[#F6F6F2] min-h-screen">
+        <div className="container mx-auto p-4 bg-[#F6F6F2] min-h-screen  w-screen">
             <h1 className="text-3xl font-bold mb-6 text-[#2b6777] text-center">Applications</h1>
             <div className="mb-4 text-center">
                 <button

@@ -1,14 +1,20 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import { FaSun, FaMoon, FaFacebook, FaTwitter, FaInstagram } from 'react-icons/fa';
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Navbar = ({ toggleMode, isDarkMode }) => {
+
+  const [isLargeScreen, setIsLargeScreen] = useState(window.innerWidth >= 768);
+
   const { user, userLogOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleLogOut = () => {
     userLogOut();
+    navigate('/')
+
   };
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,6 +22,18 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
   const handleMenuToggle = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+
+  // apjec haeding
+
+  useEffect(() => {
+    const handleResize = () => setIsLargeScreen(window.innerWidth >= 768);
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
 
   return (
     <nav className="bg-[#2b6777] shadow-lg">
@@ -30,12 +48,14 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
               alt="APJEC Logo"
             />
             <span className="text-[#F6F6F2] text-xl font-semibold">
-              APJ Abdul Kalam Educational Center
+              {/* <h1> */}
+              {isLargeScreen ? 'APJ Abdul Kalam Educational Center' : 'APJEC'}
+              {/* </h1> */}
             </span>
           </div>
 
           {/* Links Section */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6">
             <Link
               to="/"
               className="text-[#BADFE7] hover:text-[#C2EDCE] px-3 py-2 text-base font-medium"
@@ -160,7 +180,7 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
       </div>
 
       {/* Mobile Menu */}
-      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+      {/* <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
         <div className="px-4 py-4 bg-[#388087] text-[#F6F6F2]">
           <Link to="/" className="block px-3 py-2 text-base font-medium">
             Home
@@ -192,7 +212,70 @@ const Navbar = ({ toggleMode, isDarkMode }) => {
             Help
           </Link>
         </div>
+      </div> */}
+
+
+      {/* Mobile Menu */}
+      <div className={`${isMenuOpen ? 'block' : 'hidden'} md:hidden`}>
+        <div className="px-4 py-4 bg-[#388087] text-[#F6F6F2]">
+          <Link
+            to="/"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            Home
+          </Link>
+          <Link
+            to="/aboutUs"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            About Us
+          </Link>
+          <Link
+            to="/current"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            Current Affairs
+          </Link>
+          <Link
+            to="/instructors"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            Instructors
+          </Link>
+          <Link
+            to="/classes"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            Courses
+          </Link>
+          {user && (
+            <Link
+              to="/dashboard"
+              onClick={handleMenuToggle} // Close menu on click
+              className="block px-3 py-2 text-base font-medium"
+            >
+              Dashboard
+            </Link>
+          )}
+          <Link
+            to="/help"
+            onClick={handleMenuToggle} // Close menu on click
+            className="block px-3 py-2 text-base font-medium"
+          >
+            Help
+          </Link>
+        </div>
       </div>
+
+
+
+
+
     </nav>
   );
 };

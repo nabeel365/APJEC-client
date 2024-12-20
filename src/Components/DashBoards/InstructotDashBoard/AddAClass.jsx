@@ -6,13 +6,15 @@ import Swal from 'sweetalert2';
 const AddAClass = () => {
   const { user } = useContext(AuthContext);
   const [imagePreview, setImagePreview] = useState(null);
-  const [charCount, setCharCount] = useState(0);
+  const [nameCharCount, setNameCharCount] = useState(0);
+  const [descCharCount, setDescCharCount] = useState(0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const classData = {
       name: e.target.elements.className.value,
+      description: e.target.elements.classDescription.value,
       image: e.target.elements.classImage.files[0],
       instructor: user?.displayName,
       email: user?.email,
@@ -28,21 +30,22 @@ const AddAClass = () => {
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/classes`, classData);
       e.target.reset();
       setImagePreview(null);
-      setCharCount(0);
+      setNameCharCount(0);
+      setDescCharCount(0);
 
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Your Class has been added successfully!',
+        title: 'Your Course has been added successfully!',
         showConfirmButton: false,
         timer: 1500,
       });
     } catch (error) {
-      console.error('Error saving class data:', error);
+      console.error('Error saving course data:', error);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'Something went wrong while adding the class!',
+        text: 'Something went wrong while adding the course!',
       });
     }
   };
@@ -56,7 +59,8 @@ const AddAClass = () => {
     }
   };
 
-  const handleCharCount = (e) => setCharCount(e.target.value.length);
+  const handleNameCharCount = (e) => setNameCharCount(e.target.value.length);
+  const handleDescCharCount = (e) => setDescCharCount(e.target.value.length);
 
   return (
     <div className="container mx-auto p-6 bg-[#BADFE7] rounded-lg shadow-lg">
@@ -67,7 +71,7 @@ const AddAClass = () => {
         className="w-full max-w-lg mx-auto bg-white rounded-lg p-8 shadow-md"
         onSubmit={handleSubmit}
       >
-        {/* Class Name */}
+        {/* Course Name */}
         <div className="mb-4">
           <label
             htmlFor="class-name"
@@ -81,16 +85,38 @@ const AddAClass = () => {
             name="className"
             maxLength="50"
             className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
-            placeholder="Enter class name"
+            placeholder="Enter course name"
             required
-            onChange={handleCharCount}
+            onChange={handleNameCharCount}
           />
           <small className="text-gray-500">
-            {charCount}/50 characters used
+            {nameCharCount}/50 characters used
           </small>
         </div>
 
-        {/* Class Image */}
+        {/* Course Description */}
+        <div className="mb-4">
+          <label
+            htmlFor="class-description"
+            className="block text-[#2b6777] font-semibold mb-2"
+          >
+            Course Description
+          </label>
+          <textarea
+            id="class-description"
+            name="classDescription"
+            maxLength="200"
+            className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-[#388087]"
+            placeholder="Enter course description"
+            required
+            onChange={handleDescCharCount}
+          ></textarea>
+          <small className="text-gray-500">
+            {descCharCount}/200 characters used
+          </small>
+        </div>
+
+        {/* Course Image */}
         <div className="mb-4">
           <label
             htmlFor="class-image"

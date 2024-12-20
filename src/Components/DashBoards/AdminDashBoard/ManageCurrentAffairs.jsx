@@ -96,7 +96,7 @@ const ManageCurrentAffairs = () => {
   );
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container  w-screen mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Manage Current Affairs</h1>
       {error && <p className="text-red-600 mb-4">{error}</p>}
       {success && <p className="text-green-600 mb-4">{success}</p>}
