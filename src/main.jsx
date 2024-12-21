@@ -112,6 +112,10 @@ const router = createBrowserRouter([
       {
         path: "/terms",
         element: <TermsAndConditions></TermsAndConditions>
+      },
+      {
+        path: "viewPYQs",
+        element: <ViewPYQs></ViewPYQs>
       }
     ]
   },
