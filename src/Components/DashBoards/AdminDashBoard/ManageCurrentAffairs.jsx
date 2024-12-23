@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Swal from "sweetalert2";
 
 const ManageCurrentAffairs = () => {
   const [formData, setFormData] = useState({
@@ -35,16 +36,57 @@ const ManageCurrentAffairs = () => {
     setFormData({ ...formData, pdf: e.target.files[0] });
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setError("");
+  //   setSuccess("");
+
+  //   if (!formData.title || !formData.description || !formData.date) {
+  //     setError("Please fill in all the fields.");
+  //     return;
+  //   }
+
+  //   const data = new FormData();
+  //   data.append("title", formData.title);
+  //   data.append("description", formData.description);
+  //   data.append("date", formData.date);
+  //   if (formData.pdf) {
+  //     data.append("pdf", formData.pdf);
+  //   }
+
+  //   try {
+  //     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/current-affairs`, {
+  //       method: "POST",
+  //       body: data,
+  //     });
+
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.error || "Unknown error occurred");
+  //     }
+
+  //     const result = await response.json();
+  //     setSuccess(result.message);
+  //     setFormData({ title: "", description: "", date: "", pdf: null });
+  //     fetchCurrentAffairs();
+  //   } catch (error) {
+  //     console.error("Error adding current affair:", error);
+  //     setError(error.message || "Failed to add current affair. Please try again.");
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
-    setSuccess("");
-
+  
     if (!formData.title || !formData.description || !formData.date) {
-      setError("Please fill in all the fields.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Please fill in all the fields.",
+      });
       return;
     }
-
+  
     const data = new FormData();
     data.append("title", formData.title);
     data.append("description", formData.description);
@@ -52,40 +94,91 @@ const ManageCurrentAffairs = () => {
     if (formData.pdf) {
       data.append("pdf", formData.pdf);
     }
-
+  
     try {
       const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/current-affairs`, {
         method: "POST",
         body: data,
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Unknown error occurred");
       }
-
+  
       const result = await response.json();
-      setSuccess(result.message);
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Current affair uploaded successfully!",
+      });
+  
       setFormData({ title: "", description: "", date: "", pdf: null });
       fetchCurrentAffairs();
     } catch (error) {
       console.error("Error adding current affair:", error);
-      setError(error.message || "Failed to add current affair. Please try again.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message || "Failed to add current affair. Please try again.",
+      });
     }
   };
+  
+
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/current-affairs/${id}`, {
+  //       method: "DELETE",
+  //     });
+  //     if (response.ok) {
+  //       fetchCurrentAffairs();
+  //     }
+  //   } catch (error) {
+  //     console.error("Error deleting current affair:", error);
+  //   }
+  // };
 
   const handleDelete = async (id) => {
-    try {
-      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/current-affairs/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        fetchCurrentAffairs();
+    const confirm = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+  
+    if (confirm.isConfirmed) {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/current-affairs/${id}`, {
+          method: "DELETE",
+        });
+  
+        if (response.ok) {
+          Swal.fire({
+            icon: "success",
+            title: "Deleted!",
+            text: "Current affair has been deleted.",
+          });
+          fetchCurrentAffairs();
+        } else {
+          throw new Error("Failed to delete the current affair.");
+        }
+      } catch (error) {
+        console.error("Error deleting current affair:", error);
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: error.message || "Failed to delete current affair.",
+        });
       }
-    } catch (error) {
-      console.error("Error deleting current affair:", error);
     }
   };
+  
+
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -174,7 +267,7 @@ const ManageCurrentAffairs = () => {
             </div>
             <div className="space-x-2">
               <a
-                href={affair.pdfPath}
+                href={`${import.meta.env.VITE_BACKEND_URL}/${affair.pdfPath}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"

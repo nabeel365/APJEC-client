@@ -51,7 +51,7 @@ const AskDoubts = () => {
     <div className="bg-[#F6F6F2] w-screen min-h-screen p-4 md:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2b6777] mb-6 text-center">
-          Ask Your Doubts - APJEC
+          Ask Your Doubts 
         </h1>
 
         <form onSubmit={handleSubmit} className="mb-8">
@@ -83,7 +83,7 @@ const AskDoubts = () => {
 
         <div>
           <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-[#2b6777] mb-4">
-            Asked Doubts
+            Get All Your Doubts Here
           </h2>
           <div className="overflow-y-auto max-h-[60vh] bg-[#C2EDCE] p-4 md:p-6 rounded-lg shadow-lg">
             <ul>
