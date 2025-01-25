@@ -15,6 +15,7 @@ const Home = () => {
   return (
     <div className={isDarkMode ? 'dark' : 'light'}>
       <Navbar toggleMode={toggleMode} isDarkMode={isDarkMode} />
+      
       <Outlet />
       <Footer isDarkMode={isDarkMode} />
       <DevelopedBy></DevelopedBy>

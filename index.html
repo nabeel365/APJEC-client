@@ -4,10 +4,70 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/src/images/apjec-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>APJEC</title>
+    <title>APJ Abdul Kalam Education Center (APJEC) - Excellence in Law Education</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="APJ Abdul Kalam Education Center (APJEC) provides top-notch training for law students. Learn from experts and build your legal career with our comprehensive educational resources." />
+    <meta name="keywords" content="APJEC, APJ Abdul Kalam Education Center, Law Education, Legal Training, Educational Platform, Law Students, Career in Law" />
+    <meta name="author" content="APJ Abdul Kalam Education Center" />
+
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="APJ Abdul Kalam Education Center (APJEC)" />
+    <meta property="og:description" content="Build your legal career with APJEC's expert training and educational resources for law students." />
+    <meta property="og:image" content="/src/images/apjec-logo.png" />
+    <meta property="og:url" content="" id="meta-og-url" />
+    <meta property="og:type" content="website" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="" id="canonical-link" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" id="structured-data">
+      {}
+    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script type="module">
+      // Dynamically set environment variables
+      const websiteUrl = import.meta.env.VITE_WEBSITE_URL;
+
+      // Update meta tags dynamically
+      document.getElementById('meta-og-url').setAttribute('content', websiteUrl);
+      document.getElementById('canonical-link').setAttribute('href', websiteUrl);
+
+      // Structured data
+      const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "APJ Abdul Kalam Education Center",
+        "alternateName": "APJEC",
+        "url": websiteUrl,
+        "logo": `${websiteUrl}/src/images/apjec-logo.png`,
+        "description": "APJ Abdul Kalam Education Center (APJEC) provides top-notch training for law students with a focus on legal education and career development.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "123 Main Street",
+          "addressLocality": "City",
+          "addressRegion": "State",
+          "postalCode": "123456",
+          "addressCountry": "Country"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-123-456-7890",
+          "contactType": "Customer Support",
+          "areaServed": "IN",
+          "availableLanguage": "en"
+        },
+        "sameAs": [
+          "https://www.facebook.com/apjec",
+          "https://www.twitter.com/apjec",
+          "https://www.instagram.com/apjec"
+        ]
+      };
+      document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
+    </script>
   </body>
 </html>

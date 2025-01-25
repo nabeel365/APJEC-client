@@ -22,8 +22,11 @@ const AboutUs = () => {
             <h3 className="text-xl font-semibold text-[#2b6777] mb-4">About APJEC</h3>
               <p className="text-[#388087]"><strong>Empowering Minds, Shaping Futures</strong></p>
               <p className="text-[#388087]">The APJ Abdul Kalam Education Center was established on October 15, 2022, the anniversary of APJ Abdul Kalam's birth, by the Universal Human Foundation. Our organization aims to provide deserving Bengali students with affordable and top-notch education, empowering them with the resources they need to excel in university entrance exams.
+               
+               <br />
+              Contact us: <a href="mailto:apjec.education@gmail.com" className="underline">apjec.education@gmail.com</a>
+              </p>
 
-                Contact us: BioMechaSoft@gmail.com</p>
 
             </div>
 
@@ -78,7 +81,7 @@ const AboutUs = () => {
         </section>
 
         {/* Team Section */}
-        <section className="mb-10">
+        {/* <section className="mb-10">
           <h2 className="text-3xl font-bold text-[#2b6777] text-center mb-6">Meet Our Team</h2>
           <div className="grid md:grid-cols-3 gap-8">
             <div className="text-center">
@@ -109,7 +112,9 @@ const AboutUs = () => {
               <p className="text-[#388087]">Director of Operations</p>
             </div>
           </div>
-        </section>
+        </section> */}
+
+       
 
         {/* Call to Action */}
         <section className="text-center">

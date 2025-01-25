@@ -79,13 +79,13 @@ const ManageUsers = () => {
 
 
   return (
-    <div className="container  w-screen mx-auto px-4 py-6 bg-[#F6F6F2] rounded-lg shadow-lg">
+    <div className="container  w-screen mx-auto px-4 py-6 bg-[#F6F6F2] rounded-lg shadow-lg ">
       <h2 className="text-3xl font-bold text-center text-[#2b6777] mb-6">
         Manage Users
       </h2>
 
       {/* Search and Filter */}
-      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+      <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4 p-4">
         <input
           type="text"
           placeholder="Search by name or email"

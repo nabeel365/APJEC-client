@@ -31,7 +31,7 @@ const ThreeCards = () => {
               them for university entrance exams.
             </p>
             <p className="text-[#2b6777] font-semibold">
-              Contact us: <a href="mailto:BioMechaSoft@gmail.com" className="underline">BioMechaSoft@gmail.com</a>
+              Contact us: <a href="mailto:apjec.education@gmail.com" className="underline">apjec.education@gmail.com</a>
             </p>
           </div>
 

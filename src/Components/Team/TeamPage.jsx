@@ -17,42 +17,51 @@ const TeamPage = () => {
                     {/* Team Member 1 */}
                     <div className="bg-[#BADFE7] rounded-lg shadow-lg p-6 text-center">
                         <img
-                            src="https://via.placeholder.com/150"
+                            src="/images/Adyan Dir.jpg"
                             alt="Team Member"
                             className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-[#2b6777]"
                         />
-                        <h3 className="text-xl font-bold text-[#2b6777]">Dr. Aditi Sharma</h3>
+                        <h3 className="text-xl font-bold text-[#2b6777]">Adyan Chowdhury
+                        </h3>
                         <p className="text-[#388087] mb-4">Founder & Director</p>
                         <p className="text-sm text-[#2b6777]">
-                            With 15+ years in education, Dr. Sharma is a visionary leader ensuring the growth of APJEC.
+                        Adyan Chowdhury, a distinguished individual, has recently completed his studies at the esteemed Faculty of Social Science at AMU. With his extensive knowledge and expertise in the field of polity, he has now become an esteemed faculty member at our institution. His remarkable educational background and dedication to his profession make him a valuable asset to our organization. We are proud to have him as a part of our faculty, as he continues to inspire and guide students in their pursuit of knowledge in the realm of politics and governance
                         </p>
                     </div>
 
                     {/* Team Member 2 */}
                     <div className="bg-[#C2EDCE] rounded-lg shadow-lg p-6 text-center">
                         <img
-                            src="https://via.placeholder.com/150"
+                            src="/images/Asif.jpg"
                             alt="Team Member"
                             className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-[#2b6777]"
                         />
-                        <h3 className="text-xl font-bold text-[#2b6777]">Prof. Rajiv Mehta</h3>
+                        <h3 className="text-xl font-bold text-[#2b6777]">Asif Reza</h3>
                         <p className="text-[#388087] mb-4">Head of Academics</p>
                         <p className="text-sm text-[#2b6777]">
-                            Specializing in law and governance, Prof. Mehta ensures academic excellence at APJEC.
-                        </p>
+                           
+                        I am Md Asif Reza, a current student of BALLB at Jamia Millia Islamia. I have achieved outstanding academic performance and have actively contributed to the development of my peers. By assisting them, I have improved my communication and leadership abilities. These experiences have given me valuable practical knowledge in the field of law. Through research and critical thinking, I have acquired the essential skills to navigate the intricacies of the legal sphere. Additionally, I have engaged in a variety of extracurricular activities, broadening my perspectives and cultivating a diverse skill set.​
+
+
+                           
+                             </p>
                     </div>
 
                     {/* Team Member 3 */}
                     <div className="bg-[#BADFE7] rounded-lg shadow-lg p-6 text-center">
                         <img
-                            src="https://via.placeholder.com/150"
+                            src="/images/ahmad.jpg.png"
                             alt="Team Member"
                             className="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-[#2b6777]"
                         />
-                        <h3 className="text-xl font-bold text-[#2b6777]">Ms. Priya Khandelwal</h3>
-                        <p className="text-[#388087] mb-4">Student Support Manager</p>
+                        <h3 className="text-xl font-bold text-[#2b6777]">Ahmadullah</h3>
+                        <p className="text-[#388087] mb-4">Head of Management </p>
                         <p className="text-sm text-[#2b6777]">
-                            Dedicated to assisting students in their academic and personal growth.
+                           
+                        I am Ahmadullah, currently in my fourth year as a law student at Calcutta University. With a fervent interest in the intricacies of legal frameworks and a dedication to promoting justice, I am committed to honing my skills and knowledge in this field. At Calcutta University, I actively engage in various academic pursuits, seeking to deepen my understanding of law and its implications in society. I am passionate about utilizing my education to advocate for fairness and equality, and I eagerly anticipate the opportunities for growth and learning that lie ahead on my journey as a law student.​
+
+
+                        
                         </p>
                     </div>
 
