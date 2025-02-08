@@ -55,7 +55,7 @@ const Footer = ({ isDarkMode }) => {
     },
   
     returnPolicy: {
-      title: "Privacy Policy",
+      title: "Privacy and Policy",
       content: `
       **PRIVACY POLICY OF APJEC**
   
@@ -179,9 +179,9 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <button className="text-white-600 underline" onClick={() => openModal("payment")}>Payment</button>
-          <button className="text-white-600 underline" onClick={() => openModal("returnPolicy")}>Return Policy</button>
-          <button className="text-white-600 underline" onClick={() => openModal("termsAndConditions")}>Terms & Conditions</button>
+          <button className="text-white-600 underline" onClick={() => openModal("payment")}>Terms & Conditions</button>
+          <button className="text-white-600 underline" onClick={() => openModal("returnPolicy")}>Privacy and Policy</button>
+          <button className="text-white-600 underline" onClick={() => openModal("termsAndConditions")}>Refund and Cancellation</button>
         </div>
 
         {/* Modal */}
