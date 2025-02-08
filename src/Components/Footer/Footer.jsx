@@ -15,57 +15,100 @@ const Footer = ({ isDarkMode }) => {
   const policies = {
     payment: {
       title: "Terms & Conditions",
-      content: `TERMS & CONDITIONS
-These Terms & Conditions (Terms) of
-(a) use of our website: www.apjec.org or any products or services in connection with the Application, Website, or products (Services).
-(b) any modes of registration or usage of products, including through SD cards, tablets, or other storage or transmitting devices, are between APJEC (Company/We/Us/Our) and its users (User/You/Your).
-Please read the Terms and the privacy policy of the company (privacy policy) with respect to registration with us, the use of the website, services, and products carefully before using the website, services, or products. In the event of any discrepancy between the Terms and any other policies with respect to the website, services, or products, the provisions of the Terms shall prevail.
-Your use/access/browsing of the Website or the Services or products or registration (with or without payment/with or without a subscription) through any means shall signify Your acceptance of the Terms and Your agreement to be legally bound by the same.
-If You do not agree with the Terms or the Privacy Policy, please do not use the Website or avail of the Services or products. Any access to our services, applications, or products through registrations/subscriptions is non-transferable.
-COMMUNICATION TO THE STUDENTS
-•	If there is any class cancellation or change in the schedule of the program, students shall be informed by mail/SMS/through the STUDYBYTECH website.
-•	Students are responsible to check for updates from time to time.
-STUDENT FEEDBACK & GRIEVANCE REDRESSAL
-•	In order to improve the quality of services provided to students, APJEC actively seeks, appreciates and acts upon Feedback from students about its services time to time.
-•	Students/Parents can approach with their queries for assistance guidance.
-DECLARATION BY THE STUDENT
-I have-
-•	Read & understand the above and I am aware of the services APJEC shall provide to the students.
-•	Understood that the student’s performance depends on the continuing/participating interest on his/her part.
-CUSTOMER CARE:
-We make all our best endeavors to provide You with a pleasant experience. In the unlikely event that You face any issues, please contact us at apjec.education@gmail.com
-
-.`,
+      content: `
+      **TERMS & CONDITIONS**
+  
+      These Terms & Conditions (Terms) of:
+      
+      (a) Use of our website: [www.apjec.org](https://www.apjec.org) or any products or services in connection with the Application, Website, or Products (Services).  
+      (b) Any modes of registration or usage of products, including through SD cards, tablets, or other storage or transmitting devices, are between **APJEC** (Company/We/Us/Our) and its users (User/You/Your).
+  
+      Please read the **Terms and the Privacy Policy** carefully before using the Website, Services, or Products. In case of any discrepancy between the Terms and any other policies, the **Terms shall prevail**.
+  
+      **By using our Website or Services, you agree to these Terms. If you do not agree, please do not use our Services.**  
+      Access to our services through registrations/subscriptions is **non-transferable**.
+  
+      ---
+  
+      ### **COMMUNICATION TO THE STUDENTS**
+      - If there is any **class cancellation** or **change in the schedule**, students will be informed by **email, SMS, or via the APJEC website**.
+      - Students are responsible for checking for updates regularly.
+  
+      ---
+  
+      ### **STUDENT FEEDBACK & GRIEVANCE REDRESSAL**
+      - APJEC actively **seeks, appreciates, and acts upon feedback** from students to improve its services.
+      - Students/Parents can approach the administration for assistance and guidance.
+  
+      ---
+  
+      ### **DECLARATION BY THE STUDENT**
+      - I have read and understood the **above Terms** and the **services provided by APJEC**.
+      - I understand that my **performance depends on my active participation**.
+  
+      ---
+  
+      ### **CUSTOMER CARE**
+      We strive to provide the best experience for you. If you face any issues, please contact us at:  
+      📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**
+      `,
     },
+  
     returnPolicy: {
       title: "Privacy Policy",
-      content: `Privacy and Policy of APJEC
-At APJ Abdul Kalam Education Centre, we are committed to ensuring the privacy and security of your personal information. This Privacy and Policy document outlines how we collect, use, and protect the information you provide while using our platform.
-Collection of Information:
-We collect various types of information, including personal, contact, and academic details, to enhance your experience on our platform and for further admission process. This information is gathered through registration forms and the use of cookies to improve the quality of our services.
-Use of Information:
-The information we collect is utilized for personalizing your educational experience, admission process, improving our services, and ensuring the overall functionality of our platform. We do not sell or share your information with third parties without your explicit consent.
-User Rights:
-You will have the right to access, correct, or delete your personal information. Our platform will provide an easy-to-use mechanism for you to exercise these rights. Your privacy preferences matter, and we respect your choices.
-Contact Information:
-If you have any questions or concerns about our privacy policy or the handling of your data, please contact our support team apjec.education@gmail.com . We are here to address any queries and ensure your experience with APJEC is secure and enjoyable.
-Thank you for entrusting us with your education. We are dedicated to providing you with a safe and enriching learning environment.
-APJEC Privacy and Policy Team
-
-.`,
+      content: `
+      **PRIVACY POLICY OF APJEC**
+  
+      At **APJ Abdul Kalam Education Centre**, we are committed to ensuring the **privacy and security of your personal information**. This Privacy Policy outlines how we collect, use, and protect your data.
+  
+      ---
+  
+      ### **Collection of Information**
+      - We collect **personal, contact, and academic details** to enhance your experience on our platform.
+      - Information is gathered through **registration forms** and the use of **cookies** to improve service quality.
+  
+      ---
+  
+      ### **Use of Information**
+      - The collected information is used for:
+        - Personalizing your **educational experience**.
+        - Facilitating the **admission process**.
+        - Improving our services and platform functionality.
+      - **We do not sell or share your data with third parties without your explicit consent.**
+  
+      ---
+  
+      ### **User Rights**
+      - You have the right to **access, correct, or delete** your personal information.
+      - Our platform provides an **easy-to-use mechanism** to exercise these rights.
+  
+      ---
+  
+      ### **Contact Information**
+      If you have any **questions or concerns** about our Privacy Policy, please reach out to:  
+      📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**  
+  
+      Thank you for entrusting us with your education. We are dedicated to providing a **safe and enriching learning environment**.
+  
+      **- APJEC Privacy and Policy Team**
+      `,
     },
+  
     termsAndConditions: {
-      title: "Refund and Cancellation",
-      content: `REFUND & CANCELLATION POLICIES
-Refund Policy
-Refund Policies for Registration Form fees:
-o	Once you have done registration – no refund will be offered.
-•	Students who have been enrolled in an online class have any query related to payments: apjec.education@gmail.com 
-
-.`,
+      title: "Refund & Cancellation Policy",
+      content: `
+      **REFUND & CANCELLATION POLICY**
+  
+      ### **Refund Policy**
+      - **Registration fees are non-refundable** once the registration is completed.
+      - Students enrolled in **online classes** who have payment-related queries can contact:  
+        📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**
+  
+      **For further assistance, reach out to our support team.**
+      `,
     },
   };
-
+  
   const openModal = (policyKey) => {
     setModalTitle(policies[policyKey].title);
     setModalContent(policies[policyKey].content);
@@ -136,9 +179,9 @@ o	Once you have done registration – no refund will be offered.
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <button className="text-blue-600 underline" onClick={() => openModal("payment")}>Payment</button>
-          <button className="text-green-600 underline" onClick={() => openModal("returnPolicy")}>Return Policy</button>
-          <button className="text-red-600 underline" onClick={() => openModal("termsAndConditions")}>Terms & Conditions</button>
+          <button className="text-white-600 underline" onClick={() => openModal("payment")}>Payment</button>
+          <button className="text-white-600 underline" onClick={() => openModal("returnPolicy")}>Return Policy</button>
+          <button className="text-white-600 underline" onClick={() => openModal("termsAndConditions")}>Terms & Conditions</button>
         </div>
 
         {/* Modal */}
