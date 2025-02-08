@@ -50,9 +50,12 @@ import NoticeSection from './Components/Notice/NoticeSection';
 import AboutUs from './Components/HomePage/AboutUs';
 import Career from './Components/Team/Career';
 import Admissions from './Components/HomePage/Admissions';
-import TermsAndConditions from './Components/Home/TermsAndConditions';
+// import TermsAndConditions from './Components/Home/TermsAndConditions';
 import UploadPYQ from './Components/DashBoards/InstructotDashBoard/UploadPYQ';
 import ViewPYQs from './Components/DashBoards/StudentDashBoard/ViewPYQs';
+import RefundPolicy from './Components/Footer/Refund';
+import PrivacyPolicy from './Components/Footer/Privacy';
+import TermsAndConditions from './Components/Footer/Terms';
 
 
 const queryClient = new QueryClient()
@@ -109,14 +112,26 @@ const router = createBrowserRouter([
         path: "admissions",
         element: <Admissions></Admissions>
       },
-      {
-        path: "/terms",
-        element: <TermsAndConditions></TermsAndConditions>
-      },
+      // {
+      //   path: "/terms",
+      //   element: <TermsAndConditions></TermsAndConditions>
+      // },
       {
         path: "viewPYQs",
         element: <ViewPYQs></ViewPYQs>
-      }
+      },
+      {
+        path: "terms",
+        element: <TermsAndConditions />,
+      },
+      {
+        path: "privacy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "refund",
+        element: <RefundPolicy />,
+      },
     ]
   },
   {

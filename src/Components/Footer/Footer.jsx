@@ -6,6 +6,7 @@ import {
   FaWhatsapp,
   FaInstagram,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = ({ isDarkMode }) => {
   return (
@@ -72,16 +73,17 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <a href="/images/TERMS.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          <Link to="/terms" className="text-white-600 underline">
             Terms & Conditions
-          </a>
-          <a href="/images/Privacy_and_Policy_of_APJEC.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          </Link>
+          <Link to="/privacy" className="text-white-600 underline">
             Privacy and Policy
-          </a>
-          <a href="/images/REFUND.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          </Link>
+          <Link to="/refund" className="text-white-600 underline">
             Refund and Cancellation
-          </a>
+          </Link>
         </div>
+
       </footer>
     </div>
   );
