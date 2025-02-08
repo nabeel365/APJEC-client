@@ -73,7 +73,7 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <Link to="/terms" className="text-white-600 underline">
+          <Link to="/terms"  className="text-white-600 underline">
             Terms & Conditions
           </Link>
           <Link to="/privacy" className="text-white-600 underline">
