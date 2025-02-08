@@ -8,73 +8,6 @@ import {
 } from "react-icons/fa";
 
 const Footer = ({ isDarkMode }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
-  const [modalContent, setModalContent] = useState("");
-
-  const policies = {
-    payment: {
-      title: "Terms & Conditions",
-      content: `
-        <h2>Terms & Conditions</h2>
-        
-        <h3>1. Use of Our Services</h3>
-        <p>These Terms & Conditions govern the use of:</p>
-        <ul>
-          <li>Our website: <a href="https://www.apjec.org" target="_blank">www.apjec.org</a> or any associated services/products.</li>
-          <li>Any modes of registration or usage of our products, including SD cards, tablets, or other storage/transmitting devices.</li>
-        </ul>
-        <p>By accessing, browsing, or registering (whether free or paid) on our platform, you agree to abide by these Terms & Conditions.</p>
-  
-        <h3>2. Communication to Students</h3>
-        <ul>
-          <li>Any class cancellation or schedule changes will be informed via <b>email, SMS, or the STUDYBYTECH website</b>.</li>
-          <li>Students are responsible for checking updates regularly.</li>
-        </ul>
-  
-        <h3>3. Customer Care</h3>
-        <p>For any issues, please contact us at: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
-      `,
-    },
-  
-    returnPolicy: {
-      title: "Privacy Policy",
-      content: `
-        <h2>Privacy Policy</h2>
-        <p>At <b>APJ Abdul Kalam Education Centre (APJEC)</b>, we are committed to ensuring the privacy and security of your personal data.</p>
-  
-        <h3>1. Collection of Information</h3>
-        <ul>
-          <li><b>Personal & Contact Details</b> (for registration and communication).</li>
-          <li><b>Academic Information</b> (for admission and course personalization).</li>
-          <li><b>Cookies & Tracking Data</b> (to improve user experience).</li>
-        </ul>
-  
-        <h3>2. Contact Information</h3>
-        <p>For privacy-related queries, contact us at: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
-      `,
-    },
-  
-    termsAndConditions: {
-      title: "Refund and Cancellation",
-      content: `
-        <h2>Refund & Cancellation Policies</h2>
-  
-        <h3>1. Refund Policy</h3>
-        <p><b>Registration Fees:</b> Once registered, <b>no refunds</b> will be provided.</p>
-  
-        <h3>2. Payment-Related Queries</h3>
-        <p>For any payment-related concerns, reach out to: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
-      `,
-    },
-  };
-  
-  const openModal = (policyKey) => {
-    setModalTitle(policies[policyKey].title);
-    setModalContent(policies[policyKey].content);
-    setIsModalOpen(true);
-  };
-
   return (
     <div className={isDarkMode ? "dark" : "light"}>
       <footer className="bg-[#2b6777] text-white px-6 py-8">
@@ -139,27 +72,19 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <button className="text-white-600 underline" onClick={() => openModal("payment")}>Terms & Conditions</button>
-          <button className="text-white-600 underline" onClick={() => openModal("returnPolicy")}>Privacy and Policy</button>
-          <button className="text-white-600 underline" onClick={() => openModal("termsAndConditions")}>Refund and Cancellation</button>
+          <a href="/images/Privacy_and_Policy_of_APJEC.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+            Terms & Conditions
+          </a>
+          <a href="/images/REFUND.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+            Privacy and Policy
+          </a>
+          <a href="/images/TERMS.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+            Refund and Cancellation
+          </a>
         </div>
-
-        {/* Modal */}
-        {isModalOpen && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg w-3/4 md:w-1/2 lg:w-1/3 max-h-[80vh] overflow-y-auto">
-              <h2 className="text-xl font-bold text-gray-800 mb-4">{modalTitle}</h2>
-              <p className="text-gray-700">{modalContent}</p>
-              <button className="mt-4 bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800" onClick={() => setIsModalOpen(false)}>Close</button>
-            </div>
-          </div>
-        )}
       </footer>
     </div>
   );
 };
 
-export default Footer;    
-
-
-
+export default Footer;
