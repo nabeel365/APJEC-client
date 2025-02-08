@@ -72,13 +72,13 @@ const Footer = ({ isDarkMode }) => {
 
         {/* Policy Links */}
         <div className="flex justify-center space-x-6 mt-10">
-          <a href="/images/Privacy_and_Policy_of_APJEC.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          <a href="/images/TERMS.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
             Terms & Conditions
           </a>
-          <a href="/images/REFUND.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          <a href="/images/Privacy_and_Policy_of_APJEC.pdf.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
             Privacy and Policy
           </a>
-          <a href="/images/TERMS.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
+          <a href="/images/REFUND.pdf" target="_blank" rel="noopener noreferrer" className="text-white-600 underline">
             Refund and Cancellation
           </a>
         </div>
