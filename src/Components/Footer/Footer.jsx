@@ -16,95 +16,55 @@ const Footer = ({ isDarkMode }) => {
     payment: {
       title: "Terms & Conditions",
       content: `
-      **TERMS & CONDITIONS**
+        <h2>Terms & Conditions</h2>
+        
+        <h3>1. Use of Our Services</h3>
+        <p>These Terms & Conditions govern the use of:</p>
+        <ul>
+          <li>Our website: <a href="https://www.apjec.org" target="_blank">www.apjec.org</a> or any associated services/products.</li>
+          <li>Any modes of registration or usage of our products, including SD cards, tablets, or other storage/transmitting devices.</li>
+        </ul>
+        <p>By accessing, browsing, or registering (whether free or paid) on our platform, you agree to abide by these Terms & Conditions.</p>
   
-      These Terms & Conditions (Terms) of:
-      
-      (a) Use of our website: [www.apjec.org](https://www.apjec.org) or any products or services in connection with the Application, Website, or Products (Services).  
-      (b) Any modes of registration or usage of products, including through SD cards, tablets, or other storage or transmitting devices, are between **APJEC** (Company/We/Us/Our) and its users (User/You/Your).
+        <h3>2. Communication to Students</h3>
+        <ul>
+          <li>Any class cancellation or schedule changes will be informed via <b>email, SMS, or the STUDYBYTECH website</b>.</li>
+          <li>Students are responsible for checking updates regularly.</li>
+        </ul>
   
-      Please read the **Terms and the Privacy Policy** carefully before using the Website, Services, or Products. In case of any discrepancy between the Terms and any other policies, the **Terms shall prevail**.
-  
-      **By using our Website or Services, you agree to these Terms. If you do not agree, please do not use our Services.**  
-      Access to our services through registrations/subscriptions is **non-transferable**.
-  
-      ---
-  
-      ### **COMMUNICATION TO THE STUDENTS**
-      - If there is any **class cancellation** or **change in the schedule**, students will be informed by **email, SMS, or via the APJEC website**.
-      - Students are responsible for checking for updates regularly.
-  
-      ---
-  
-      ### **STUDENT FEEDBACK & GRIEVANCE REDRESSAL**
-      - APJEC actively **seeks, appreciates, and acts upon feedback** from students to improve its services.
-      - Students/Parents can approach the administration for assistance and guidance.
-  
-      ---
-  
-      ### **DECLARATION BY THE STUDENT**
-      - I have read and understood the **above Terms** and the **services provided by APJEC**.
-      - I understand that my **performance depends on my active participation**.
-  
-      ---
-  
-      ### **CUSTOMER CARE**
-      We strive to provide the best experience for you. If you face any issues, please contact us at:  
-      📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**
+        <h3>3. Customer Care</h3>
+        <p>For any issues, please contact us at: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
       `,
     },
   
     returnPolicy: {
-      title: "Privacy and Policy",
+      title: "Privacy Policy",
       content: `
-      **PRIVACY POLICY OF APJEC**
+        <h2>Privacy Policy</h2>
+        <p>At <b>APJ Abdul Kalam Education Centre (APJEC)</b>, we are committed to ensuring the privacy and security of your personal data.</p>
   
-      At **APJ Abdul Kalam Education Centre**, we are committed to ensuring the **privacy and security of your personal information**. This Privacy Policy outlines how we collect, use, and protect your data.
+        <h3>1. Collection of Information</h3>
+        <ul>
+          <li><b>Personal & Contact Details</b> (for registration and communication).</li>
+          <li><b>Academic Information</b> (for admission and course personalization).</li>
+          <li><b>Cookies & Tracking Data</b> (to improve user experience).</li>
+        </ul>
   
-      ---
-  
-      ### **Collection of Information**
-      - We collect **personal, contact, and academic details** to enhance your experience on our platform.
-      - Information is gathered through **registration forms** and the use of **cookies** to improve service quality.
-  
-      ---
-  
-      ### **Use of Information**
-      - The collected information is used for:
-        - Personalizing your **educational experience**.
-        - Facilitating the **admission process**.
-        - Improving our services and platform functionality.
-      - **We do not sell or share your data with third parties without your explicit consent.**
-  
-      ---
-  
-      ### **User Rights**
-      - You have the right to **access, correct, or delete** your personal information.
-      - Our platform provides an **easy-to-use mechanism** to exercise these rights.
-  
-      ---
-  
-      ### **Contact Information**
-      If you have any **questions or concerns** about our Privacy Policy, please reach out to:  
-      📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**  
-  
-      Thank you for entrusting us with your education. We are dedicated to providing a **safe and enriching learning environment**.
-  
-      **- APJEC Privacy and Policy Team**
+        <h3>2. Contact Information</h3>
+        <p>For privacy-related queries, contact us at: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
       `,
     },
   
     termsAndConditions: {
-      title: "Refund & Cancellation Policy",
+      title: "Refund and Cancellation",
       content: `
-      **REFUND & CANCELLATION POLICY**
+        <h2>Refund & Cancellation Policies</h2>
   
-      ### **Refund Policy**
-      - **Registration fees are non-refundable** once the registration is completed.
-      - Students enrolled in **online classes** who have payment-related queries can contact:  
-        📧 **[apjec.education@gmail.com](mailto:apjec.education@gmail.com)**
+        <h3>1. Refund Policy</h3>
+        <p><b>Registration Fees:</b> Once registered, <b>no refunds</b> will be provided.</p>
   
-      **For further assistance, reach out to our support team.**
+        <h3>2. Payment-Related Queries</h3>
+        <p>For any payment-related concerns, reach out to: <b>📧 Email:</b> <a href="mailto:apjec.education@gmail.com">apjec.education@gmail.com</a></p>
       `,
     },
   };
