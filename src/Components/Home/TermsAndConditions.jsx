@@ -3,7 +3,7 @@ import React from "react";
 const TermsAndConditions = () => {
   return (
     <div className="bg-[#F6F6F2] min-h-screen p-8">
-      <h1 className="text-3xl font-bold text-[#2b6777] mb-6">Terms and Conditions</h1>
+      <h1 className="text-3xl font-bold text-[#2b6777] mb-6">Terms and Conditions...</h1>
       <div className="bg-white shadow-lg p-6 rounded-lg">
         <p className="text-gray-700 mb-4">
           Welcome to APJ Educational Institution (APJEC). By using our platform, you agree to comply with and be bound by the following terms and conditions. Please read these carefully before using the website.
