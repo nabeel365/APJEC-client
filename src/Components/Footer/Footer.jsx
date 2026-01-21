@@ -127,7 +127,7 @@ const Footer = ({ isDarkMode }) => {
           >
             <h3 className="text-lg font-bold mb-4">Enquiry Form</h3>
 
-            <input
+            {/* <input
               type="text"
               placeholder="Your Name"
               required
@@ -136,7 +136,7 @@ const Footer = ({ isDarkMode }) => {
               onChange={(e) =>
                 setEnquiryForm({ ...enquiryForm, name: e.target.value })
               }
-            />
+            /> */}
 
             <input
               type="tel"
