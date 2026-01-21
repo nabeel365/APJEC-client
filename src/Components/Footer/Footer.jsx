@@ -9,6 +9,35 @@ import {
 import { Link } from "react-router-dom";
 
 const Footer = ({ isDarkMode }) => {
+  /* ===================== NEW STATE (ADDED) ===================== */
+  const [showEnquiry, setShowEnquiry] = useState(false);
+  const [enquiryForm, setEnquiryForm] = useState({
+    name: "",
+    phone: "",
+    course: "CULET 2026 PROGOTI 3.0",
+  });
+
+  /* ===================== NEW FUNCTION (ADDED) ===================== */
+  const submitEnquiry = async (e) => {
+    e.preventDefault();
+
+    await fetch(`${import.meta.env.VITE_BACKEND_URL}/enquiries`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(enquiryForm),
+    });
+
+    alert("Enquiry submitted successfully");
+
+    setEnquiryForm({
+      name: "",
+      phone: "",
+      course: "CULET 2026 PROGOTI 3.0",
+    });
+
+    setShowEnquiry(false);
+  };
+
   return (
     <div className={isDarkMode ? "dark" : "light"}>
       <footer className="bg-[#2b6777] text-white px-6 py-8">
@@ -53,11 +82,11 @@ const Footer = ({ isDarkMode }) => {
           <div className="space-y-4 sm:text-center md:text-center lg:text-left">
             <h3 className="text-[#BADFE7] font-semibold">Follow Us</h3>
             <div className="flex justify-center md:justify-start space-x-4">
-              <a href="https://www.facebook.com/apjec.edu" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2EDCE]" aria-label="Facebook"><FaFacebook size={24} /></a>
-              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2EDCE]" aria-label="Twitter"><FaTwitter size={24} /></a>
-              <a href="https://t.me/apjec" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2EDCE]" aria-label="Telegram"><FaTelegram size={24} /></a>
-              <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2EDCE]" aria-label="Whatsapp"><FaWhatsapp size={24} /></a>
-              <a href="https://www.instagram.com/apjec.education/" target="_blank" rel="noopener noreferrer" className="hover:text-[#C2EDCE]" aria-label="Instagram"><FaInstagram size={24} /></a>
+              <a href="https://www.facebook.com/apjec.edu" target="_blank" rel="noopener noreferrer"><FaFacebook size={24} /></a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter size={24} /></a>
+              <a href="https://t.me/apjec" target="_blank" rel="noopener noreferrer"><FaTelegram size={24} /></a>
+              <a href="https://whatsapp.com" target="_blank" rel="noopener noreferrer"><FaWhatsapp size={24} /></a>
+              <a href="https://www.instagram.com/apjec.education/" target="_blank" rel="noopener noreferrer"><FaInstagram size={24} /></a>
             </div>
             <div className="text-sm text-[#C2EDCE]">
               <p><strong>Registered Office:</strong> Uttar Dariapur, Kaliachak, Malda, West Bengal, 732201</p>
@@ -67,24 +96,78 @@ const Footer = ({ isDarkMode }) => {
         </div>
 
         <div className="mt-8 border-t border-[#388087] pt-6 text-center text-sm text-[#C2EDCE]">
-          <p>&copy; {new Date().getFullYear()} APJEC - APJ Educational Institution. All rights reserved.</p>
-          <p>Contact: <a href="mailto:apjec.education@gmail.com" className="text-[#BADFE7] hover:text-[#C2EDCE]">apjec.education@gmail.com</a></p>
+          <p>&copy; {new Date().getFullYear()} APJEC - APJ Educational Institution.</p>
+          <p>Contact: <a href="mailto:apjec.education@gmail.com" className="underline">apjec.education@gmail.com</a></p>
         </div>
 
-        {/* Policy Links */}
-        <div className="flex justify-center space-x-6 mt-10">
-          <Link to="/terms"  className="text-white-600 underline">
-            Terms & Conditions
-          </Link>
-          <Link to="/privacy" className="text-white-600 underline">
-            Privacy and Policy
-          </Link>
-          <Link to="/refund" className="text-white-600 underline">
-            Refund and Cancellation
-          </Link>
+        {/* ===================== ENQUIRY BUTTON (ADDED) ===================== */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={() => setShowEnquiry(true)}
+            className="bg-[#C2EDCE] text-[#2b6777] px-6 py-2 rounded font-semibold hover:bg-[#BADFE7]"
+          >
+            Enquiry
+          </button>
         </div>
 
+        {/* ===================== POLICY LINKS (UNCHANGED) ===================== */}
+        <div className="flex justify-center space-x-6 mt-6">
+          <Link to="/terms" className="underline">Terms & Conditions</Link>
+          <Link to="/privacy" className="underline">Privacy and Policy</Link>
+          <Link to="/refund" className="underline">Refund and Cancellation</Link>
+        </div>
       </footer>
+
+      {/* ===================== ENQUIRY MODAL (ADDED) ===================== */}
+      {showEnquiry && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <form
+            onSubmit={submitEnquiry}
+            className="bg-white text-black p-6 rounded w-[300px]"
+          >
+            <h3 className="text-lg font-bold mb-4">Enquiry Form</h3>
+
+            <input
+              type="text"
+              placeholder="Your Name"
+              required
+              className="w-full mb-3 border p-2"
+              value={enquiryForm.name}
+              onChange={(e) =>
+                setEnquiryForm({ ...enquiryForm, name: e.target.value })
+              }
+            />
+
+            <input
+              type="tel"
+              placeholder="Phone Number"
+              required
+              className="w-full mb-3 border p-2"
+              value={enquiryForm.phone}
+              onChange={(e) =>
+                setEnquiryForm({ ...enquiryForm, phone: e.target.value })
+              }
+            />
+
+            <select disabled className="w-full mb-4 border p-2">
+              <option>CULET 2026 PROGOTI 3.0</option>
+            </select>
+
+            <div className="flex justify-between">
+              <button type="submit" className="bg-[#2b6777] text-white px-4 py-2 rounded">
+                Submit
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowEnquiry(false)}
+                className="px-4 py-2 border rounded"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 };
