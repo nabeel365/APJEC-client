@@ -12,7 +12,7 @@ const Footer = ({ isDarkMode }) => {
   /* ===================== NEW STATE (ADDED) ===================== */
   const [showEnquiry, setShowEnquiry] = useState(false);
   const [enquiryForm, setEnquiryForm] = useState({
-    name: "",
+    name: "NA",
     phone: "",
     course: "CULET 2026 PROGOTI 3.0",
   });
