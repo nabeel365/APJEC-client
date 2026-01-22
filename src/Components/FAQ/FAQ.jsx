@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const FAQ = () => {
   const [activeIndex, setActiveIndex] = useState(null);
@@ -12,65 +13,103 @@ const FAQ = () => {
     {
       question: "What courses do you offer at your coaching center?",
       answer:
-        "We offer coaching for Entrance exams of courses such as BA LLB (5 years), BA (all courses), and B.Com.",
+        "We offer coaching for entrance exams of courses such as BA LLB (5 years), BA (all courses), and B.Com.",
     },
     {
       question: "Which universities should I primarily focus on getting into?",
       answer:
-        "We encourage the students to pursue a course in the Top tier Universities in our nation such as Aligarh Muslim University (AMU), Jamia Millia Islamia (JMI), Calcutta University (CU), Presidency University (PU), and Delhi University (DU) also for the Universities which are dedicated to admitting students through an universal Entrance test such as CUET, MHCET or Independent entrance examinations conducted by Universities across the nation.",
+        "Students are guided for top-tier universities such as Aligarh Muslim University (AMU), Jamia Millia Islamia (JMI), Calcutta University (CU), Presidency University (PU), Delhi University (DU), and universities admitting through CUET and other national entrance exams.",
     },
     {
       question: "How can I take admission in your coaching institution?",
       answer:
-        "You can take admission by contacting us via WhatsApp at 6294494027 or by calling us at 7029928412.",
+        "You can take admission by contacting us via WhatsApp at 6294494027 or by calling us directly for counselling and guidance.",
     },
     {
-      question: "Who is eligible to join, and what are the eligibility criteria for admission?",
+      question: "Who is eligible to join APJEC coaching programs?",
       answer:
-        "Any student who has already completed their +2 (higher secondary) or is currently pursuing their +2 session and wishes to pursue higher studies at any of such top-tier Universities or they are looking out for a well rounded coaching and guidance for Entrance tests could enroll themselves in our coaching institution.",
+        "Students who have completed or are currently pursuing their +2 (Higher Secondary) and aspire to pursue higher education in law or other disciplines through entrance examinations are eligible.",
     },
     {
       question: "What are the coaching fees?",
-      answer: "We have made an attempt to stand by the Underprivileged students coming from the marginally weaker section of society by letting them avail the Scholarship program and by offering reasonably affordable fees for our courses.For further information about coaching fees, please contact us through WhatsApp at 6294494027 or by calling 7029928412.",
+      answer:
+        "APJEC offers affordable coaching fees with scholarship programs for underprivileged yet meritorious students. For detailed fee structure, please contact us directly.",
     },
     {
-      question: "Do you have any scholarship programs?",
-      answer: "Yes, we offer scholarships exclusively for underprivileged yet meritorious students who have consistently performed well in their studies."
+      question: "Do you provide scholarship programs?",
+      answer:
+        "Yes, APJEC provides scholarships exclusively for underprivileged and meritorious students based on academic performance.",
     },
     {
-      question: "What is the mode of instruction? ",
-      answer: "The mode of instruction will be entirely online; classes will be conducted in a live format using Google Meet. The course will also include frequent mock tests and Viva through Online mode."
+      question: "What is the mode of instruction?",
+      answer:
+        "All classes are conducted online through live interactive sessions using Google Meet, along with regular mock tests and viva sessions.",
     },
     {
-      question: " In which languages are the courses taught?",
-      answer: "We have two batches. The Bengali batch primarily focused on teaching the students in Bengali as well as in english. And the hindi batch in which we primarily emphasize on teaching in Hindi and English. It is important to note that All the study materials which will be provided are in English."
+      question: "In which languages are the courses taught?",
+      answer:
+        "We offer Bengali-English and Hindi-English batches. All study materials are provided in English.",
     },
     {
-      question: "I'm interested in the course, but I'm not sure if APJEC is right for me. To whom can I speak to about this?",
-      answer: "The question arises that why Should We choose APJEC? Well We have made an attempt to not only guide the Underprivileged students towards a better future by enrolling them in our scholarship program but also let the fortunate ones get access to proper guidance and personalized coaching at a very affordable cost. Our institution and faculty are committed to admitting students based on their intellectual ability, regardless of their background. We value in invoking their interest and guiding them towards a better future. You are being requested to reach out for more information or any question regarding our courses or Career related queries. You can contact us via WhatsApp at 6294494027 or by calling 7029928412."
+      question: "How can students access study materials and resources?",
+      answer:
+        "Students receive regular online classes, mock tests, viva sessions, and comprehensive study materials as part of the coaching program.",
     },
     {
-      question: " How could students access the study materials and resources offered by your Courses?",
-      answer: "We provide study materials and resources as part of our overall coaching program. Each of our aspirants will have access to regular online coaching, Mock tests, VIVA and sufficient study materials. We are committed in ensuring that they are well equipped with the necessary tools to excel in their preparation."
+      question: "How can I stay updated with APJEC announcements?",
+      answer:
+        "You can follow APJEC on Instagram (@apjec.education) and Facebook (apjec.edu) for the latest updates and announcements.",
     },
-    {
-      question: "How can I stay updated with the latest information and updates from the APJEC? ",
-      answer: "You can follow us on Instagram and Facebook page to stay informed about our latest news, events, and updates. • Instagram at apjec.education • Facebook at apjec.edu"
-    }
-    
   ];
 
   const displayedFaqs = showAll ? faqs : faqs.slice(0, 3);
 
   return (
-    <div className=" bg-F6F6F2 text-gray-800">
+    <div className="bg-F6F6F2 text-gray-800">
+
+      {/* ===================== SEO ===================== */}
+      <Helmet>
+        <title>
+          Frequently Asked Questions | CULET 2026 & Law Coaching – APJEC
+        </title>
+
+        <meta
+          name="description"
+          content="Find answers to common questions about CULET 2026 coaching, CU BA LLB admission, online law classes, fees, scholarships, and eligibility at APJEC."
+        />
+
+        <link
+          rel="canonical"
+          href="https://apjec.online/faq"
+        />
+
+        {/* ===================== FAQ SCHEMA ===================== */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((faq) => ({
+              "@type": "Question",
+              "name": faq.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.answer,
+              },
+            })),
+          })}
+        </script>
+      </Helmet>
+
       <div className="max-w-5xl mx-auto py-12 px-6">
+
+        {/* ===================== H1 ===================== */}
         <h1
           className="text-4xl font-bold mb-8 text-center"
           style={{ color: "#2b6777" }}
         >
-          Frequently Asked Questions (FAQs)
+          Frequently Asked Questions – Law Coaching & CULET 2026
         </h1>
+
         <div className="space-y-6">
           {displayedFaqs.map((faq, index) => (
             <div
@@ -92,7 +131,8 @@ const FAQ = () => {
                 <h2
                   className="text-lg font-medium"
                   style={{
-                    color: index === activeIndex ? "#2b6777" : "#388087",
+                    color:
+                      index === activeIndex ? "#2b6777" : "#388087",
                   }}
                 >
                   {faq.question}
@@ -105,6 +145,7 @@ const FAQ = () => {
                   ▼
                 </span>
               </div>
+
               {index === activeIndex && (
                 <div className="px-6 py-4 text-gray-700">
                   <p>{faq.answer}</p>
@@ -113,13 +154,12 @@ const FAQ = () => {
             </div>
           ))}
         </div>
+
         <div className="text-center mt-6">
           <button
             onClick={() => setShowAll(!showAll)}
             className="px-6 py-2 rounded-md text-white"
-            style={{
-              backgroundColor: "#388087",
-            }}
+            style={{ backgroundColor: "#388087" }}
           >
             {showAll ? "See Less" : "See More"}
           </button>

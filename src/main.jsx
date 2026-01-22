@@ -56,6 +56,7 @@ import ViewPYQs from './Components/DashBoards/StudentDashBoard/ViewPYQs';
 import RefundPolicy from './Components/Footer/Refund';
 import PrivacyPolicy from './Components/Footer/Privacy';
 import TermsAndConditions from './Components/Footer/Terms';
+import { HelmetProvider } from 'react-helmet-async';
 
 
 const queryClient = new QueryClient()
@@ -248,6 +249,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+
+    <HelmetProvider>
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
 
@@ -255,5 +258,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
     </QueryClientProvider>
     </AuthProvider>
+    </HelmetProvider>
+    
   </React.StrictMode>,
 )

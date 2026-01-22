@@ -4,7 +4,7 @@ import TopSlider from '../HomePage/TopSlider';
 import CustomerReview from '../HomePage/CustomerReview';
 import PopularClasses from '../HomePage/PopularClasses';
 import PopularInstructors from '../HomePage/PopularInstructors';
-import { Fade, Reveal, Roll, Slide, Zoom } from 'react-awesome-reveal';
+import { Fade, Slide } from 'react-awesome-reveal';
 import NoticeSection from '../Notice/NoticeSection';
 import TeamPage from '../Team/TeamPage';
 import Testimonials from '../Testimonials/Testimonials';
@@ -12,59 +12,65 @@ import CurrentAffairsList from '../CurrentAffairs/CurrentAffairsList';
 import FAQ from '../FAQ/FAQ';
 import NoticeModal from '../Notice/NoticeModal';
 import ThreeCards from '../HomePage/ThreeCards';
+import { Helmet } from "react-helmet-async";
 
 const Layout = () => {
-    return (
-        <div>
-            <br />
+  return (
+    <div>
 
-            <Slide direction="left">
+      {/* ===================== SEO : HOME PAGE ===================== */}
+      <Helmet>
+        <title>
+          Calcutta University Law Entrance Test (CULET) 2026 Coaching – APJEC
+        </title>
 
+        <meta
+          name="description"
+          content="APJ Abdul Kalam Education Centre (APJEC) offers expert coaching for Calcutta University Law Entrance Test (CULET) 2026. Get complete guidance for CU BA LLB admission, syllabus, exam pattern, PYQs and mock tests."
+        />
 
+        <link rel="canonical" href="https://apjec.online/home" />
+      </Helmet>
 
-            <TopSlider>
-                
-                </TopSlider> 
+      {/* ===================== H1 (SEO REQUIRED, VISUALLY HIDDEN) ===================== */}
+      <h1 style={{ position: "absolute", left: "-9999px", top: "auto" }}>
+        Calcutta University Law Entrance Test (CULET) 2026 Coaching in West Bengal
+      </h1>
 
-            </Slide>
+      <br />
 
-            <NoticeModal></NoticeModal> 
+      {/* ===================== HERO SECTION ===================== */}
+      <Slide direction="left">
+        <TopSlider />
+      </Slide>
 
+      <NoticeModal />
 
-<br />
-            
-            
-            <NoticeSection></NoticeSection>
+      <br />
 
-            
+      {/* ===================== NOTICES ===================== */}
+      <NoticeSection />
 
+      <br />
 
+      {/* ===================== THREE CARDS ===================== */}
+      <ThreeCards />
 
+      <br />
 
-            <Fade duration={2000} >
-            {/* <PopularInstructors></PopularInstructors> */}
+      {/* ===================== TEAM ===================== */}
+      <TeamPage />
 
-            </Fade>
+      <br />
 
-<br />
-            {/* <CurrentAffairsList></CurrentAffairsList> */}
+      {/* ===================== TESTIMONIALS ===================== */}
+      <Testimonials />
 
-<ThreeCards></ThreeCards>
+      {/* ===================== FAQ (IMPORTANT FOR SEO) ===================== */}
+      <FAQ />
 
-<br />
-
-{/* <div style="height: 2px; background-color: #2b6777; margin: 10px 0;"></div> */}
-
-           <TeamPage></TeamPage>
-
-           <br></br>
-
-           <Testimonials></Testimonials>
-
-<FAQ></FAQ>
-
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Layout;
